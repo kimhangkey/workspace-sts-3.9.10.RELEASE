@@ -1,0 +1,57 @@
+package com.myspring.pro27.member.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
+
+import com.myspring.pro27.member.vo.MemberVO;
+
+
+@Repository("memberDAO")
+public class MemberDAOImpl implements MemberDAO {
+	
+	@Autowired
+	private SqlSession sqlSession;
+
+	
+	@Override
+	public List selectAllMemberList() throws DataAccessException {
+		List<MemberVO> membersList = sqlSession.selectList("mapper.member.selectAllMemberList");
+		
+		return membersList;
+	}
+
+	@Override
+	public void insertMember(MemberVO memberVO) throws DataAccessException {
+		sqlSession.insert("mapper.member.insertMember", memberVO);
+	}
+
+	@Override
+	public void deleteMember(String id) throws DataAccessException {
+		sqlSession.delete("mapper.member.deleteMember", id);
+	}
+
+	@Override
+	public void modMember(MemberVO memberVO) throws DataAccessException {
+		sqlSession.update("mapper.member.updateMember",memberVO);
+		
+	}
+
+	@Override
+	public MemberVO selectMemberById(String id) throws DataAccessException {
+		return (MemberVO) sqlSession.selectOne("mapper.member.selectMemberById", id);
+		// selectOne 메서드의 반환 타입은 항상 단일 객체(Object).
+		// 따라서 쿼리의 resultType이 MemberVO로 되어있어도 형변환 필요함.
+	}
+
+	@Override
+	public List searchMember(MemberVO memberVO) throws DataAccessException {
+		List list = sqlSession.selectList("mapper.member.searchMember", memberVO);
+		return list;
+	}
+	
+	
+}
