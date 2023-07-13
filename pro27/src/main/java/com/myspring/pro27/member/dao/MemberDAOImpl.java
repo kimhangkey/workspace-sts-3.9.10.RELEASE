@@ -42,15 +42,20 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public MemberVO selectMemberById(String id) throws DataAccessException {
-		return (MemberVO) sqlSession.selectOne("mapper.member.selectMemberById", id);
+		return sqlSession.selectOne("mapper.member.selectMemberById", id);
 		// selectOne 메서드의 반환 타입은 항상 단일 객체(Object).
 		// 따라서 쿼리의 resultType이 MemberVO로 되어있어도 형변환 필요함.
+		// 단 sts3 spring legacy project에서는 자동 매핑  가능으로 필요없음.
 	}
 
 	@Override
 	public List searchMember(MemberVO memberVO) throws DataAccessException {
-		List list = sqlSession.selectList("mapper.member.searchMember", memberVO);
-		return list;
+		return sqlSession.selectList("mapper.member.searchMember", memberVO);
+	}
+
+	@Override
+	public MemberVO loginById(MemberVO memberVO) throws DataAccessException {
+		return sqlSession.selectOne("mapper.member.loginById", memberVO);
 	}
 	
 	

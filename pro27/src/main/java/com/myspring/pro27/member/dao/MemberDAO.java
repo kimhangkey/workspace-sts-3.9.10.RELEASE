@@ -14,4 +14,5 @@ public interface MemberDAO {
 	 public void modMember(MemberVO memberVO) throws DataAccessException;
 	 public MemberVO selectMemberById(String id) throws DataAccessException;
 	 public List searchMember(MemberVO memberVO) throws	DataAccessException;
+	 public MemberVO loginById(MemberVO memberVO) throws DataAccessException;
 }

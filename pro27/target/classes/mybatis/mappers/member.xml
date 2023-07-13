@@ -101,6 +101,11 @@
 	]]>
 	</delete>
 	
+	<select id="loginById"  resultType="memberVO"   parameterType="memberVO" >
+	<include refid="a" />
+	where id=#{id} and pwd=#{pwd}		
+  </select>
+	
 	
 	<!-- 동적 SQL문 -->
   <select id="searchMember" parameterType="memberVO" resultMap="memResult">

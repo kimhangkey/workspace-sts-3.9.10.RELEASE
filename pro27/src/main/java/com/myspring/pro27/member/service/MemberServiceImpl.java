@@ -50,8 +50,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public List searchMember(MemberVO memberVO) throws DataAccessException {
-		List list = memberDAO.searchMember(memberVO);
-		return list;
+		return memberDAO.searchMember(memberVO);
+	}
+
+	@Override
+	public MemberVO login(MemberVO memberVO) throws DataAccessException {
+		return memberDAO.loginById(memberVO);
 	}
 	
 	

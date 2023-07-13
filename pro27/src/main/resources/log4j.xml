@@ -10,6 +10,20 @@
 		</layout>
 	</appender>
 	
+	
+	<!-- DailyFile Appenders -->
+	<appender name="dailyFileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="C:\\spring\\logs\\output.log" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+		  <param name="DatePattern"   value="'.'yyyy-MM-dd"/>
+			<param name="ConversionPattern"   value="[%d{HH:mm:ss}][%-5p](%F:%L)-%m%n"/>
+		</layout>
+	</appender>
+	<!-- Append value="true" : 로그를 기존 파일에 이어서 추가입력 -->
+	<!-- Append value="false" : 로그를 기존 파일에 덮어쓰며 입력. 즉 로그 추가시, 기존 내용 삭제 -->
+	
+	
 	<!-- Application Loggers -->
 	<logger name="com.myspring.pro27">
 		<level value="info" />
@@ -32,10 +46,14 @@
 		<level value="info" />
 	</logger>
 
-	<!-- Root Logger -->
+	<!-- Root Logger : 출력할 로그 레벨 및 출력 설정 -->
 	<root>
 		<priority value="warn" />
+		<!-- 우선순위 value보다 낮은 레벨의 로그는 출력하지 않음. value 자신을 포함한 상위레벨 로그들만 출력. -->
+		<!-- 레벨 높은 순 : OFF(모든 로그 출력 비활성화), FATAL, ERROR, WARN, INFO, DEBUG, TRACE -->
+		<!-- 단, 위에서  <logger> 요소로 개별적으로 지정한 로그들은 레벨 순위 관계없이 출력이 된다.(value ="OFF" 하더라도) -->
 		<appender-ref ref="console" />
+		<appender-ref ref="dailyFileAppender" />
 	</root>
 	
 </log4j:configuration>

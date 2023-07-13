@@ -163,6 +163,38 @@
 		</dependency>
 		
 		
+<!--
+	commons-beanutils: Apache Commons BeanUtils는 자바 빈(Java Bean) 객체와 관련된 작업을 수행하기 위한 유용한 기능을 제공하는 라이브러리입니다. 
+						이 라이브러리는 자바 빈 객체의 프로퍼티(property) 값을 설정하거나 가져오는 등의 작업을 쉽게 처리할 수 있도록 도와줍니다.
+
+
+	commons-dbcp: Apache Commons DBCP(Databse Connection Pool)는 데이터베이스 연결 풀링을 구현하는 라이브러리입니다. 
+					 데이터베이스 연결을 관리하는 데 사용되며, 애플리케이션에서 데이터베이스 연결을 효율적으로 관리하고 재사용할 수 있게 해줍니다.
+
+
+	cglib: CGLIB(Class Generation Library)은 자바의 동적 프록시(Dynamic Proxy)와 코드 생성(Code Generation)을 지원하는 라이브러리입니다. 
+			CGLIB은 런타임 시점에 클래스를 동적으로 생성하고 수정할 수 있어, 다양한 기능을 구현하는 데 활용됩니다. 
+			주로 AOP(Aspect-Oriented Programming) 기능을 구현하는 데 사용되며, 스프링 프레임워크에서도 프록시 객체 생성에 활용됩니다. 
+-->
+		
+		<!-- 타일즈 관련 라이브러리  -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-core</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-servlet</artifactId>
+			<version>2.2.2</version>
+			</dependency>
 		
 	</dependencies>
 
