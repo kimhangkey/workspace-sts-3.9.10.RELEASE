@@ -41,7 +41,9 @@ public class MemberControllerImpl implements MemberController {
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("listMembers메서드");
 		
-		String viewName = getViewName(request);
+//		String viewName = getViewName(request);
+		String viewName = (String) request.getAttribute("viewName");
+		// 인터셉터를 통해 바인딩된 viewName을 가져옴.(Object 타입으로 가져오니 캐스팅 필요)
 		
 //		logger.info("info 레벨 : viewName = " + viewName);
 //		logger.debug("debug 레벨@@@@@@@ : viewName = " + viewName);
@@ -101,7 +103,6 @@ public class MemberControllerImpl implements MemberController {
 		}
 		
 		List list = memberService.searchMember(vo);
-		System.out.println(vo.getId());
 		ModelAndView mav = new ModelAndView("/member/listMembers");
 		mav.addObject("membersList", list);
 		
@@ -112,7 +113,9 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "/*Form.do", method =  RequestMethod.GET)
 	public ModelAndView form(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(required = false) String id, String result) throws Exception {
-		String viewName = getViewName(request);
+//		String viewName = getViewName(request);
+		
+		String viewName = (String) request.getAttribute("viewName");
 		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("result", result);
@@ -148,7 +151,8 @@ public class MemberControllerImpl implements MemberController {
 	
 	return mav;
 	}
-	
+	// RedirectAttributes rAttr에서, rAttr.addAttribute 하면, 리다이렉트 url에 쿼리파라미터로 바인딩 됨.
+	// 즉 , /member/loginForm.do?result=loginFailed 이런 식. 리퀘스트에 바인딩.
 	
 	
 	@Override
