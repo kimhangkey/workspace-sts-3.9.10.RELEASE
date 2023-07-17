@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+	MyBatis에서는 <resultMap>의 type 속성에 클래스명을 지정할 때 
+	대소문자 구분을 하지 않고 일치 여부만 확인합니다.  <resultMap id="memResult" type="memberVO">
+-->
+<mapper namespace="mapper.member">
+	<resultMap id="memResult" type="memberVO">
+		<result property="id" column="id" />
+		<result property="pwd" column="pwd" />
+		<result property="name" column="name" />
+		<result property="email" column="email" />
+		<result property="joinDate" column="joinDate" />
+	</resultMap>
+	
+	
+	<!-- <resultMap id="memResult" type="java.util.HashMap">
+      <result property="id" column="id" />
+      <result property="pwd" column="pwd" />
+      <result property="name" column="name" />
+      <result property="email" column="email" />
+      <result property="joinDate" column="joinDate" />
+   </resultMap> -->
+	<!-- 여기서 property는 key, column은 value(데이터의 각 열에 해당하는 값 예를들어 hong) -->
+	<!-- selectAllMemberList 쿼리를 실행하면 그 결과물을 memResult에 정의된 매핑 규칙에 따라 'type='부분의 해당 타입의 객체로 매핑하여 반환 -->
+	
+	<select id="selectAllMemberList" resultMap="memResult">
+      <![CDATA[select * from t_member order by joinDate desc]]>
+	</select>
+	
+	<!-- 
+		매핑(Mapping)은 서로 다른 데이터 구조 또는 객체 간의 대응 관계를 맺는 것을 의미. 
+		데이터나 객체를 한 형식에서 다른 형식으로 변환하거나 대응시키는 과정을 매핑이라고 함. -->
+	
+	<sql id="a">
+		<![CDATA[
+			select * from t_member
+    	]]>
+	</sql>
+	<!-- 이렇게 공통 sql문을 선언하고 <include refid="a"> 이런식으로 사용 가능.
+		 단, <![CDATA[] 는 이미 공통문에서 포함되어 있기 때문에 활용시 추가 쿼리는 텍스트만. -->
+	<select id="selectName" resultType="String">
+    <![CDATA[
+	select name from t_member
+	where id = 'messi10'			
+    ]]>
+	</select>
+	
+	<select id="selectPwd" resultType="String" >
+	  <![CDATA[ 
+	    select pwd from t_member 
+	    where id = 'messi10'
+	 ]]>
+	 </select> 
+	 
+	 
+	 
+	 <select id="selectMemberById" resultType="memberVO"  parameterType="String" >
+     	<include refid="a" />
+         where
+         id=#{id}			
+	 </select>	
+	
+	<select id="selectMemberByPwd" resultMap="memResult"  parameterType="String" >
+		<include refid="a" />
+         where
+         pwd = #{pwd}			
+    </select>
+	
+	<insert id="insertMember" parameterType="memberVO">
+		<![CDATA[
+		 insert into t_member(id,pwd, name, email)
+		 values(#{id}, #{pwd}, #{name}, #{email})
+		]]>
+	</insert>
+
+	<insert id="insertMember2" parameterType="java.util.Map">
+		<![CDATA[
+			 insert into t_member(id,pwd, name, email)
+			 values(#{id}, #{pwd}, #{name}, #{email})
+		]]>
+	</insert>
+
+	<update id="updateMember" parameterType="memberVO">
+     <![CDATA[
+	     update t_member
+	     set pwd=#{pwd}, name=#{name}, email=#{email}
+	     where
+	     id=#{id}
+      ]]>
+	</update>
+
+	<delete id="deleteMember" parameterType="String">
+	<![CDATA[
+	   delete from t_member
+	   where
+	   id=#{id}
+	]]>
+	</delete>
+	
+	<select id="loginById"  resultType="memberVO"   parameterType="memberVO" >
+	<include refid="a" />
+	where id=#{id} and pwd=#{pwd}		
+  </select>
+	
+	
+	<!-- 동적 SQL문 -->
+  <select id="searchMember" parameterType="memberVO" resultMap="memResult">
+      <include refid="a" />
+      <where>
+         <if test=" id != ''  and  id != null">
+            id like '%' || #{id} || '%'
+         </if>
+         
+         <if test="pwd != ''  and  pwd != null ">
+         	OR pwd like '%' || #{pwd} || '%'
+         </if>
+         
+         <if test=" name != ''  and  name != null">
+            OR name like '%' || #{name} || '%'
+         </if>
+         
+         <if test="email != ''  and email != null ">
+           OR email like '%' || #{email} || '%'
+         </if>
+      </where>
+      order by joinDate desc
+  </select>
+  <!-- 위에서 앞의 if문이 거짓일 경우, 뒤에 if 부분이 선두 조건으로 실행될 때, AND/OR는 자동으로 빠진다. -->
+  
+	 
+	
+</mapper>

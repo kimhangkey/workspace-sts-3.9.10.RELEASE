@@ -117,7 +117,8 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
-
+		
+		<!-- mybatis -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
