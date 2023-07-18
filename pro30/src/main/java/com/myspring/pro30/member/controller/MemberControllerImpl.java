@@ -34,7 +34,7 @@ public class MemberControllerImpl implements MemberController {
 	private MemberVO memberVO;
 	
 	
-	@RequestMapping(value = { "/","/main.do"}, method = RequestMethod.GET)
+	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
@@ -45,9 +45,8 @@ public class MemberControllerImpl implements MemberController {
 	@Override
 	@RequestMapping(value = "/listMembers.do", method = RequestMethod.GET)
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("listMembers메서드");
+		System.out.println("listMembers메서드12");
 		
-//		String viewName = getViewName(request);
 		String viewName = (String) request.getAttribute("viewName");
 		// 인터셉터를 통해 바인딩된 viewName을 가져옴.(Object 타입으로 가져오니 캐스팅 필요)
 		
@@ -118,13 +117,16 @@ public class MemberControllerImpl implements MemberController {
 	
 	@RequestMapping(value = "/*Form.do", method =  RequestMethod.GET)
 	public ModelAndView form(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(required = false) String id, String result) throws Exception {
-//		String viewName = getViewName(request);
+			@RequestParam(required = false) String id, String result, String action) throws Exception {
 		
 		String viewName = (String) request.getAttribute("viewName");
 		
+		HttpSession session = request.getSession();
+		session.setAttribute("action", action);
+		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("result", result);
+		
 		if(viewName.equals("/member/modMemberForm")) {
 			memberVO = memberService.selectMemberById(id);
 			
@@ -172,38 +174,5 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 	
-	
-	
-	private String getViewName(HttpServletRequest request) throws Exception {
-		String contextPath = request.getContextPath();
-		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
-		
-		if (uri == null || uri.trim().equals("")) {
-			uri = request.getRequestURI();
-		}
-
-		int begin = 0;
-		if (!((contextPath == null) || ("".equals(contextPath)))) {
-			begin = contextPath.length();
-		}
-
-		int end;
-		if (uri.indexOf(";") != -1) {
-			end = uri.indexOf(";");
-		} else if (uri.indexOf("?") != -1) {
-			end = uri.indexOf("?");
-		} else {
-			end = uri.length();
-		}
-
-		String viewName = uri.substring(begin, end);
-		if (viewName.indexOf(".") != -1) {
-			viewName = viewName.substring(0, viewName.lastIndexOf("."));
-		}
-		if (viewName.lastIndexOf("/") != -1) {
-			viewName = viewName.substring(viewName.lastIndexOf("/",1), viewName.length());
-		}
-		return viewName;
-	}
 
 }
