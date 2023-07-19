@@ -18,6 +18,6 @@ public interface MemberController {
 	public ModelAndView removeMember(@RequestParam String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView modMember(@ModelAttribute MemberVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView searchMember(@ModelAttribute MemberVO vo, @RequestParam(required = false) String option, String total, String id_email, HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView login(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView login(@ModelAttribute("member") MemberVO member, @RequestParam(required = false) String action, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

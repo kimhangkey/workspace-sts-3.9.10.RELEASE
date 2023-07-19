@@ -31,7 +31,7 @@
 	  if(isLogOn != '' && isLogOn != 'false'){
 	    location.href=articleForm;
 	  }else{
-	    alert("로그인 후 글쓰기가 가능합니다.")
+	    alert("로그인 후 글쓰기가 가능합니다.");
 	    location.href=loginForm+'?action=/board/articleForm.do';
 	  }
 	}

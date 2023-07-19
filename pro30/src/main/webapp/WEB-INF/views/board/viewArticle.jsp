@@ -40,22 +40,8 @@
 	function fn_remove_article(obj){
 		obj.action = "${contextPath}/board/removeArticle.do?articleNO=${article.articleNO}";
 		obj.submit();
-	 } // 이렇게 해도 삭제 동작이 된다.
+	 }
 	
-	/* function fn_remove_article(url,articleNO){
-		 var form = document.createElement("form");
-		 form.setAttribute("method", "post");
-		 form.setAttribute("action", url);
-	     var articleNOInput = document.createElement("input");
-	     articleNOInput.setAttribute("type","hidden");
-	     articleNOInput.setAttribute("name","articleNO");
-	     articleNOInput.setAttribute("value", articleNO);
-		 
-	     form.appendChild(articleNOInput);
-	     // 폼태그의 자식요소로 매개변수 내용을 추가
-	     document.body.appendChild(form);
-		 form.submit();
-	 } */
 	     
 	
 	function readURL(input) {
@@ -67,8 +53,8 @@
 	         reader.readAsDataURL(input.files[0]);
 	     }
 	 }
-	 
-	/*  function fn_reply_form(url, parentNO) {
+/* 	 
+	function fn_reply_form(url, parentNO) {
 		 var form = document.createElement("form");
 		 form.setAttribute("method", "post");
 		 form.setAttribute("action", url);
@@ -81,14 +67,19 @@
 	     form.appendChild(parentNOInput);
 	     document.body.appendChild(form);
 	     form.submit();
-	 } */
-	 
-	 function fn_reply_form(obj){
-			obj.action = "${contextPath}/board/replyForm.do?parentNO=${article.articleNO}";
+	 }
+	  */
+
+	function fn_reply_form(obj, isLogOn) {
+		if (isLogOn != '' && isLogOn != 'false') {
+			obj.action = "${contextPath}/board/replyForm.do";
 			obj.submit();
-		 }
-	 
-	 
+		} else {
+			alert("로그인 후 답글쓰기가 가능합니다.");
+			obj.action = "${contextPath}/member/loginForm.do?action=/board/replyForm.do";
+			obj.submit();
+		}
+	}
 </script>
 
 <title>게시글 보기</title>
@@ -99,51 +90,53 @@
 		<table border="0" align="center">
 			<tr>
 				<td width="150" align="center" bgcolor="#FF9933">글번호</td>
-				<td>
+				<td align="left">
 					<input type="text" value="${article.articleNO }" disabled />
 					<input type="hidden" name="articleNO" value="${article.articleNO}" />
 				</td>
 			</tr>
 			<tr>
-				<td width="150" align="center" bgcolor="#FF9933">작성자 아이디</td>
-				<td>
+				<td width="150" align="center" bgcolor="#FF9933">작성자</td>
+				<td align="left">
 					<input type=text value="${article.id }" name="writer" disabled />
 				</td>
 			</tr>
 			<tr>
 				<td width="150" align="center" bgcolor="#FF9933">제목</td>
-				<td>
+				<td align="left">
 					<input type=text value="${article.title }" name="title"	id="i_title" disabled />
 				</td>
 			</tr>
 			<tr>
 				<td width="150" align="center" bgcolor="#FF9933">내용</td>
-				<td>
-					<textarea rows="20" cols="60" name="content" id="i_content"	disabled />${article.content }</textarea>
+				<td align="left">
+					<textarea rows="20" cols="60" name="content" id="i_content"	disabled 
+						style="resize: none;">${article.content}</textarea>
 				</td>
 			</tr>
 
-				<tr>
-					<td width="150" align="center" bgcolor="#FF9933" rowspan="2">
-						이미지</td>
-					<td>
-						<input type="hidden" name="originalFileName" value="${article.imageFileName }" /> 
+			<tr>
+				<td width="150" align="center" bgcolor="#FF9933" rowspan="2">
+					이미지</td>
+				<td align="left">
+					<input type="hidden" name="originalFileName" value="${article.imageFileName }" /> 
 						<c:if test="${not empty article.imageFileName && article.imageFileName!='null' }">
 						<img
 							src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}"
-							id="preview" width="300" height="300"/><br>
-						</c:if>
-						<img src="" id="preview" >
-					</td>
-				</tr>
-				<tr>
-					<td><input type="file" name="imageFileName "
-						id="i_imageFileName" disabled onchange="readURL(this);" /></td>
-				</tr>
+							id="preview" width="300" height="300" />
+						<br>
+						</c:if> 
+						<img src="" id="preview">
+				</td>
+			</tr>
+			<tr>
+				<td align="left"><input type="file" name="imageFileName "
+					id="i_imageFileName" disabled onchange="readURL(this);" /></td>
+			</tr>
 			<tr>
 				<td width=20% align=center bgcolor=#FF9933>등록일자</td>
-				<td>
-					<input type=text value="<fmt:formatDate value="${article.writeDate}" />" disabled />
+				<td align="left"><input type=text
+					value="<fmt:formatDate value="${article.writeDate}" />" disabled />
 				</td>
 			</tr>
 			<tr id="tr_btn_modify">
@@ -154,21 +147,14 @@
 			</tr>
 
 			<tr id="tr_btn">
-				<td colspan=2 align=center>
-					<input type=button value="수정하기" onClick="fn_enable(this.form)"> 
-				
-					<%-- <input type=button value="삭제하기" 
-					onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO})"> --%>
-					
-					<input type=button value="삭제하기" onClick="fn_remove_article(this.form)">
-					<!-- 이렇게 해도 삭제 동작이 된다. -->
-				
+				<td colspan=2 align="center"><br>
+					<c:if test="${member.id == article.id || member.id == 'admin'}">
+						<input type=button value="수정하기" onClick="fn_enable(this.form)">
+						<input type=button value="삭제하기" onClick="fn_remove_article(this.form)">
+	    			</c:if>
+					<input type=button value="답글쓰기" onClick="fn_reply_form(this.form,'${isLogOn}')">
+					<%-- <input type=button value="답글쓰기" onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.articleNO})"> --%>
 					<input type=button value="리스트로 돌아가기" onClick="backToList(this.form)"> 
-				
-					<%-- <input type=button value="답글쓰기" 
-					onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.articleNO})"> --%>
-					
-					<input type=button value="답글쓰기" onClick="fn_reply_form(this.form)">
 				</td>
 			</tr>
 		</table>

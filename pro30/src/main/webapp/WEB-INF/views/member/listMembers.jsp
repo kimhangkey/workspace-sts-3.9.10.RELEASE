@@ -49,19 +49,23 @@
 			<td><b>이름</b></td>
 			<td><b>이메일</b></td>
 			<td><b>가입일</b></td>
-			<td><b>회원 수정</b></td>
-			<td><b>회원 삭제</b></td>
+			<c:if test="${member.id == 'admin' }">
+				<td><b>회원 수정</b></td>
+				<td><b>회원 삭제</b></td>
+			</c:if>
 		</tr>
 
-		<c:forEach var="member" items="${membersList}">
+		<c:forEach var="mem" items="${membersList}">
 			<tr align="center">
-				<td>${member.id}</td>
-				<td>${member.pwd}</td>
-				<td>${member.name}</td>
-				<td>${member.email}</td>
-				<td>${member.joinDate}</td>
-				<td><a href="${contextPath}/member/modMemberForm.do?id=${member.id }">수정</a></td>
-				<td><a href="${contextPath}/member/removeMember.do?id=${member.id }">삭제</a></td>
+				<td>${mem.id}</td>
+				<td>${mem.pwd}</td>
+				<td>${mem.name}</td>
+				<td>${mem.email}</td>
+				<td>${mem.joinDate}</td>
+				<c:if test="${member.id == 'admin' }">
+					<td><a href="${contextPath}/member/modMemberForm.do?id=${mem.id}">수정</a></td>
+					<td><a href="${contextPath}/member/removeMember.do?id=${mem.id}">삭제</a></td>
+				</c:if>
 			</tr>
 		</c:forEach>
 	</table>

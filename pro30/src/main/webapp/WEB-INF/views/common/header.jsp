@@ -9,6 +9,8 @@
 %>
 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="uri" value="${pageContext.request.requestURI}" />
+<c:set var="path" value="${uri.substring(contextPath.length())}" />
 
 <!DOCTYPE html>
 <html>
@@ -31,7 +33,7 @@
      <td>
        <!-- <a href="#"><h3>로그인</h3></a> -->
        <c:choose>
-          <c:when test="${isLogOn == true  && member!= null}">
+          <c:when test="${isLogOn == true  && member != null}">
             <h3>환영합니다. ${member.name }님!</h3>
             <a href="${contextPath}/member/logout.do"><h3>로그아웃</h3></a>
           </c:when>

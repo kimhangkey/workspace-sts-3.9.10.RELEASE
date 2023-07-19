@@ -56,11 +56,11 @@ public class BoardControllerImpl  implements BoardController{
 	@Override
 	@RequestMapping(value="/board/addNewArticle.do" ,method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest, 
-	HttpServletResponse response) throws Exception {
+	public ResponseEntity addNewArticle(@RequestParam(defaultValue = "0") String parentNO,
+			MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
 		
 		multipartRequest.setCharacterEncoding("utf-8");
-		System.out.println("addNewArticle의 멀파리 : " + multipartRequest);
+		System.out.println("패런트넘버 : "+ parentNO);
 		
 		Map<String,Object> articleMap = new HashMap<String, Object>();
 		
@@ -70,17 +70,15 @@ public class BoardControllerImpl  implements BoardController{
 		while(enu.hasMoreElements()){
 			String name=(String)enu.nextElement();
 			String value=multipartRequest.getParameter(name);
-			System.out.println(name + " ,,, " + value);
 			articleMap.put(name,value);
 		}
 		String imageFileName= upload(multipartRequest);
 		
-		System.out.println(imageFileName);
 		
 		HttpSession session = multipartRequest.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		String id = memberVO.getId();
-		articleMap.put("parentNO", 0);
+		articleMap.put("parentNO", parentNO);
 		articleMap.put("id", id);
 		articleMap.put("imageFileName", imageFileName);
 		
@@ -305,13 +303,15 @@ public class BoardControllerImpl  implements BoardController{
 	
 */
 
-	
-
-	@RequestMapping(value = "/board/*Form.do", method =  RequestMethod.GET)
-	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/board/*Form.do")
+	private ModelAndView form(@RequestParam(required = false) String articleNO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		if(viewName.equals("/board/replyForm")) {
+			mav.addObject("parentNO", articleNO);
+		}
 		return mav;
 	}
 
@@ -319,15 +319,14 @@ public class BoardControllerImpl  implements BoardController{
 	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception{
 		String imageFileName= null;
 		Iterator<String> fileNames = multipartRequest.getFileNames();
-		System.out.println("업로드 메서드");
-		System.out.println(fileNames.hasNext());
+		
 		while(fileNames.hasNext()){
 			String fileName = fileNames.next();
-			System.out.println("파일네임 : "+ fileName);
 			MultipartFile mFile = multipartRequest.getFile(fileName);
+			
 			imageFileName=mFile.getOriginalFilename();
-			System.out.println("while에서 이미지네임 : " + imageFileName);
 			File file = new File(ARTICLE_IMAGE_REPO +"\\"+ fileName);
+			
 			if(mFile.getSize()!=0){ //File Null Check
 				if(! file.exists()){ //경로상에 파일이 존재하지 않을 경우
 					if(file.getParentFile().mkdirs()){ //경로에 해당하는 디렉토리들을 생성
@@ -337,7 +336,6 @@ public class BoardControllerImpl  implements BoardController{
 				mFile.transferTo(new File(ARTICLE_IMAGE_REPO +"\\"+"temp"+ "\\"+imageFileName)); //임시로 저장된 multipartFile을 실제 파일로 전송
 			}
 		}
-		System.out.println("업로드 메서드 이미지네임 : "+imageFileName);
 		return imageFileName;
 	}
 	
