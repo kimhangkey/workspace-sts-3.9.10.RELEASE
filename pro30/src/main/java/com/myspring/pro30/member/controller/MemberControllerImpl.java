@@ -179,5 +179,9 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 	
+	// redirect : 새로운 url로 재전송. 새로운 요청을 가지고 해당 url로 이동. 주소창에도 변경된 URL이 표시.
+	// forward : 현재 요청과 응답을 가지고, 현재 서버 내부에서 해당 url로 이동. 주소창 URL 변경되지 않음.
+	// include : 해당 url 내용을 현재 페이지에 포함시킴.
+	
 
 }
