@@ -13,8 +13,8 @@ import com.kimhangkey.thelimited.member.vo.MemberVO;
 public class ViewNameInterceptor extends HandlerInterceptorAdapter {
 	
 	//count를 간단히 불러오기 위해 intercrptor에 sqlSession추가.
-		@Autowired
-		private SqlSession sqlSession;
+//		@Autowired
+//		private SqlSession sqlSession;
 		
 		//일반사용자인지, 관리자인지를 구문하기 위해 memberVO 빈을 사용한다.
 		@Autowired
@@ -25,45 +25,45 @@ public class ViewNameInterceptor extends HandlerInterceptorAdapter {
 			
 			HttpSession session = request.getSession();
 			
-			try {
-				//사용자확인
-				memberVO=(MemberVO)session.getAttribute("memberInfo");
-				String  member_id=memberVO.getMember_id();
-				
-				//공통, 카트갯수, 주문갯수, 소팡머니 출력
-				int cartCount = 0;
-				cartCount=sqlSession.selectOne("mapper.sopang.counts.cartLen",member_id);
-				session.setAttribute("cartCount", cartCount);
-				
-				int deliveringCount = 0;
-				deliveringCount=sqlSession.selectOne("mapper.sopang.counts.deliveringLen",member_id);
-				session.setAttribute("deliveringCount", deliveringCount);
-				
-				Long sopang_money = 0L;
-				sopang_money=(Long)sqlSession.selectOne("mapper.sopang.counts.sopang_money",member_id);
-				session.setAttribute("sopang_money", sopang_money);
-				
-				//관리자일경우, 상품갯수, 주문건수, 총매출 출력.
-				//System.out.println(member_id);
-				if(member_id.equals("1111") == true) {
-					int goodsLen = 0;
-					goodsLen=sqlSession.selectOne("mapper.sopang.counts.goodsLen");
-					session.setAttribute("goodsLen", goodsLen);
-					
-					int ordersLen = 0;
-					ordersLen=sqlSession.selectOne("mapper.sopang.counts.ordersLen");
-					session.setAttribute("ordersLen", ordersLen);
-					
-					Long totalSales = 0L;
-					totalSales=(Long)sqlSession.selectOne("mapper.sopang.counts.totalSales");
-					session.setAttribute("totalSales", totalSales);
-					
-					
-				}
-				
-			}catch (Exception e) {
-				//System.out.println("로그인하지않았거나 예상하기 어려운 예외가 발생했습니다.");
-			}
+//			try {
+//				//사용자확인
+//				memberVO=(MemberVO)session.getAttribute("memberInfo");
+//				String  member_id=memberVO.getMember_id();
+//				
+//				//공통, 카트갯수, 주문갯수, 소팡머니 출력
+//				int cartCount = 0;
+//				cartCount=sqlSession.selectOne("mapper.sopang.counts.cartLen",member_id);
+//				session.setAttribute("cartCount", cartCount);
+//				
+//				int deliveringCount = 0;
+//				deliveringCount=sqlSession.selectOne("mapper.sopang.counts.deliveringLen",member_id);
+//				session.setAttribute("deliveringCount", deliveringCount);
+//				
+//				Long sopang_money = 0L;
+//				sopang_money=(Long)sqlSession.selectOne("mapper.sopang.counts.sopang_money",member_id);
+//				session.setAttribute("sopang_money", sopang_money);
+//				
+//				//관리자일경우, 상품갯수, 주문건수, 총매출 출력.
+//				//System.out.println(member_id);
+//				if(member_id.equals("1111") == true) {
+//					int goodsLen = 0;
+//					goodsLen=sqlSession.selectOne("mapper.sopang.counts.goodsLen");
+//					session.setAttribute("goodsLen", goodsLen);
+//					
+//					int ordersLen = 0;
+//					ordersLen=sqlSession.selectOne("mapper.sopang.counts.ordersLen");
+//					session.setAttribute("ordersLen", ordersLen);
+//					
+//					Long totalSales = 0L;
+//					totalSales=(Long)sqlSession.selectOne("mapper.sopang.counts.totalSales");
+//					session.setAttribute("totalSales", totalSales);
+//					
+//					
+//				}
+//				
+//			}catch (Exception e) {
+//				//System.out.println("로그인하지않았거나 예상하기 어려운 예외가 발생했습니다.");
+//			}
 			
 			//공통 viewName 리턴.
 			try {
