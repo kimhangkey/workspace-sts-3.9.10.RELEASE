@@ -51,7 +51,7 @@
 							</div>
 							<div class="top_bar_user">
 								<div class="user_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg" alt=""></div>
-								<div><a href="#">회원가입</a></div>
+								<div><a href="${contextPath}/member/memberForm.do">회원가입</a></div>
 								<div><a href="${contextPath}/member/loginForm.do">로그인</a></div>
 							</div>
 						</div>

@@ -19,7 +19,7 @@ public class MainController {
 		return mav;
 	}
 	
-	@RequestMapping(value = {"/member/loginForm.do"})
+	@RequestMapping(value = {"/member/*Form.do"})
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
 		ModelAndView mav = new ModelAndView();

@@ -18,7 +18,7 @@ body {
 }
 
 .form-control {
-	border: 2px solid #bdc1d2;
+	border: 2px solid #000;
 	font-size: 13px;
 	height: 48px
 }
@@ -26,7 +26,7 @@ body {
 .form-control:focus {
 	color: #495057;
 	background-color: #fff;
-	border-color: #f7bfd9;
+	border-color: #d6b534;
 	outline: 0;
 	box-shadow: none
 }
@@ -48,11 +48,30 @@ body {
 	padding: 5px
 }
 
+.login_to_home {
+	text-decoration: none;
+	color: #000;
+}
+
+.login_to_home:hover {
+	text-decoration: none;
+	color: #d6b534;
+}
+
+.login_logo {
+	font-size: 30px;
+}
+
 .continue {
 	height: 48px;
 	font-size: 13px;
-	background-color: #e91e63;
+	color: #fff;
+	background-color: #000;
 	border: none
+}
+
+.continue:hover {
+	opacity: .7;
 }
 
 .line-text {
@@ -66,35 +85,41 @@ body {
 }
 
 .member a {
-	color: #e91e63;
+	color: #000;
 	font-size: 14px
+}
+
+.member a:hover {
+	color: #d6b534;
 }
 
 .member span {
 	font-size: 13px;
 	font-weight: 400;
-	color: #6ca0d6
+	color: #6ca0d6;
 }
 
 .facebook-button {
-	background-color: #39559f
+	background-color: #39559f;
 }
 
 .facebook-button:hover {
-	background-color: #39559f
+	background-color: #39559f;
+	opacity: .7;
 }
 
 .facebook:focus {
 	color: #fff;
 	background-color: #4285f4;
 	border-color: #4285f4;
-	box-shadow: none
+	box-shadow: none;
 }
 
 .google-button {
-	background-color: #4285f4
+	background-color: #e91e63;
 }
 
 .google-button:hover {
-	background-color: #4285f4
+	background-color: #e91e63;
+	opacity: .7;
 }
