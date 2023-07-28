@@ -49,11 +49,40 @@
 									</li>
 								</ul>
 							</div>
-							<div class="top_bar_user">
-								<div class="user_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg" alt=""></div>
-								<div><a href="${contextPath}/member/memberForm.do">회원가입</a></div>
-								<div><a href="${contextPath}/member/loginForm.do">로그인</a></div>
-							</div>
+							
+							<c:choose>
+							<c:when test="${isLogOn==true and not empty memberInfo}">
+							
+								<c:choose>
+								
+								<c:when test="${isLogOn==true and memberInfo.member_id =='admin'}">
+								
+									<div class="top_bar_user">
+										<div class="user_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg" alt=""></div>
+										<div><a href="${contextPath}/member/memberForm.do">관리자</a></div>
+										<div><a href="${contextPath}/member/logout.do">로그아웃</a></div>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div class="top_bar_user">
+										<div class="user_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg" alt=""></div>
+										<div><a href="${contextPath}/member/memberForm.do">${memberInfo.member_name}</a></div>
+										<div><a href="${contextPath}/member/logout.do">로그아웃</a></div>
+									</div>
+								</c:otherwise>
+								
+								</c:choose>
+							</c:when>
+							
+							<c:otherwise>		
+									<div class="top_bar_user">
+										<div class="user_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg" alt=""></div>
+										<div><a href="${contextPath}/member/memberForm.do">회원가입</a></div>
+										<div><a href="${contextPath}/member/loginForm.do">로그인</a></div>
+									</div>
+							</c:otherwise>
+							</c:choose>		
+									
 						</div>
 					</div>
 				</div>
@@ -310,8 +339,8 @@
 
 </div>
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="${contextPath}/resources/js/header.js"></script>
 
 </body>

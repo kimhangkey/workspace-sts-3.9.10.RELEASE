@@ -23,8 +23,7 @@
 
 </head>
 <body>
-	<form action="${contextPath}/member/memberForm.do" method="post" id="loginForm">
-			
+
 		<div class="container d-flex justify-content-center align-items-center">
 			<div class="card">
 				<div
@@ -32,13 +31,19 @@
 					<a href="${contextPath}/main/main.do" class="login_to_home"><h5 class="login_logo">THE LIMITED</h5></a>
 				</div>
 				<div class="p-3 px-4 py-4 border-bottom">
-					<input type="text" class="form-control mb-2" name="member_id"
-						placeholder="아이디/이메일" required />
-					<div class="form">
-						<input type="password" class="form-control" placeholder="비밀번호" name="member_pw" required />
-					</div>
-					
-					<button type="button" onClick="loginTheLimited()" class="btn btn-dark btn-block continue">로그인</button>
+					<form action="${contextPath}/member/login.do" method="post" id="loginForm">
+						<input type="text" class="form-control mb-2" name="member_id" value="${param.id}"
+							placeholder="아이디/이메일" required />
+						<div class="form">
+							<input type="password" class="form-control" placeholder="비밀번호" name="member_pw" required />
+						</div>
+						
+						<button type="button" onClick="loginTheLimited()" class="btn btn-dark btn-block continue">로그인</button>
+						
+						<!-- 정보를 입력하지않고 로그인을 요청한 경우 show -->
+						<div class="allRequiredInputCheck invalid-feedback text-start fs-07 mb-3 d-none">
+							모든 정보를 입력해주세요.</div>
+					</form>
 					<div
 						class="d-flex justify-content-center align-items-center mt-3 mb-3">
 						<span class="line"></span> <small class="px-2 line-text">OR</small>
@@ -60,7 +65,6 @@
 				</div>
 			</div>
 		</div>
-	</form>	
 	
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -69,6 +73,7 @@
 	<script>
 	const form = document.getElementById("loginForm");
 	const inputs = form.querySelectorAll("input[required]");
+	var allRequiredInputCheck = document.querySelector('.allRequiredInputCheck');
 
 	
 	//로그인을 클릭한 경우
@@ -85,16 +90,16 @@
 		          input.classList.add("is-invalid");
 		        } else {//외 의 경우 초기화.
 		          input.classList.remove("is-invalid");
+		          allRequiredInputCheck.classList.add('d-none');
 		        }
 		      });
 		    
 		 	//모든 입력이 유효하면 폼을 제출
 		    if (isValid) {form.submit();}
-		 	
+		    else {allRequiredInputCheck.classList.remove('d-none');}
 		}
-	</script>
 	
-	<script>
+		// 페이스북/구글 로그인
 	    function facebookLogin() {
 	        window.location.href = "https://www.facebook.com/login"; // 페이스북 로그인 페이지 URL로 이동
 	    }

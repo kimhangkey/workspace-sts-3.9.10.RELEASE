@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kimhangkey.thelimited.common.base.BaseController;
+
 @Controller("mainController")
-public class MainController {
+public class MainController extends BaseController {
 	
 	@RequestMapping(value = {"/main/main.do", "/"})
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -19,13 +21,4 @@ public class MainController {
 		return mav;
 	}
 	
-	@RequestMapping(value = {"/member/*Form.do"})
-	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
-		ModelAndView mav = new ModelAndView();
-		String viewName=(String)request.getAttribute("viewName");
-		mav.setViewName(viewName);
-		System.out.println(viewName);
-		return mav;
-	}
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+  <typeAliases>
+    <typeAlias type="com.kimhangkey.thelimited.member.vo.MemberVO" alias="memberVO" />
+    
+    <!-- <typeAlias type="com.kimhangkey.thelimited.vo.MemberVO" alias="goodsVO" />
+	 
+    <typeAlias type="com.kimhangkey.thelimited.vo.MemberVO" alias="imageFileVO" />
+     
+    <typeAlias type="com.kimhangkey.thelimited.vo.MemberVO" alias="cartVO" />
+ 
+    <typeAlias type="com.kimhangkey.thelimited.vo.MemberVO" alias="orderVO" />
+
+    <typeAlias type="com.kimhangkey.thelimited.vo.MemberVO" alias="mypageVO" />
+     -->
+  </typeAliases>
+</configuration>
+
+
+
