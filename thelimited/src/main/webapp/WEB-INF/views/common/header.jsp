@@ -59,14 +59,14 @@
 								
 									<div class="top_bar_user">
 										<div class="user_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg" alt=""></div>
-										<div><a href="${contextPath}/member/memberForm.do">관리자</a></div>
+										<div><a href="${contextPath}/admin/goods/adminGoods.do">관리자</a></div>
 										<div><a href="${contextPath}/member/logout.do">로그아웃</a></div>
 									</div>
 								</c:when>
 								<c:otherwise>
 									<div class="top_bar_user">
 										<div class="user_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg" alt=""></div>
-										<div><a href="${contextPath}/member/memberForm.do">${memberInfo.member_name}</a></div>
+										<div><a href="${contextPath}/mypage/listMyOrderHistory.do">${memberInfo.member_name}</a></div>
 										<div><a href="${contextPath}/member/logout.do">로그아웃</a></div>
 									</div>
 								</c:otherwise>
@@ -98,7 +98,7 @@
 					<!-- Logo -->
 					<div class="col-lg-2 col-sm-3 col-3 order-1">
 						<div class="logo_container">
-							<div class="logo"><a href="#">THE LIMITED</a></div>
+							<div class="logo"><a href="${contextPath}/main/main.do">THE LIMITED</a></div>
 						</div>
 					</div>
 
@@ -244,7 +244,7 @@
 			</div>
 		</nav>
 		
-		<!-- Menu -->
+		<!-- mobile Menu -->
 
 		<div class="page_menu">
 			<div class="container">

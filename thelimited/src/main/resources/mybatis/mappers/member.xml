@@ -43,5 +43,17 @@
 	</insert>
 	
 	
+	<!-- 아이디 중복확인 -->
+	<!-- decode조건문과 비슷한역할의 함수 -->
+	<!-- count(*)가 1일경우(=조건에 맞는 회원이있는경우) true, 아닐경우 false를 반환한다. -->
+	<select id="selectOverlappedID" parameterType="String"
+		resultType="String">
+		select decode(count(*),1, 'true', 0, 'false')
+		from
+		t_shopping_member
+		where member_id = #{id}
+	</select>
+	
+	
 	
 </mapper>

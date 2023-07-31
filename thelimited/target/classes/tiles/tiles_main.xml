@@ -14,19 +14,38 @@
 		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
 	</definition>
 	
-	<!-- 회원가입/로그인용 레이아웃 -->
-	<definition name="loginLayout"
-		template="/WEB-INF/views/member/layout.jsp">
-		<put-attribute name="title" value="레이아웃 페이지" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
-	</definition>
-	
 	<!-- 메인 페이지 -->
 	<definition name="/main/main" extends="baseLayout">
 		<put-attribute name="title" value="the Limited" />
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp" />
 	</definition>
+	
+	<!-- 회원가입/로그인용 레이아웃 -->
+	<definition name="loginLayout"
+		template="/WEB-INF/views/member/member_layout.jsp">
+		<put-attribute name="title" value="레이아웃 페이지" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
+	<!-- 관리자 페이지 레이아웃 -->
+	<definition name="adminLayout"
+		template="/WEB-INF/views/admin/admin_layout.jsp">
+		<put-attribute name="title" value="레이아웃 페이지" />
+		<put-attribute name="header" value="/WEB-INF/views/admin/admin_header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
+	<!-- 마이 페이지 레이아웃 -->
+	<definition name="mypageLayout"
+		template="/WEB-INF/views/mypage/mypage_layout.jsp">
+		<put-attribute name="title" value="레이아웃 페이지" />
+		<put-attribute name="header" value="/WEB-INF/views/mypage/mypage_header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
 		
 </tiles-definitions>
 

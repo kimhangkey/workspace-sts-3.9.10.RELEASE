@@ -20,4 +20,6 @@ public interface MemberController {
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ResponseEntity addMember(@ModelAttribute("memberVO") MemberVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ResponseEntity overlapped(@RequestParam String id,HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

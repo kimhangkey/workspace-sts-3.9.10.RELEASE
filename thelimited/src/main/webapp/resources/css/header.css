@@ -110,6 +110,10 @@ h6::selection
 {
 	
 }
+/* .container {
+	margin-left: 30px;
+}
+ */
 .form-control
 {
 	color: #db5246;
@@ -223,6 +227,11 @@ section
 .button:hover
 {
 	opacity: 0.8;
+}
+
+.container
+{
+	
 }
 
 /*********************************
@@ -1020,6 +1029,23 @@ select option
     color: #FFFFFF;
     text-transform: uppercase;
     margin-right: 16px;
+}
+
+.menu_home>span
+{
+	font-size: 20px;
+    font-weight: bolder;
+    color: #000;
+    line-height: 60px;
+}
+
+.menu_line>span
+{
+	font-size: 25px;
+    font-weight: 100;
+    color: #000;
+    line-height: 60px;
+    opacity: .3;
 }
 
 /*********************************

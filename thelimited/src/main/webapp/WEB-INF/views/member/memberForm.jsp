@@ -13,6 +13,48 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/form.css">
 
+<script>
+
+//id중복체크
+function fn_overlapped(){
+	//member_id 값을 가져와 overlapped를 실행함.
+    var _id=$("#member_id").val();
+    if(_id==''){return;}
+    
+    $.ajax({
+       type:"post",
+       async:false,  
+       url:"${contextPath}/member/overlapped.do",
+       dataType:"text",
+       data: {id:_id},
+       success:function (data,textStatus){
+    	  //가능한 id일 경우 input값은 _id로 유지되며 외의경우 아무런이벤트 없음 
+    	  //각 상황에 따른 피드백 및 스타일을 add or remove
+          if(data=='false'){
+        	$('.input1').prop("disabled", false);
+       	    $('#member_id').addClass("is-valid");
+       		$('#member_id').removeClass("is-invalid");
+       	 	$('.member_id-feedback.valid-feedback').removeClass("d-none");
+       	    $('#member_id').val(_id);
+          }else{
+        	  $('.input1').prop("disabled", true);
+        	  $('#member_id').removeClass("is-valid");
+        	  $('#member_id').addClass("is-invalid");
+        	  $('.member_id-feedback.invalid-feedback').removeClass("d-none");
+          }
+       },
+       error:function(data,textStatus){
+          alert("에러가 발생했습니다.");
+       },
+       complete:function(data,textStatus){}
+    });
+ }
+ 
+
+</script>
+
+
+
 </head>
 <body>
 	<div class="container d-flex justify-content-center align-items-center">
@@ -25,14 +67,21 @@
 			
 				<form action="${contextPath}/member/addMember.do" method="post"
 					id="joinForm">
-					<input type="text" class="form-control mb-4"
+					
+					<!-- id check -->
+					<input type="text" class="form-control mb-0" id="member_id" onblur="fn_overlapped()"
 						name="member_id" placeholder="아이디/이메일" required />
+					<div class="member_id-feedback valid-feedback text-start fs-07 d-none">
+						사용가능한 아이디 입니다.</div>
+					<div class="member_id-feedback invalid-feedback text-start fs-07 d-none" >
+						이미 사용중인 아이디 입니다. 다른 아이디를 입력해 주세요.</div>
+					<div class="mb-4"></div>
 						
 					<!-- password check -->
 					<div class="form">
-						<input type="password" name="member_pw" class="form-control mb-4 member_pwWrite" 
+						<input type="password" name="member_pw" class="form-control mb-4 member_pwWrite input1" 
 							placeholder="비밀번호" onblur="member_pwChecking()" required />
-						<input type="password" class="form-control member_pwCheck" 
+						<input type="password" class="form-control member_pwCheck input1" 
 							placeholder="비밀번호 확인" onblur="member_pwChecking()" required />
 							
 						<div class="member_pw-feedback valid-feedback text-start fs-07 d-none">
@@ -43,11 +92,11 @@
 					
 					
 					
-					<input type="text" name="member_name" class="form-control mb-4"
-						placeholder="이름" required />
-					<input type="text" name="hp1" class="form-control mb-4"
-						placeholder="휴대폰 번호" required />
-					<button type="button" onClick="addMember()" class="btn btn-dark btn-block continue">가입하기</button>
+					<input type="text" name="member_name" class="form-control mb-4 input1 nameAndH1"
+						placeholder="이름" required oninput="etcInptut()" />
+					<input type="text" name="hp1" class="form-control mb-4 input1 nameAndH1"
+						placeholder="휴대폰 번호" required oninput="etcInptut()" />
+					<button type="button" onClick="addMember()" class="btn btn-dark btn-block continue join" >가입하기</button>
 					
 					<div class="allRequiredInputCheck invalid-feedback text-start fs-07 mb-3 d-none">
 						모든 정보를 입력해주세요.</div>
@@ -91,7 +140,7 @@
         let member_pwCheck = document.querySelector('.member_pwCheck');
         let member_pw_feedback = document.querySelector('.member_pw-feedback.invalid-feedback');
         let member_pw_feedback_valid = document.querySelector('.member_pw-feedback.valid-feedback');
-        let join_button = document.querySelector('.continue');
+        let join_button = document.querySelector('.join');
         
         //member_pwWrite와 member_pwCheck가 입력되었을 때만 안내문구와 테두리 표시.
 		if(member_pwWrite.value=="" || member_pwCheck.value==""){
@@ -155,7 +204,7 @@
     var allRequiredInputCheck = document.querySelector('.allRequiredInputCheck');
     
     
-    //이름, 휴대폰 input 에서 this input이 공란일때 style로 경고를 표시함.
+    //이름, 휴대폰 input 에서 입력값이 존재할 때, 경고 삭제
     function etcInptut(){
     	if(this.value != ""){
     		nameAndH1.forEach(input => {input.classList.remove("is-invalid");});
