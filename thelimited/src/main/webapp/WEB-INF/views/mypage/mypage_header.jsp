@@ -134,9 +134,9 @@
 					<div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
 						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
-								<a href="#"><div class="wishlist_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918681/heart.png" alt=""></div>
+								<div class="wishlist_icon"><a href="#"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918681/heart.png" alt=""></a></div>
 								<div class="wishlist_content">
-									<div class="wishlist_text">찜목록</div></a>
+									<div class="wishlist_text"><a href="#" class="wishlist_text">찜목록</a></div>
 									<div class="wishlist_count">10</div>
 								</div>
 							</div>
@@ -144,18 +144,22 @@
 							<!-- Cart -->
 							<div class="cart">
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
-									<a href="#"><div class="cart_icon">
-										<img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png" alt="">
-										<div class="cart_count"><span>3</span></div>
+									<div class="cart_icon">
+										<a href="#">
+											<img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png" alt="">
+											<span class="cart_count"><span>3</span></span>
+										</a>
 									</div>
 									<div class="cart_content">
-										<div class="cart_text">쇼핑카트</div></a>
+										<div class="cart_text"><a href="#" class="cart_text">쇼핑카트</a></div>
 										<div class="cart_price">39,000원</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					
+					
 				</div>
 			</div>
 		</div>
@@ -187,14 +191,14 @@
 
 							<!-- Menu Trigger -->
 
-							<div class="menu_trigger_container ml-auto">
+							<!-- <div class="menu_trigger_container ml-auto">
 								<div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
 									<div class="menu_burger">
 										<div class="menu_trigger_text">menu</div>
 										<div class="cat_burger menu_burger_inner"><span></span><span></span><span></span></div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 
 						</div>
 					</div>
@@ -202,9 +206,9 @@
 			</div>
 		</nav>
 		
-		<!-- Menu -->
+		<!-- mobile Menu -->
 
-		<div class="page_menu">
+		<!-- <div class="page_menu">
 			<div class="container">
 				<div class="row">
 					<div class="col">
@@ -286,7 +290,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 	</header>
 	

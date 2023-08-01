@@ -16,7 +16,8 @@
 	
 	<!-- 메인 페이지 -->
 	<definition name="/main/main" extends="baseLayout">
-		<put-attribute name="title" value="the Limited" />
+		<put-attribute name="title" value="main" />
+		<put-attribute name="main_css" value="/resources/css/main.css" />
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp" />
 	</definition>
 	

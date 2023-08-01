@@ -77,6 +77,31 @@ $(document).ready(function()
 		});
 	}
 
+	// 스크롤 헤더
+    $(window).scroll(function() {
+        // 현재 스크롤 위치
+        var scrollPosition = $(this).scrollTop();
+
+        // 헤더 요소에 scrolled 클래스를 추가하거나 제거
+        if (scrollPosition > 250) {
+          $('.header').addClass('scrolled');
+        } else {
+          $('.header').removeClass('scrolled');
+        }
+      });
+    
+    $('.home').on('click', function(event) {
+        event.preventDefault();
+        scrollToTop();
+      });
+
+      function scrollToTop() {
+        $('html, body').animate({
+          scrollTop: 0
+        }, 'fast');
+      }
+    // 스크롤 헤더 end
+     
 	/* 
 
 	4. Init Page Menu
