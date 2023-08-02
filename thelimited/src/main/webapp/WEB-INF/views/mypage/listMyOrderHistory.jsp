@@ -7,7 +7,7 @@
 <div class="container">
 	<div class="">
 		<div class="align-items-center">
-			<div class="">
+			<div class="ps-4">
 
 				<p class="fs-1 fw-bold mb-2">주문목록</p>
 				<form method="post">

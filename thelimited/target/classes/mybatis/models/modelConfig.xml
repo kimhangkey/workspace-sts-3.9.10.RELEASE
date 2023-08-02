@@ -6,11 +6,11 @@
   <typeAliases>
     <typeAlias type="com.kimhangkey.thelimited.member.vo.MemberVO" alias="memberVO" />
     
-    <!-- <typeAlias type="com.kimhangkey.thelimited.vo.MemberVO" alias="goodsVO" />
+    <typeAlias type="com.kimhangkey.thelimited.goods.vo.GoodsVO" alias="goodsVO" />
 	 
-    <typeAlias type="com.kimhangkey.thelimited.vo.MemberVO" alias="imageFileVO" />
-     
-    <typeAlias type="com.kimhangkey.thelimited.vo.MemberVO" alias="cartVO" />
+    <typeAlias type="com.kimhangkey.thelimited.cart.vo.CartVO" alias="cartVO" />
+    
+    <!-- <typeAlias type="com.kimhangkey.thelimited.vo.MemberVO" alias="imageFileVO" />
  
     <typeAlias type="com.kimhangkey.thelimited.vo.MemberVO" alias="orderVO" />
 

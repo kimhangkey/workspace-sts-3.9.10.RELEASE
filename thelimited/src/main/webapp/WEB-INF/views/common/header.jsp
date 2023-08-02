@@ -10,9 +10,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<%-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-<link rel="stylesheet" href="${contextPath}/resources/css/header.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/header.css"> --%>
 
 </head>
 <body>
@@ -150,7 +150,7 @@
 										</a>
 									</div>
 									<div class="cart_content">
-										<div class="cart_text"><a href="#" class="cart_text">쇼핑카트</a></div>
+										<div class="cart_text"><a href="${contextPath}/cart/shoppingCart.do" onclick="checkLogin(event)" class="cart_text">쇼핑카트</a></div>
 										<div class="cart_price">39,000원</div>
 									</div>
 								</div>
@@ -387,6 +387,26 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="${contextPath}/resources/js/header.js"></script>
+
+<script>
+function checkLogin(event) {
+  event.preventDefault(); // 기본 동작(링크 이동) 막기
+
+  // 세션에 바인딩된 값 가져오기
+  var isLogOn = '<%= session.getAttribute("isLogOn") %>';
+  var memberInfo = '<%= session.getAttribute("memberInfo") %>';
+
+  // 세션 값 조건 확인
+  if (isLogOn === 'true' && memberInfo !== '') {
+    // 로그인 상태이면 해당 링크로 이동
+    var targetHref = event.target.getAttribute('href');
+    window.location.href = targetHref;
+  } else {
+    // 로그인 상태가 아니면 경고창 표시
+    alert('로그인 후 다시 시도해주세요.');
+  }
+}
+</script>
 
 </body>
 </html>

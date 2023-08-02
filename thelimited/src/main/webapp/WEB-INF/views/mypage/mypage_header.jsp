@@ -184,7 +184,7 @@
 									<li class="menu_home"><span>마이 페이지</span></li>
 									<li class="menu_line"><span>&nbsp;&#124;</span></li>
 									<li><a href="${contextPath}/mypage/listMyOrderHistory.do">주문목록<i class="fas fa-chevron-down"></i></a></li>
-									<li><a href="#">장바구니<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="${contextPath}/cart/shoppingCart.do">쇼핑카트<i class="fas fa-chevron-down"></i></a></li>
 									<li><a href="${contextPath}/mypage/myDetailInfo.do">내정보<i class="fas fa-chevron-down"></i></a></li>
 								</ul>
 							</div>

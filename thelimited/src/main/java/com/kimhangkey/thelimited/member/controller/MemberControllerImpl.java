@@ -55,9 +55,9 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 				mav.setViewName("redirect:/main/main.do");
 				
 			} else { //memberVO가 존재하지않을 경우 message를 담아 return + login페이지로 이동
-				String message = "아이디나  비밀번호가 틀립니다. 다시 로그인해주세요";
+				String message = "아이디나 비밀번호가 틀립니다. 다시 로그인해주세요.";
 				mav.addObject("message", message);
-				mav.setViewName("/member/login");
+				mav.setViewName("/member/loginForm");
 			}
 			return mav;
 		}
