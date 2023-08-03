@@ -10,8 +10,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- Bjqs 플러그인 스타일-->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bjqs/bjqs.css">
+<!-- Bjqs 플러그인 스타일 -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bjqs/bjqs.css"> -->
 
 <%-- <link rel="stylesheet" href="${contextPath}/resources/css/main.css"> --%>
 
@@ -25,6 +25,8 @@
 		</ul> --%>
 		<img id="slideshow-img" width="100%" height="446" src="${contextPath}/resources/image/main_banner01.jpg">
 	</div>
+	
+	<div style="height: 1600px"></div>
 	
 <%-- 	<div class="main_book">
 	   <c:set  var="goods_count" value="0" />

@@ -50,11 +50,6 @@ public class CartControllerImpl extends BaseController implements CartController
 		Map<String, List> cartMap = cartService.myCartList(cartVO);
 		
 		
-		List<GoodsVO> test1 = cartMap.get("myGoodsList");
-		
-		
-		System.out.println("리스트 내용물 사이즈 :" + test1.size());
-		
 		
 		
 		session.setAttribute("cartMap", cartMap);
@@ -91,7 +86,7 @@ public class CartControllerImpl extends BaseController implements CartController
 	public ModelAndView removeCartGoods(@RequestParam("cart_id") int cart_id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
-
+		System.out.println(cart_id);
 		// @RequestParam받은 cart_id 상품을 삭제 후 myCartList로 redirect
 		cartService.removeCartGoods(cart_id);
 		mav.setViewName("redirect:/cart/myCartList.do");

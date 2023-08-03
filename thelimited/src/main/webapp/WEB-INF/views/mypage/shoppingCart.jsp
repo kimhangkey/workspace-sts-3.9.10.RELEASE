@@ -7,12 +7,24 @@
 <c:set var="myCartList" value="${cartMap.myCartList}" />
 <c:set var="myGoodsList" value="${cartMap.myGoodsList}" />
 
-<c:set var="totalGoodsNum" value="0" />
 <!--주문 개수 -->
-<c:set var="totalDeliveryPrice" value="0" />
+<c:set var="totalGoodsNum" value="0" />
+
 <!-- 총 배송비 -->
-<c:set var="totalDiscountedPrice" value="0" />
+<c:if test="${empty myCartList }">
+<c:set var="totalDeliveryPrice" value="0" />
+</c:if>
+<c:if test="${not empty myCartList }">
+<c:set var="totalDeliveryPrice" value="4000" />
+</c:if>
+
 <!-- 총 할인금액 -->
+<c:set var="totalDiscountedPrice" value="0" />
+
+<!-- 상품총액 -->
+<c:set var="total_goods_price" value="0" />
+
+
 
 
 <script>
@@ -51,18 +63,24 @@ function modify_cart_qty(index, goods_id, value){
 
 //장바구니 삭제하기
 function delete_cart_goods(cart_id){
-	// 삭제할 cart_id값을 저장
-	var cart_id=Number(cart_id);
-	//formObj을 만들어 submit
-	var formObj=document.createElement("form");
-	var i_cart = document.createElement("input");
-	i_cart.name="cart_id";
-	i_cart.value=cart_id;
-	formObj.appendChild(i_cart);
-    document.body.appendChild(formObj); 
-    formObj.method="post";
-    formObj.action="${contextPath}/cart/removeCartGoods.do";
-    formObj.submit();
+	var result = confirm('해당 상품을 쇼핑카트에서 삭제하시겠습니까?' + cart_id);
+	
+	if(result) {
+		// 삭제할 cart_id값을 저장
+		var cart_id=Number(cart_id);
+		//formObj을 만들어 submit
+		var formObj=document.createElement("form");
+		var i_cart = document.createElement("input");
+		i_cart.name="cart_id";
+		i_cart.value=cart_id;
+		formObj.appendChild(i_cart);
+	    document.body.appendChild(formObj); 
+	    formObj.method="post";
+	    formObj.action= "${contextPath}/cart/removeCartGoods.do";
+	    formObj.submit();
+		alert('해당 상품이 삭제 되었습니다.');
+	}
+	
 }
 
 
@@ -155,346 +173,168 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 
 </script>
 
-<%-- <div class="container">
-	<div class="mypage_container"><!-- 임시 클래스 -->
-		<div class="mt-5 p-0 ps-5 align-items-center">
-			<div class="ps-4">
-				<p class="fs-5 fw-bold mb-3 mypage_text">쇼핑카트</p>
-				<div class="border-top border-main border-2 mt-2">
-
-					<div class="">
-
-						<c:choose>
-
-							<c:when test="${ empty myCartList }">
-								<!-- 장바구니가 비어있을 경우 -->
-								<p class="my-5 text-center mypage_text">쇼핑카트에 상품이 없습니다 !</p>
-							</c:when>
-
-							<c:otherwise>
-								<!-- 장바구니  리스트 myGoodsList를 foreach 문으로 돌려 출력한다.-->
-								<form name="frm_order_all_cart">
-									<c:forEach var="item" items="${myGoodsList}" varStatus="cnt">
-
-										<!-- 인덱스 초기화 -->
-										<c:set var="cart_goods_qty"
-											value="${myCartList[cnt.count-1].cart_goods_qty}" />
-										<c:set var="cart_id"
-											value="${myCartList[cnt.count-1].cart_id}" />
-										<!-- 인덱스 초기화 -->
-
-										<div
-											class="shadow-sm p-0 mt-3 rounded border border-light d-flex justify-content-between">
-
-											<!-- 상품정보 및 선택영역 -->
-											<div class="d-flex">
-
-												<!-- 체크박스 영역 -->
-												<div class="d-flex align-items-center p-3 bg-light">
-													<input type="checkbox" name="checked_goods"
-														class="cartGood"
-														price="${item.goods_sales_price*cart_goods_qty}"
-														value="${item.goods_id}">
-												</div>
-												<!-- 체크박스 영역 -->
-
-												<div class="d-flex align-items-center ps-4">
-
-													<!-- 상품상세페이지로 이동 -->
-													<a
-														href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }"
-														class="text-decoration-none d-block"> <!-- 상품정보 -->
-														<div class="d-flex justify-content-between">
-															<div class="d-flex">
-																<img
-																	src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}"
-																	style="width: 64px; height: 64px">
-																<div class="ms-3">
-																	<p class="mb-1 mt-1">${item.goods_title}</p>
-																	<p class="mb-0 text-secondary">
-																		<span> 수량 : </span>
-																		<span class="cart_goods_qty">${cart_goods_qty}개</span><br>
-																		<span> 상품 가격 : </span>
-																		<span>
-																			<fmt:formatNumber value="${item.goods_sales_price}" pattern="#,###" />원
-																		</span><br>
-																		<span> 총 상품 가격 : </span>
-																		<span class="goods_sales_price">${item.goods_sales_price * cart_goods_qty}</span>원
-																		카트번호: ${cart_id}
-																	</p>
-																</div>
-															</div>
-														</div> <!-- 상품정보 -->
-
-													</a>
-													<!-- 상품상세페이지로 이동 -->
-												</div>
-
-											</div>
-											<!-- 상품정보 및 선택영역 -->
 
 
-											<!-- 상품정보 수정영역 -->
-											<div class="p-4">
-												<div class="border-start ps-4">
 
-													<select id="" selectedValue="1"
-														class="form-select rounded-0 text-center"
-														onchange="selectValue(this, this.value,${item.goods_id },${cnt.count-1 })">
-														<option value="1">1</option>
-														<option value="2">2</option>
-														<option value="3">3</option>
-														<option value="4">4</option>
-														<option value="5">5</option>
-														<option value="6">6</option>
-														<option value="7">7</option>
-													</select> <input type="hidden" id="cart_goods_qty"
-														name="cart_goods_qty" value="${cart_goods_qty}">
-
-													<!-- 주문하기 -->
-													<a
-														href="javascript:fn_order_each_goods('${item.goods_id }','${item.goods_title }','${item.goods_sales_price}','${item.goods_fileName}');"
-														class="btn btn-sm border-main rounded-0  d-block mt-2"
-														style="width: 150px;">주문하기</a>
-
-													<!-- 삭제하기 -->
-													<a href="javascript:delete_cart_goods('${cart_id}');"
-														class="btn btn-sm border-main rounded-0  d-block mt-2"
-														style="width: 150px;">삭제</a>
-
-												</div>
-											</div>
-											<!-- 상품정보 수정영역 -->
-
-
-										</div>
-
-									</c:forEach>
-								</form>
-								<!-- 장바구니  리스트 myGoodsList를 foreach 문으로 돌려 출력한다.-->
-							</c:otherwise>
-						</c:choose>
-
-					</div>
-					
-				</div>
-
-				<!-- 전체선택 -->
-				<div class="text-end mt-4 mb-2">
-					<label> <input title="모든 상품을 결제상품으로 설정" type="checkbox"
-						name="checked_goods" class="all-deal-select"
-						onclick='selectAll(this)'> <span
-						class=" selectAllSpan">전체선택</span>
-					</label>
-				</div>
-				<!-- 전체선택 -->
-
-
-				<!-- 선택상품 가격표시 영역 -->
-				<p
-					class="bg-light border text-end p-4 text-secondary d-flex justify-content-end align-items-center">
-					<!-- 변수세팅 및 형 변환 -->
-					<!-- 상품가격 * 갯수 및 형변환 -->
-					<c:set var="totalGoodsPrice"
-						value="${totalGoodsPrice+item.goods_sales_price*cart_goods_qty }" />
-					
-					<c:set var="total_price"
-						value="${totalGoodsPrice+totalDeliveryPrice-totalDiscountedPrice}" />
-					<!-- 변수세팅 및 형 변환 -->
-
-					<!-- 가격정보 hidden input -->
-					<input id="h_totalGoodsPrice" type="hidden"	value="${totalGoodsPrice}" /> 
-					<input id="h_totalDeliveryPrice" type="hidden" value="${totalDeliveryPrice}" /> 
-					<input id="h_totalSalesPrice" type="hidden" value="${totalSalesPrice}" />
-					<input id="h_final_totalPrice" type="hidden" value="${totalGoodsPrice+totalDeliveryPrice}" />
-					<!-- 가격정보 hidden input -->
-
-					<span> 
-						<!-- 총 상품가격 --> 
-						<span>총 상품가격 
-							<span id="goodsPrice">${total_goods_price}</span> 원
-						</span> 
-						<span>+</span> 
-						<!-- 총 배송비 --> 
-						<span>총 배송비 ${totalDeliveryPrice }원</span> 
-						<span>=</span> 
-						<!-- 총 주문금액 --> 
-						총 주문금액
-					 	<span class="text-black fw-bold fs-5 ms-3">
-					 		<span id="totalPrice">${total_price}</span> 원
-					 	</span>
-					</span>
-				</p>
-				<!-- 선택상품 가격표시 영역 -->
-
-
-				<!-- 선택상품 주문하기 -->
-				<a href="javascript:fn_order_all_cart_goods()"
-					class="btn btn-lg btn-main rounded-0 w-100 d-block fw-bold p-2 lh-lg mb-3">주문하기</a>
-				<!-- 선택상품 주문하기 -->
-
-
-			</div>
+<!-- 쇼핑카트 -->
+<section class="cart1">
+	<div class="container">
+		<div class="cart__information">
+			<ul>
+				<li>쇼핑카트 상품은 최대 30일간 저장됩니다.</li>
+				<li>한 번에 여러 상품을 선택하여 주문할 경우, 배송비는 1회만 추가됩니다.</li>
+				<li>상품 판매가, 재고 수량 등 정보가 변경된 경우 주문이 불가할 수 있습니다.</li>
+			</ul>
 		</div>
-	</div>
-</div> --%>
+		<!-- 장바구니  리스트 myGoodsList를 foreach 문으로 돌려 출력한다.-->
+		<table class="cart__list">
+			<thead>
+				<tr>
+					<td><input title="모든 상품을 결제상품으로 설정" type="checkbox"
+						name="checked_goods" class="all-deal-select"
+						onclick='selectAll(this)'></td>
+					<td colspan="2">상품 정보</td>
+					<td>판매가</td>
+					<td>상품 옵션</td>
+					<td>배송비</td>
+					<td>합계</td>
+					<td>선택</td>
+				</tr>
+			</thead>
+			<tbody>
+				<c:choose>
 
-<!-- 테스트 장바구니 @@@@@@@@@@@@@ -->
-<div class="container">
-	<p class="fs-5 fw-bold mb-3 mypage_text">쇼핑카트</p>
-				<!-- 장바구니  리스트 myGoodsList를 foreach 문으로 돌려 출력한다.-->
-					<table class="cart__list">
-						<thead>
-							<tr>
-								<td>
-									<input title="모든 상품을 결제상품으로 설정" type="checkbox"
-										name="checked_goods" class="all-deal-select"
-										onclick='selectAll(this)'>
-								</td>
-								<td colspan="2">상품 정보</td>
-								<td>상품 상세</td>
-								<td>상품 가격</td>
-								<td>배송비</td>
-								<td>수량 변경</td>
-							</tr>
-						</thead>
-						<tbody>
-					<c:choose>
-		
-					<c:when test="${ empty myCartList }">
+					<c:when test="${ empty myCartList || isLogOn == 'false' }">
 						<!-- 장바구니가 비어있을 경우 -->
-						<td colspan="4">쇼핑카트에 상품이 없습니다 !</td>
+						<tr> 	
+							<td colspan="8" height="100px">쇼핑카트에 상품이 없습니다 !</td>
+						</tr>
 					</c:when>
-		
-					<c:otherwise>
-						
-						
-					<form name="frm_order_all_cart">
-						<c:forEach var="item" items="${myGoodsList}" varStatus="cnt">
 
-						<!-- 인덱스 초기화 -->
-						<c:set var="cart_goods_qty"
-							value="${myCartList[cnt.count-1].cart_goods_qty}" />
-						<c:set var="cart_id" value="${myCartList[cnt.count-1].cart_id}" />
-						<!-- 인덱스 초기화 -->
-							<tr class="cart__list__detail">
-								<td>
-									<input type="checkbox" name="checked_goods"
+					<c:otherwise>
+
+
+						<form name="frm_order_all_cart">
+							<c:forEach var="item" items="${myGoodsList}" varStatus="cnt">
+
+								<!-- 인덱스 초기화 -->
+								<c:set var="cart_goods_qty"
+									value="${myCartList[cnt.count-1].cart_goods_qty}" />
+								<c:set var="cart_id" value="${myCartList[cnt.count-1].cart_id}" />
+								<!-- 인덱스 초기화 -->
+
+								<tr class="cart__list__detail">
+									<td><input type="checkbox" name="checked_goods"
 										class="cartGood"
 										price="${item.goods_sales_price*cart_goods_qty}"
 										value="${item.goods_id}"></td>
-								<td><img src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}" class="cart_img"></td>
-								<td>
-									<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
-										<span>${item.goods_title}</span>
-									</a>
-								</td>
-								<td>
-									<span> 수량 : </span>
-									<span class="cart_goods_qty">${cart_goods_qty}개</span><br><br>
-									<span> 상품단가 : </span>
-									<span>
-										<fmt:formatNumber value="${item.goods_sales_price}" pattern="#,###" />원
-									</span><br>
-								</td>
-							<!-- 	<td class="cart__list__option">
+									<td><img
+										src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}"
+										class="cart_img"></td>
+									<td><a
+										href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
+											<span>${item.goods_title}</span>
+									</a></td>
+									<td><span> <fmt:formatNumber
+												value="${item.goods_sales_price}" pattern="#,###" />원
+									</span></td>
+									<td class="cart_select"><span> 수량 : </span> <select id=""
+										selectedValue="1" class="form-select rounded-0 text-center"
+										onchange="selectValue(this, this.value,${item.goods_id },${cnt.count-1 })">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+									</select> <input type="hidden" id="cart_goods_qty" name="cart_goods_qty"
+										value="${cart_goods_qty}"><br>
+									<br> <%-- <span class="cart_goods_qty">${cart_goods_qty}개</span><br><br> --%>
+										<span> 상품총액 : </span> <span> <span
+											class="goods_sales_price d-none">${item.goods_sales_price * cart_goods_qty}</span>
+											<span><fmt:formatNumber
+													value="${item.goods_sales_price * cart_goods_qty}"
+													pattern="#,###" />원</span>
+									</span></td>
+									<!-- 	<td class="cart__list__option">
 									<p>모델명 : 키보드 - 한국어 MK2A3KH/A / 1개</p>
 									<button class="cart__list__optionbtn">주문조건 추가/변경</button>
 								</td> -->
-								<td>
-									<span class="goods_sales_price">${item.goods_sales_price * cart_goods_qty}</span>원<br>
-									<button class="cart__list__orderbtn" onclick="fn_order_each_goods('${item.goods_id }','${item.goods_title }','${item.goods_sales_price}','${item.goods_fileName}')">주문하기</button></td>
-								<td><span>${item.goods_delivery_price}</span></td>
-								<td>
-									<select id="" selectedValue="1"
-										class="form-select rounded-0 text-center"
-										onchange="selectValue(this, this.value,${item.goods_id },${cnt.count-1 })">
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-									</select> 
-									<input type="hidden" id="cart_goods_qty" name="cart_goods_qty" value="${cart_goods_qty}">
-								</td>
-							</tr>
-						</c:forEach>
-					</form>
+									<td><span><fmt:formatNumber
+												value="${item.goods_delivery_price}" pattern="#,###" />원</span></td>
+									<td><span><fmt:formatNumber
+												value="${(item.goods_sales_price * cart_goods_qty) + item.goods_delivery_price}"
+												pattern="#,###" />원</span></td>
+									<td><a class="cart__list__orderbtn"
+										href="javascript:fn_order_each_goods('${item.goods_id }','${item.goods_title }','${item.goods_sales_price}','${item.goods_fileName}')">주문하기</a><br>
+									<br> <%-- <button class="cart__list__delbtn" onclick="delete_cart_goods('${cart_id}')">삭제하기</button> --%>
+										<a class="cart__list__delbtn"
+										href="javascript:delete_cart_goods('${cart_id}')">삭제하기</a></td>
+								</tr>
+							</c:forEach>
+						</form>
 					</c:otherwise>
-					</c:choose>
+				</c:choose>
 
-					</tbody>
-						<!-- <tfoot>
-							<tr>
-								<td colspan="3">
-									<input title="모든 상품을 결제상품으로 설정" type="checkbox"
-										name="checked_goods" class="all-deal-select"
-										onclick='selectAll(this)'> 
-									<span class=" selectAllSpan">전체선택</span>
-									<button class="cart__list__optionbtn" onclick="fn_order_all_cart_goods()">선택상품 주문</button>
-								</td>
-							</tr>
-						</tfoot> -->
-	</table>
-				<!-- 전체선택 -->
-				<!-- <div class="text-end mt-4 mb-2">
-					<label> <input title="모든 상품을 결제상품으로 설정" type="checkbox"
-						name="checked_goods" class="all-deal-select"
-						onclick='selectAll(this)'> <span
-						class=" selectAllSpan">전체선택</span>
-					</label>
-				</div> -->
-				<!-- 전체선택 -->
+			</tbody>
+		</table>
 
+<c:choose>
 
-				<!-- 선택상품 가격표시 영역 -->
-				<p
-					class="bg-light border text-end p-4 text-secondary d-flex justify-content-end align-items-center">
-					<!-- 변수세팅 및 형 변환 -->
-					<!-- 상품가격 * 갯수 및 형변환 -->
-					<c:set var="totalGoodsPrice"
-						value="${totalGoodsPrice+item.goods_sales_price*cart_goods_qty }" />
+	<c:when test="${ !empty myCartList || isLogOn == 'false' }">
 					
-					<c:set var="total_price"
-						value="${totalGoodsPrice+totalDeliveryPrice-totalDiscountedPrice}" />
-					<!-- 변수세팅 및 형 변환 -->
 
-					<!-- 가격정보 hidden input -->
-					<input id="h_totalGoodsPrice" type="hidden"	value="${totalGoodsPrice}" /> 
-					<input id="h_totalDeliveryPrice" type="hidden" value="${totalDeliveryPrice}" /> 
-					<input id="h_totalSalesPrice" type="hidden" value="${totalSalesPrice}" />
-					<input id="h_final_totalPrice" type="hidden" value="${totalGoodsPrice+totalDeliveryPrice}" />
-					<!-- 가격정보 hidden input -->
+		<!-- 선택상품 가격표시 영역 -->
+		<p
+			class="bg-light border text-end p-4 text-secondary d-flex justify-content-end align-items-center">
+			<!-- 변수세팅 및 형 변환 -->
+			<!-- 상품가격 * 갯수 및 형변환 -->
+			<c:set var="totalGoodsPrice"
+				value="${totalGoodsPrice+item.goods_sales_price*cart_goods_qty }" />
 
-					<span> 
-						<!-- 총 상품가격 --> 
-						<span>총 상품가격 
-							<span id="goodsPrice">${total_goods_price}</span> 원
-						</span> 
-						<span>+</span> 
-						<!-- 총 배송비 --> 
-						<span>총 배송비 ${totalDeliveryPrice }원</span> 
-						<span>=</span> 
-						<!-- 총 주문금액 --> 
-						총 주문금액
-					 	<span class="text-black fw-bold fs-5 ms-3">
-					 		<span id="totalPrice">${total_price}</span> 원
-					 	</span>
-					</span>
-				</p>
-				<!-- 선택상품 가격표시 영역 -->
+			<c:set var="total_price"
+				value="${totalGoodsPrice+totalDeliveryPrice-totalDiscountedPrice}" />
+			<!-- 변수세팅 및 형 변환 -->
+
+			<!-- 가격정보 hidden input -->
+			<input id="h_totalGoodsPrice" type="hidden"
+				value="${totalGoodsPrice}" /> <input id="h_totalDeliveryPrice"
+				type="hidden" value="${totalDeliveryPrice}" /> <input
+				id="h_totalSalesPrice" type="hidden" value="${totalSalesPrice}" />
+			<input id="h_final_totalPrice" type="hidden"
+				value="${totalGoodsPrice+totalDeliveryPrice}" />
+			<!-- 가격정보 hidden input -->
+
+			<span> <!-- 총 상품가격 --> <span>상품총액 <span id="goodsPrice">${total_goods_price}</span>
+					원
+			</span> <span>+</span> <!-- 총 배송비 --> <span>기본 배송비 <span><fmt:formatNumber
+							value="${totalDeliveryPrice}" pattern="#,###" /></span> 원
+			</span> <span>=</span> <!-- 총 주문금액 --> 총 주문금액 <span
+				class="text-black fw-bold fs-5 ms-3"> <span id="totalPrice">${total_price}</span>
+					원
+			</span>
+			</span>
+		</p>
+		<!-- 선택상품 가격표시 영역 -->
+
+	</c:when>
+</c:choose>
+
+	
+		<!-- 선택상품 주문하기 -->
+		<div class="d-flex justify-content-end">
+			<a href="javascript:fn_order_all_cart_goods()"
+				class="btn btn-lg btn-main rounded-0 d-block fw-bold p-2 lh-lg mb-3">선택상품
+				주문하기</a>
+		</div>
+		<!-- 선택상품 주문하기 -->
+	</div>
+	<!-- 테스트 장바구니 end -->
 
 
-				<!-- 선택상품 주문하기 -->
-				<a href="javascript:fn_order_all_cart_goods()"
-					class="btn btn-lg btn-main rounded-0 w-100 d-block fw-bold p-2 lh-lg mb-3">주문하기</a>
-				<!-- 선택상품 주문하기 -->
-</div>        
-<!-- 테스트 장바구니 end -->
 
-<div style="height: 800px"></div>
+</section>
 
 
 
@@ -515,28 +355,29 @@ for (let i=0; i<selectBox_len; i++){
 });
 
 
-
 //전체 선택을 눌렀을때 금액 계산
 var total = 0;
+var total_goods = 0;
 const checkboxes = document.getElementsByName('checked_goods');
 var totalPrice=document.getElementById("totalPrice");
 var goodsPrice=document.getElementById("goodsPrice");
 function selectAll(selectAll){
 	const goods_sales_price = document.querySelectorAll(".goods_sales_price");
-	//checked_goods name을 가진 checkbox가 체크되엇는지 확인
+	//checked_goods name을 가진 checkbox가 체크되었는지 확인
 	checkboxes.forEach((checkbox) => {checkbox.checked = selectAll.checked;}); 
 	//체크되었을경우 금액추가
 	if (selectAll.checked == true) {
+		total_goods=0;
 		total=0;
-		for (const i of goods_sales_price) {total += i.innerHTML*1;};
-		totalPrice.innerHTML=total;
-		goodsPrice.innerHTML=total;
+		for (const i of goods_sales_price) {total_goods += i.innerHTML*1;total=total_goods+4000;};
+		goodsPrice.innerHTML=total_all.toLocaleString();
+		totalPrice.innerHTML=total.toLocaleString();
 	}
 	//체크되지않았을 경우 금액빼기
 	else if(selectAll.checked == false){ 
-		for (const i of goods_sales_price) {total -= i.innerHTML*1;};
-		totalPrice.innerHTML=total;
-		goodsPrice.innerHTML=total;
+		for (const i of goods_sales_price) {total_goods -= i.innerHTML*1;total=total_goods+4000;};
+		goodsPrice.innerHTML=total_goods.toLocaleString();
+		totalPrice.innerHTML=total.toLocaleString();
 	}
 }
 
@@ -545,12 +386,12 @@ function selectAll(selectAll){
 let all_select = document.querySelector(".all-deal-select");
 checkboxes.forEach((i) => i.addEventListener("click", function () {
 	//체크되었을경우 금액추가
-	if (this.checked == true) {total += i.getAttribute("price")*1;}
+	if (this.checked == true) {total_goods += i.getAttribute("price")*1;total=total_goods+4000;}
 	//체크되지않았을 경우 금액빼기
-	else if(this.checked == false){total -= i.getAttribute("price")*1;all_select.checked = false;}
+	else if(this.checked == false){total_goods -= i.getAttribute("price")*1;all_select.checked = false;total=total_goods+4000;}
 	//계산된 금액 반영 innerHTML
-	totalPrice.innerHTML=total;
-	goodsPrice.innerHTML=total; 
+	goodsPrice.innerHTML=total_goods.toLocaleString(); 
+	totalPrice.innerHTML=total.toLocaleString();
 }));
 
 </script>

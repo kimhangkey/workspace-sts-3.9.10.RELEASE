@@ -115,10 +115,10 @@ h6::selection
 	margin-left: 30px;
 }
  */
-.form-control
+/* .form-control
 {
 	color: #db5246;
-}
+} */
 section
 {
 	display: block;
@@ -188,10 +188,10 @@ section
 }
 .super_container
 {	
-	width: 100%;
+	width: 100vw;
+/* 	width: 100%; */
 	overflow: visible;
 	
-/* 	overflow: hidden; */
 	background-color: #fff;
 }
 .prlx_parent
@@ -235,7 +235,10 @@ section
 
 .container
 {
+}
 
+.top_bar
+{
 }
 
 /*********************************
@@ -690,7 +693,7 @@ section
 {
 	color: #d6b534;
 }
-select
+/* select
 {
 	display: inline;
 	border: 0;
@@ -703,7 +706,7 @@ select
 	color: #7b00ff;
 	-webkit-transition: all .4s ease-in-out;
 	transition: all .4s ease-in-out;
-}
+} */
 select:hover
 {
 	cursor: pointer;
@@ -1102,52 +1105,73 @@ select option
 
 
 /*********************************
-	테스트 장바구니 시작@@@@@@@@@
+	쇼핑카트
 *********************************/
 
-/* .cart_img {
+.cart_img {
   display: block;
   width: 100px;
   height: 100px;
   margin: auto;
+  border-radius: 15px;
 }
 
-.cart {
-  width: 80%;
+
+.cart1 {
+  width: 70%;
   margin: auto;
   padding: 30px;
 }
 
-.cart ul {
-  background-color: whitesmoke;
-  padding: 30px;
+.cart1 ul {
+  background-color: #f8f9fa;
+  padding: 25px;
   margin-bottom: 50px;
-  border: whitesmoke solid 1px;
+  border: #e9ecef solid 1px;
   border-radius: 5px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 300;
 }
 
-.cart ul :first-child {
-  color: limegreen;
-} */
+.cart1 ul>li {
+	list-style: disc;
+	margin-bottom: 3px;
+	margin-left: 10px;
+}
+
+.cart1 ul :first-child {
+  color: #d6b534;
+  font-weight: bold;
+}
+
+.cart1 .btn {
+	background-color: #000;
+	color: #fff;
+	width: 30%;
+	line-height: 45px;
+}
+
+.cart1 .btn:hover {
+	opacity: .7;
+}
 
 table {
   border-top: solid 1.5px black;
   border-collapse: collapse;
   width: 100%;
-  font-size: 18px;
   text-align: center;
   margin-top: 50px;
 }
 
 thead {
   text-align: center;
+  font-size: 16px;
   font-weight: bold;
 }
 
+
 tbody {
-  font-size: 12px;
+  font-size: 15px;
 }
 
 td {
@@ -1155,12 +1179,22 @@ td {
   border-bottom: 1px solid lightgrey;
 }
 
-.cart__list__detail :nth-child(3) {
-  vertical-align: top;
+
+.cart__list__detail *{
+  vertical-align: center;
+}
+
+.cart__list__detail td:nth-child(3) {
+  text-align: left;
 }
 
 .cart__list__detail :nth-child(3) a {
-  font-size: 12px;
+  font-size: 15px;
+  color: #000;
+}
+
+.cart__list__detail :nth-child(3) a:hover {
+  color: #d6b534;
 }
 
 .cart__list__detail :nth-child(3) p {
@@ -1200,10 +1234,11 @@ td {
   padding: 7px;
 }
 
-.cart__list__detail :nth-child(4),
-.cart__list__detail :nth-child(5),
-.cart__list__detail :nth-child(6),
-.cart__list__detail :nth-child(7)
+.cart__list__detail td:nth-child(4),
+.cart__list__detail td:nth-child(5),
+.cart__list__detail td:nth-child(6),
+.cart__list__detail td:nth-child(7),
+.cart__list__detail td:nth-child(8)
  {
   border-left: 2px solid whitesmoke;
 }
@@ -1213,15 +1248,46 @@ td {
   text-align: center;
 }
 
-.cart__list__detail :nth-child(5) button {
-  background-color: limegreen;
+.cart__list__orderbtn {
+  background-color: #000;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 4px 8px;
-  font-size: 12px;
-  margin-top: 5px;
+  font-size: 13px;
+  /* margin-top: 5px; */
 }
+
+.cart__list__orderbtn:hover {
+	cursor: pointer;
+	background-color: #d6b534;
+	color: #fff;
+	
+}
+
+.cart__list__delbtn {
+  background-color: #db4455;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 13px;
+  opacity: 1;
+}
+
+.cart__list__delbtn:hover {
+	cursor: pointer;
+	color: #fff;
+	opacity: .6;
+	
+}
+
+.cart_select>select {
+	width: 40px;
+	height: 25px;
+	font-size: 15px;
+}
+
 
 .price {
   font-weight: bold;
@@ -1243,19 +1309,9 @@ td {
   border-radius: 5px;
 }
 
-.cart__bigorderbtn.left {
-  background-color: white;
-  border: 1px lightgray solid;
-}
-
-.cart__bigorderbtn.right {
-  background-color: limegreen;
-  color: white;
-  border: none;
-}
 
 /*********************************
-	테스트 장바구니 끝 @@@@@@
+	쇼핑카트 end
 *********************************/
 
 
@@ -1438,12 +1494,42 @@ td {
 		font-size: 16px;
 	}
 	
+	.scrolled .main_nav
+{
+	position: fixed;
+	top: 55px;
+	left: 0;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+	
+	border-bottom: 3px solid #e9ecef;
+}
+	
 }
 
 
 @media only screen and (max-width: 991px)
 {
-	
+	.cart1 {
+		width: 700px;
+	}
+	.scrolled .main_nav
+	{
+		position: fixed;
+		top: 0;
+		left: 0;
+		-webkit-transition: all 200ms ease;
+		-moz-transition: all 200ms ease;
+		-ms-transition: all 200ms ease;
+		-o-transition: all 200ms ease;
+		transition: all 200ms ease;
+		
+		border-bottom: 3px solid #e9ecef;
+	}
+
 	.header_search
 	{
 		height: 50px;
@@ -1458,7 +1544,16 @@ td {
 	}
 	.main_nav_menu
 	{
-		display: none;
+		/* display: none; */
+		overflow: hidden;
+	}
+	.main_nav_dropdown li
+	{
+		/* display: none; */
+	}
+	.main_nav_dropdown li a
+	{
+		font-size: 12px;
 	}
 	.logo_container,
 	.wishlist_cart
@@ -1478,6 +1573,7 @@ td {
 	.top_bar
 	{
 		height: 40px;
+		overflow: hidden;
 	}
 	.top_bar_contact_item
 	{
@@ -1518,7 +1614,7 @@ td {
 	}
 	
 }
-
+/*
 @media only screen and (max-width: 767px)
 {
 	.header_search
@@ -1666,5 +1762,5 @@ td {
 		padding-left: 25px;
 		padding-right: 25px;
 	}
-	
+	 */
 }
