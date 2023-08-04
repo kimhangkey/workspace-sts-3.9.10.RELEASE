@@ -1155,7 +1155,7 @@ select option
 	opacity: .7;
 }
 
-table {
+.cart1 table {
   border-top: solid 1.5px black;
   border-collapse: collapse;
   width: 100%;
@@ -1163,18 +1163,18 @@ table {
   margin-top: 50px;
 }
 
-thead {
+.cart1 thead {
   text-align: center;
   font-size: 16px;
   font-weight: bold;
 }
 
 
-tbody {
+.cart1 tbody {
   font-size: 15px;
 }
 
-td {
+.cart1 td {
   padding: 15px 0px;
   border-bottom: 1px solid lightgrey;
 }
@@ -1184,8 +1184,16 @@ td {
   vertical-align: center;
 }
 
+.cart__list__detail td:nth-child(2) {
+	width: 180px;
+}
 .cart__list__detail td:nth-child(3) {
-  text-align: left;
+	width: 180px;
+	text-align: left;
+}
+
+.cart__list__detail td:nth-child(5) {
+	width: 190px;
 }
 
 .cart__list__detail :nth-child(3) a {
@@ -1314,6 +1322,34 @@ td {
 	쇼핑카트 end
 *********************************/
 
+/*********************************
+	admin 상품관리
+*********************************/
+
+.file_fake {
+	width: 350px;
+	margin-left: 15px;
+}
+
+.main_upload:hover {
+	color: #d6b534;
+	cursor: pointer;
+}
+
+.warning1 {
+	border: 3px solid red;
+	color: red;
+}
+
+
+.goods_table td:nth-child(2),
+.goods_table td:nth-child(3),
+.goods_table td:nth-child(4),
+.goods_table td:nth-child(5),
+.goods_table td:nth-child(6)
+ {
+  border-left: 2px solid whitesmoke;
+}
 
 
 
@@ -1482,7 +1518,7 @@ td {
 	}
 }
 
-@media only screen and (max-width: 1199px)
+@media only screen and (max-width: 1299px)
 {
 	
 	.main_nav_dropdown li
@@ -1494,8 +1530,18 @@ td {
 		font-size: 16px;
 	}
 	
+	.cart__list__detail td:nth-child(2), 
+	.cart__list__detail td:nth-child(3) {
+		width: 100px;
+	}
+	
+	.cart__list__detail td:nth-child(5)
+	{
+		width: 150px;
+	}
+	
 	.scrolled .main_nav
-{
+	{
 	position: fixed;
 	top: 55px;
 	left: 0;
@@ -1511,11 +1557,16 @@ td {
 }
 
 
-@media only screen and (max-width: 991px)
+@media only screen and (max-width: 1041px)
 {
 	.cart1 {
 		width: 700px;
 	}
+	.cart__list__detail td:nth-child(2), 
+	.cart__list__detail td:nth-child(3) {
+	width: 100px;
+	}
+	
 	.scrolled .main_nav
 	{
 		position: fixed;

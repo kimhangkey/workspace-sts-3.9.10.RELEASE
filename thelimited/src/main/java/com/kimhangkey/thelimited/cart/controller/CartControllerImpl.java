@@ -87,9 +87,9 @@ public class CartControllerImpl extends BaseController implements CartController
 			HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(cart_id);
-		// @RequestParam받은 cart_id 상품을 삭제 후 myCartList로 redirect
+		// @RequestParam받은 cart_id 상품을 삭제 후 shoppingCart로 redirect
 		cartService.removeCartGoods(cart_id);
-		mav.setViewName("redirect:/cart/myCartList.do");
+		mav.setViewName("redirect:/cart/shoppingCart.do");
 		return mav;
 	}
 

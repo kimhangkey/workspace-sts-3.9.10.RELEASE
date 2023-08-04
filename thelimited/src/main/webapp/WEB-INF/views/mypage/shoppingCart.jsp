@@ -184,6 +184,7 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 				<li>쇼핑카트 상품은 최대 30일간 저장됩니다.</li>
 				<li>한 번에 여러 상품을 선택하여 주문할 경우, 배송비는 1회만 추가됩니다.</li>
 				<li>상품 판매가, 재고 수량 등 정보가 변경된 경우 주문이 불가할 수 있습니다.</li>
+				<li>해당 상품이 삭제되는 경우, 쇼핑카트 목록에서 자동으로 제거될 수 있습니다.</li>
 			</ul>
 		</div>
 		<!-- 장바구니  리스트 myGoodsList를 foreach 문으로 돌려 출력한다.-->
@@ -238,9 +239,10 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 									<td><span> <fmt:formatNumber
 												value="${item.goods_sales_price}" pattern="#,###" />원
 									</span></td>
-									<td class="cart_select"><span> 수량 : </span> <select id=""
-										selectedValue="1" class="form-select rounded-0 text-center"
-										onchange="selectValue(this, this.value,${item.goods_id },${cnt.count-1 })">
+									<td class="cart_select">
+										<span> 수량 : </span> 
+										<select id="" class="form-select rounded-0 text-center" 
+											onchange="selectValue(this, this.value,${item.goods_id },${cnt.count-1 })">
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -248,9 +250,8 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 											<option value="5">5</option>
 											<option value="6">6</option>
 											<option value="7">7</option>
-									</select> <input type="hidden" id="cart_goods_qty" name="cart_goods_qty"
-										value="${cart_goods_qty}"><br>
-									<br> <%-- <span class="cart_goods_qty">${cart_goods_qty}개</span><br><br> --%>
+										</select> 
+										<input type="hidden" id="cart_goods_qty" name="cart_goods_qty" value="${cart_goods_qty}"><br><br>
 										<span> 상품총액 : </span> <span> <span
 											class="goods_sales_price d-none">${item.goods_sales_price * cart_goods_qty}</span>
 											<span><fmt:formatNumber
@@ -262,9 +263,9 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 									<button class="cart__list__optionbtn">주문조건 추가/변경</button>
 								</td> -->
 									<td><span><fmt:formatNumber
-												value="${item.goods_delivery_price}" pattern="#,###" />원</span></td>
+												value="${totalDeliveryPrice}" pattern="#,###" />원</span></td>
 									<td><span><fmt:formatNumber
-												value="${(item.goods_sales_price * cart_goods_qty) + item.goods_delivery_price}"
+												value="${(item.goods_sales_price * cart_goods_qty) + totalDeliveryPrice}"
 												pattern="#,###" />원</span></td>
 									<td><a class="cart__list__orderbtn"
 										href="javascript:fn_order_each_goods('${item.goods_id }','${item.goods_title }','${item.goods_sales_price}','${item.goods_fileName}')">주문하기</a><br>
@@ -280,46 +281,45 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 			</tbody>
 		</table>
 
-<c:choose>
 
-	<c:when test="${ !empty myCartList || isLogOn == 'false' }">
-					
-
-		<!-- 선택상품 가격표시 영역 -->
-		<p
-			class="bg-light border text-end p-4 text-secondary d-flex justify-content-end align-items-center">
-			<!-- 변수세팅 및 형 변환 -->
-			<!-- 상품가격 * 갯수 및 형변환 -->
-			<c:set var="totalGoodsPrice"
-				value="${totalGoodsPrice+item.goods_sales_price*cart_goods_qty }" />
-
-			<c:set var="total_price"
-				value="${totalGoodsPrice+totalDeliveryPrice-totalDiscountedPrice}" />
-			<!-- 변수세팅 및 형 변환 -->
-
-			<!-- 가격정보 hidden input -->
-			<input id="h_totalGoodsPrice" type="hidden"
-				value="${totalGoodsPrice}" /> <input id="h_totalDeliveryPrice"
-				type="hidden" value="${totalDeliveryPrice}" /> <input
-				id="h_totalSalesPrice" type="hidden" value="${totalSalesPrice}" />
-			<input id="h_final_totalPrice" type="hidden"
-				value="${totalGoodsPrice+totalDeliveryPrice}" />
-			<!-- 가격정보 hidden input -->
-
-			<span> <!-- 총 상품가격 --> <span>상품총액 <span id="goodsPrice">${total_goods_price}</span>
-					원
-			</span> <span>+</span> <!-- 총 배송비 --> <span>기본 배송비 <span><fmt:formatNumber
-							value="${totalDeliveryPrice}" pattern="#,###" /></span> 원
-			</span> <span>=</span> <!-- 총 주문금액 --> 총 주문금액 <span
-				class="text-black fw-bold fs-5 ms-3"> <span id="totalPrice">${total_price}</span>
-					원
-			</span>
-			</span>
-		</p>
-		<!-- 선택상품 가격표시 영역 -->
-
-	</c:when>
-</c:choose>
+	<c:choose>
+		<c:when test="${ !empty myCartList || isLogOn == 'false' }">
+	
+			<!-- 선택상품 가격표시 영역 -->
+			<p
+				class="bg-light border text-end p-4 text-secondary d-flex justify-content-end align-items-center">
+				<!-- 변수세팅 및 형 변환 -->
+				<!-- 상품가격 * 갯수 및 형변환 -->
+				<c:set var="totalGoodsPrice"
+					value="${totalGoodsPrice+item.goods_sales_price*cart_goods_qty }" />
+	
+				<c:set var="total_price"
+					value="${totalGoodsPrice+totalDeliveryPrice-totalDiscountedPrice}" />
+				<!-- 변수세팅 및 형 변환 -->
+	
+				<!-- 가격정보 hidden input -->
+				<input id="h_totalGoodsPrice" type="hidden"
+					value="${totalGoodsPrice}" /> <input id="h_totalDeliveryPrice"
+					type="hidden" value="${totalDeliveryPrice}" /> <input
+					id="h_totalSalesPrice" type="hidden" value="${totalSalesPrice}" />
+				<input id="h_final_totalPrice" type="hidden"
+					value="${totalGoodsPrice+totalDeliveryPrice}" />
+				<!-- 가격정보 hidden input -->
+	
+				<span> <!-- 총 상품가격 --> <span>상품총액 <span id="goodsPrice">${total_goods_price}</span>
+						원
+				</span> <span>+</span> <!-- 총 배송비 --> <span>기본 배송비 <span><fmt:formatNumber
+								value="${totalDeliveryPrice}" pattern="#,###" /></span> 원
+				</span> <span>=</span> <!-- 총 주문금액 --> 총 주문금액 <span
+					class="text-black fw-bold fs-5 ms-3"> <span id="totalPrice">${total_price}</span>
+						원
+				</span>
+				</span>
+			</p>
+			<!-- 선택상품 가격표시 영역 -->
+	
+		</c:when>
+	</c:choose>
 
 	
 		<!-- 선택상품 주문하기 -->
@@ -330,11 +330,8 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 		</div>
 		<!-- 선택상품 주문하기 -->
 	</div>
-	<!-- 테스트 장바구니 end -->
-
-
-
 </section>
+<!-- 쇼핑카트 end -->
 
 
 
