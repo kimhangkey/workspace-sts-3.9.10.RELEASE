@@ -8,16 +8,22 @@
 <c:set var="goods" value="${goodsMap.goodsVO}" />
 <c:set var="imageList" value="${goodsMap.imageList }" />
 
+<!-- 사진 전환 스크립트 -->
+<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+		crossorigin="anonymous"></script>
+
 
 <div class="container">
 	<div class="row">
 		<div class="p-0 align-items-center gap-3 mt-5">
-			<!-- <p class="fs-6 mb-1">HOT! TREND</p>
+		<!-- 	<p class="fs-6 mb-1">HOT! TREND</p>
                 <p class="fs-3 fw-bold">카테고리</p> -->
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="mypage_form justify-content-md-center mx-auto px-auto">
 
 		<div class="p-0 d-flex">
 
@@ -32,7 +38,7 @@
 						style="width: 50px"></a> <a class="mb-3 back_eee"
 						id="detailThumb2" data-bs-toggle="list" href="#detailThumb02"
 						role="tab" aria-controls="detailThumb02"> <img
-						src="${contextPath}/resources/img/logo_square.png"
+						src="${contextPath}/resources/image/dog1.jpg"
 						style="width: 50px"></a>
 				</div>
 				<!-- tab caller -->
@@ -44,11 +50,11 @@
 						role="tabpanel" aria-labelledby="detailThumb1">
 						<img
 							src="${contextPath}/download.do?goods_id=${goods.goods_id}&fileName=${goods.goods_fileName}"
-							style="width: 410px">
+							style="width: 410px; height: 410px;">
 					</div>
 					<div class="tab-pane back_eee" id="detailThumb02" role="tabpanel"
 						aria-labelledby="detailThumb2">
-						<img src="${contextPath}/resources/img/logo_square.png">
+						<img src="${contextPath}/resources/image/dog1.jpg" style="width: 410px; height: 410px;">
 					</div>
 				</div>
 				<!-- tab 본문 -->
@@ -61,29 +67,34 @@
 			<!-- 상품정보 -->
 			<div class="ps-4 w-100">
 				<!-- 카테고리 -->
-				<p class="fs-6 mb-1">${goods.goods_sort }</p>
+				<p class="fs-3 mb-1 detail_sort">카테고리:
+				<c:if test="${goods.goods_sort == 'clothes'}">의류</c:if>
+				<c:if test="${goods.goods_sort == 'bags'}">가방</c:if>
+				<c:if test="${goods.goods_sort == 'accessories'}">패션잡화</c:if>
+				<c:if test="${goods.goods_sort == 'toys'}">토이&#47;완구</c:if>
+				</p>
 				<!-- 상품명 -->
-				<p class="fs-3 fw-bold">${goods.goods_title }</p>
+				<p class="fs-1 fw-bold detail_title">${goods.goods_title }</p>
 				<hr>
 				<!-- 가격 및 수량, 수량은 고정 -->
-				<p class="fs-6 mb-1">
+				<p class="fs-6 mb-1 detail_price">
 					<span class="fs-4 text-danger fw-bold">
 					<fmt:formatNumber value="${goods.goods_sales_price }" pattern="#,###" />
 					</span>원
 					· 1개
 				</p>
 
-				<div class="d-flex gap-2 mt-4">
+				<div class="d-flex gap-0 mt-4">
 					<input type="hidden" id="goods_qty" name="order_goods_qty"
 						value="1">
 
 					<!-- 장바구니 담기, goods_id값과 함께 add_cart 실행 -->
 					<a href="javascript:add_cart('${goods.goods_id}')"
-						class="btn btn-lg fw-bold border-main rounded-0 d-block flex-fill">장바구니담기</a>
+						class="btn btn-lg fw-bold border-main rounded-0 d-block flex-fill addcart_btn">장바구니담기</a>
 					<!-- 주문하기, 상품정보와 함께 fn_order_each_goods실행  -->
 					<a
 						href="javascript:fn_order_each_goods('${goods.goods_id }','${goods.goods_title }','${goods.goods_sales_price}','${goods.goods_fileName}');"
-						class="btn btn-lg fw-bold btn-main rounded-0 d-block flex-fill">바로구매</a>
+						class="btn btn-lg fw-bold btn-main rounded-0 d-block flex-fill buynow_btn">바로구매</a>
 				</div>
 			</div>
 			<!-- 상품정보 -->
@@ -97,12 +108,12 @@
 			<!-- tab Caller -->
 			<ul class="nav nav-tabs">
 				<li class="nav-item"><a
-					class="nav-link rounded-0 text-center py-3 fw-bold active"
+					class="nav-link rounded-0 text-center py-3 fw-bold active detail_info"
 					id="detailInfo1" data-bs-toggle="list" href="#detailInfo01"
 					role="tab" aria-controls="detailInfo01" style="width: 250px">
 						상품상세 </a></li>
 				<li class="nav-item"><a
-					class="nav-link rounded-0 py-3 text-center fw-bold"
+					class="nav-link rounded-0 py-3 text-center fw-bold detail_info"
 					id="detailInfo2" data-bs-toggle="list" href="#detailInfo02"
 					role="tab" aria-controls="detailInfo02" style="width: 250px">
 						배송/교환/반품 안내</a></li>
@@ -116,11 +127,10 @@
 					aria-labelledby="detailInfo1">
 					<!-- 상세이미지 리스트 foreach로 뿌림 -->
 					<c:forEach var="image" items="${imageList }">
-						<div class="mb-5"
-							style="background:url(${contextPath}/resources/img/back1.jpg);background-size: cover;">
+						<div class="mb-5">
 							<img class=""
 								src="${contextPath}/download.do?goods_id=${goods.goods_id}&fileName=${image.fileName}"
-								style="width: 1200px;">
+								style="width: 100%;">
 						</div>
 					</c:forEach>
 					<!-- 상세이미지 리스트 foreach로 뿌림 -->
@@ -129,7 +139,7 @@
 				<!-- 상품/배송정보등의 외 정보 -->
 				<div class="tab-pane" id="detailInfo02" role="tabpanel"
 					aria-labelledby="detailInfo2">
-					<img src="${contextPath}/resources/img/goods/detailInfo.jpg">
+					<img src="${contextPath}/resources/image/delivery_info.png" style="width: 100%;">
 				</div>
 				<!-- 상품/배송정보등의 외 정보 -->
 			</div>

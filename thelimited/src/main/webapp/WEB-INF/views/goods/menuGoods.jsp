@@ -7,13 +7,15 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <div class="container">
-	<div class="row">
-		<div class="p-0 align-items-center gap-3 mt-5">
-			<p class="fs-6 mb-1">HOT! TREND</p>
+	<div class="row justify-content-center">
+		<div class="p-0 align-items-center gap-3 mt-5 mb-3">
+		
+			<!-- 카테고리 명 -->
+			<!-- <p class="fs-3 fw-bold">상품목록</p> -->
+			<!-- 카테고리 명 -->
+			<p class="fs-6 mb-3 menu_title">${menuGoods}</p>
 			
-			<!-- 카테고리 명 -->
-			<p class="fs-3 fw-bold">${menuGoods}</p>
-			<!-- 카테고리 명 -->
+			
 		</div>
 	</div>
 
@@ -29,12 +31,12 @@
 
 				<c:otherwise>
 					<c:forEach var="item" items="${goodsList}">
-						<div class="p-0">
+						<div class="p-0" style="width: 250px; height: 250px">
 							<a
 								href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id}"
 								class="text-decoration-none d-block"> <img
 								src="${contextPath}/download.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}"
-								style="width: 250px">
+								style="width: 200px; height: 200px">
 								<p class="mt-4 mb-0 text-truncate fw-bold fs-6">${item.goods_title}</p>
 								<p><span class="text-danger fw-bold fs-4 me-1">
 								<fmt:formatNumber value="${item.goods_sales_price}" pattern="#,###" />

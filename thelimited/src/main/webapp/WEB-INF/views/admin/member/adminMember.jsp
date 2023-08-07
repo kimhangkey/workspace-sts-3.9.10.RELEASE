@@ -9,7 +9,7 @@
 		<div class="mt-5 align-items-center">
 			<div class="ps-4">
 
-				<p class="fs-5 fw-bold mb-2">회원관리</p>
+				<p class="fs-5 fw-bold mb-3 subpage_title">회원관리</p>
 				<form name="frm_mod_member">
 
 					<div
@@ -18,27 +18,27 @@
 						
 						<!-- 검색 - 오늘 / href는 url경로라서  javascript:함수 로 지정해야 실행 가능. -->
 							<a href="javascript:search_order_history('today')"
-								class="badge rounded-pill btn mb-2 rounded-0 border-main  ">오늘</a>
+								class="badge rounded-pill btn mb-2 rounded-0 border-main date_btn ">오늘</a>
 							
 							<!-- 검색 - 1개월 -->
 							<a href="javascript:search_order_history('one_month')"
 								name="one_month"
-								class="badge rounded-pill btn mb-2 rounded-0 border-main  active">최근
+								class="badge rounded-pill btn mb-2 rounded-0 border-main date_btn active">최근
 								1개월</a> 
 								
 								<!-- 검색 - 2개월 -->
 								<a href="javascript:search_order_history('two_month')"
-								class="badge rounded-pill btn mb-2 rounded-0 border-main  two_month">최근
+								class="badge rounded-pill btn mb-2 rounded-0 border-main date_btn two_month">최근
 								2개월</a> 
 								
 								<!-- 검색 - 3개월 -->
 								<a href="javascript:search_order_history('three_month')"
-								class="badge rounded-pill btn mb-2 rounded-0 border-main  three_month">최근
+								class="badge rounded-pill btn mb-2 rounded-0 border-main date_btn three_month">최근
 								3개월 </a> 
 								
 								<!-- 검색 - 6개월 -->
 								<a href="javascript:search_order_history('six_month')"
-								class="badge rounded-pill btn mb-2 rounded-0 border-main  six_month">최근
+								class="badge rounded-pill btn mb-2 rounded-0 border-main date_btn six_month">최근
 								6개월</a>
 
 						</div>

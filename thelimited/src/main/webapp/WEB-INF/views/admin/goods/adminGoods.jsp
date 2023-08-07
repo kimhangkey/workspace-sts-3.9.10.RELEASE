@@ -10,32 +10,32 @@
 	<div class="">
 		<div class="mt-5 align-items-center">
 			<div class="">
-				<p class="fs-5 fw-bold mb-2">상품관리</p>
+				<p class="fs-5 fw-bold mb-3 subpage_title">상품관리</p>
 				<div class="d-flex align-items-center gap-1 justify-content-between">
 					<div>
 
 						<!-- 검색 - 오늘 -->
 						<a href="javascript:search_order_history('today')"
-							class="badge rounded-pill btn mb-2 rounded-0 border-main  ">오늘</a>
+							class="badge rounded-pill btn mb-2 rounded-0 border-main date_btn ">오늘</a>
 
 						<!-- 검색 - 1개월 -->
 						<a href="javascript:search_order_history('one_month')"
-							class="badge rounded-pill btn mb-2 rounded-0 border-main  active">최근
+							class="badge rounded-pill btn mb-2 rounded-0 border-main date_btn active">최근
 							1개월</a>
 
 						<!-- 검색 - 2개월 -->
 						<a href="javascript:search_order_history('two_month')"
-							class="badge rounded-pill btn mb-2 rounded-0 border-main  two_month">최근
+							class="badge rounded-pill btn mb-2 rounded-0 border-main date_btn two_month">최근
 							2개월</a>
 
 						<!-- 검색 - 3개월 -->
 						<a href="javascript:search_order_history('three_month')"
-							class="badge rounded-pill btn mb-2 rounded-0 border-main  three_month">최근
+							class="badge rounded-pill btn mb-2 rounded-0 border-main date_btn three_month">최근
 							3개월 </a>
 
 						<!-- 검색 - 6개월 -->
 						<a href="javascript:search_order_history('six_month')"
-							class="badge rounded-pill btn mb-2 rounded-0 border-main  six_month">최근
+							class="badge rounded-pill btn mb-2 rounded-0 border-main date_btn six_month">최근
 							6개월</a>
 
 					</div>
@@ -96,9 +96,9 @@
 												name="" id="" onchange="selectValue(this, this.value)"
 												class="form-select rounded-0 flex-inherit text-start  border border-end">
 												<option value="clothes" selected>의류</option>
-												<option value="bag">가방</option>
-												<option value="acc">패션잡화</option>
-												<option value="toy">토이&#47;완구</option>
+												<option value="bags">가방</option>
+												<option value="accessories">패션잡화</option>
+												<option value="toys">토이&#47;완구</option>
 											</select> 
 											<!-- 초기선택값 의류 -->
 											<input type="hidden" name="goods_sort" id="goods_sort"
@@ -243,14 +243,14 @@
 														<span style="width: 100px;" class="">카테고리</span>
 
 														<!-- select 선택시 input에 selected value가 공유됨 selectValue() -->
-														<!-- //input값에 따른 selectBox option select 스크립트에 의해 자동선택되 사용자에게 보여줌. -->
+														<!-- //input값에 따른 selectBox option select 스크립트에 의해 자동선택되어 사용자에게 보여줌. -->
 														<select name="" id=""
 															onchange="selectValue(this, this.value)"
 															class="form-select rounded-0 flex-inherit text-start  border border-end">
 															<option value="clothes">의류</option>
-															<option value="bag">가방</option>
-															<option value="acc">패션잡화</option>
-															<option value="toy">토이&#47;완구</option>
+															<option value="bags">가방</option>
+															<option value="accessories">패션잡화</option>
+															<option value="toys">토이&#47;완구</option>
 														</select> 
 														<!-- 상품 카테고리 표시 -->
 														<input type="hidden" name="goods_sort"

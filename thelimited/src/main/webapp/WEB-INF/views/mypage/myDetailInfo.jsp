@@ -6,9 +6,9 @@
 
 <div class="container">
 	<div class="row justify-content-md-center mx-auto px-auto">
-		<div class="mt-5 p-0 ps-5 align-items-center">
+		<div class="mt-5 p-0 ps-5 align-items-center mypage_form">
 			<div class="ps-4">
-				<p class="fs-5 fw-bold mb-3">내정보</p>
+				<p class="fs-5 fw-bold mb-3 subpage_title">내정보</p>
 
 				<div class="border-top border-main border-2 mt-2"></div>
 				<div class="table-responsive mt-4">

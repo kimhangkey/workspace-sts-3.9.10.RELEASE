@@ -232,7 +232,7 @@
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="${contextPath}/goods/menuGoods.do?menuGoods=bag">가방<i class="fas fa-chevron-down"></i></a>
+										<a href="${contextPath}/goods/menuGoods.do?menuGoods=bags">가방<i class="fas fa-chevron-down"></i></a>
 										<ul>
 											<li><a href="#">백팩<i class="fas fa-chevron-down"></i></a></li>
 											<li><a href="#">클러치<i class="fas fa-chevron-down"></i></a></li>
@@ -242,7 +242,7 @@
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="${contextPath}/goods/menuGoods.do?menuGoods=acc">패션잡화<i class="fas fa-chevron-down"></i></a>
+										<a href="${contextPath}/goods/menuGoods.do?menuGoods=accessories">패션잡화<i class="fas fa-chevron-down"></i></a>
 										<ul>
 											<li>
 												<a href="#">모자<i class="fas fa-chevron-down"></i></a>
@@ -259,7 +259,7 @@
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="${contextPath}/goods/menuGoods.do?menuGoods=toy">토이&#47;완구<i class="fas fa-chevron-down"></i></a>
+										<a href="${contextPath}/goods/menuGoods.do?menuGoods=toys">토이&#47;완구<i class="fas fa-chevron-down"></i></a>
 										<ul>
 											<li><a href="#">피규어<i class="fas fa-chevron-down"></i></a></li>
 											<li><a href="#">인형<i class="fas fa-chevron-down"></i></a></li>

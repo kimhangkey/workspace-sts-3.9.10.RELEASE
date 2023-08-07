@@ -5,32 +5,34 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <div class="container">
-	<div class="">
-		<div class="align-items-center">
+	<div class="row justify-content-md-center mx-auto px-auto">
+		<div class="align-items-center mt-5 mypage_form">
 			<div class="ps-4">
 
-				<p class="fs-1 fw-bold mb-2">주문목록</p>
+				<p class="fs-1 fw-bold mb-2 subpage_title">주문목록</p>
+				<div class="mt-4"></div>
+				
 				<form method="post">
 
 					<!-- 검색 - 오늘 -->
 					<a href="javascript:search_order_history('today')"
-						class="badge rounded-pill btn mb-2 rounded-0 border-main ">오늘</a>
+						class="badge rounded-pill btn mb-2 rounded-0 border-main date_btn ">오늘</a>
 					<!-- 검색 - 1개월 -->
 					<a href="javascript:search_order_history('one_month')"
 						name="one_month"
-						class="badge rounded-pill btn mb-2 rounded-0 border-main active">최근
+						class="badge rounded-pill btn mb-2 rounded-0 border-main date_btn active">최근
 						1개월</a>
 					<!-- 검색 - 2개월 -->
 					<a href="javascript:search_order_history('two_month')"
-						class="badge rounded-pill btn mb-2 rounded-0 border-main two_month">최근
+						class="badge rounded-pill btn mb-2 rounded-0 border-main date_btn two_month">최근
 						2개월</a>
 					<!-- 검색 - 3개월 -->
 					<a href="javascript:search_order_history('three_month')"
-						class="badge rounded-pill btn mb-2 rounded-0 border-main three_month">최근
+						class="badge rounded-pill btn mb-2 rounded-0 border-main date_btn three_month">최근
 						3개월 </a>
 					<!-- 검색 - 6개월 -->
 					<a href="javascript:search_order_history('six_month')"
-						class="badge rounded-pill btn mb-2 rounded-0 border-main six_month">최근
+						class="badge rounded-pill btn mb-2 rounded-0 border-main date_btn six_month">최근
 						6개월</a>
 
 					<!-- set된 조회할 기간 -->
@@ -127,12 +129,10 @@
 												</div>
 												
 												
-												<!-- 주문취소, 교환, 반품, 배송중에는 사용자가  배송관련 정보를 수정할 수없다. -->
+												<!-- 교환, 반품, 배송중에는 사용자가  배송관련 정보를 수정할 수없다. -->
 												<c:choose>
 												
 													
-													<c:when test="${item.delivery_state=='cancel_order'}">
-													</c:when>
 													<c:when test="${item.delivery_state=='returning_goods'}">
 													</c:when>
 													<c:when test="${item.delivery_state=='exchange_goods'}">
@@ -145,15 +145,23 @@
 															class="border-start ps-4 align-self-center align-self-stretch d-flex align-items-center">
 															<div>
 																<c:choose>
+																	
+																	<c:when test="${item.delivery_state=='cancel_order'}">
+																		<!-- 주문 취소일 경우 목록 삭제 가능 -->
+																		<button
+																			class="btn btn-sm border-main rounded-0 d-block my-2"
+																			onClick="fn_edit_order('${item.order_id}','delete')"
+																			style="width: 150px;">목록삭제</button>
+																	</c:when>
 
 																	<c:when
 																		test="${item.delivery_state=='delivery_prepared'}">
-																		<!-- 배송준비완료일때 -->
+																		<!-- 배송준비중일때 -->
 																		<button
 																			class="btn btn-sm border-main rounded-0 d-block my-2"
 																			onClick="fn_edit_order('${item.order_id}','cancel')"
 																			style="width: 150px;">주문취소</button>
-																		<!-- 배송준비완료일때 -->
+																		<!-- 배송준비중일때 -->
 																	</c:when>
 
 																	<c:when
@@ -243,7 +251,13 @@
 				    	formObj.action="${contextPath}/mypage/exchangeMyOrder.do";
 				    	formObj.submit();
 						}
-				    }
+				    } else if (option == "delete") {
+						var answer=confirm("목록에서 삭제하시겠습니까?");
+						if(answer==true){
+							formObj.action="${contextPath}/mypage/deleteMyOrder.do";
+					    	formObj.submit();
+						}
+					}
 				    	
 				
 			}

@@ -11,6 +11,8 @@
     <meta charset="utf-8">
   </head>
   <body>
-  <h1>this is footer</h1>
+  <div style="height: 800px">
+	  <h1>this is footer</h1>
+  </div>
   </body>
 </html>
