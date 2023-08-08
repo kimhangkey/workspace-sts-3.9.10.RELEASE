@@ -102,19 +102,18 @@
 						<div class="header_search">
 							<div class="header_search_content">
 								<div class="header_search_form_container">
-									<form action="#" class="header_search_form clearfix">
-										<input type="search" required="required" class="header_search_input" placeholder="원하는 상품을 검색해 보세요.">
+									<form action="${contextPath}/goods/searchGoods.do" class="header_search_form clearfix">
+										<input type="search" required="required" class="header_search_input" name="searchWord" placeholder="원하는 상품을 검색해 보세요.">
 										<div class="custom_dropdown" style="display: block;">
 											<div class="custom_dropdown_list">
-												<span class="custom_dropdown_placeholder clc">전체</span>
+												<span id="dropdownSelected" class="custom_dropdown_placeholder clc">전체</span>
 												<i class="fas fa-chevron-down"></i>
 												<ul class="custom_list clc">
 													<li><a class="clc" href="#">전체</a></li>
-													<li><a class="clc" href="#">Computers</a></li>
-													<li><a class="clc" href="#">Laptops</a></li>
-													<li><a class="clc" href="#">Cameras</a></li>
-													<li><a class="clc" href="#">Hardware</a></li>
-													<li><a class="clc" href="#">Smartphones</a></li>
+													<li><a class="clc" href="#">의류</a></li>
+													<li><a class="clc" href="#">가방</a></li>
+													<li><a class="clc" href="#">패션잡화</a></li>
+													<li><a class="clc" href="#">토이&#47;완구</a></li>
 												</ul>
 											</div>
 										</div>
@@ -299,3 +298,41 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="${contextPath}/resources/js/header.js"></script>
+
+<!-- 검색 -->
+<script>
+    const dropdownSelected = document.getElementById('dropdownSelected');
+    const submitButton = document.querySelector('.header_search_button');
+
+
+	submitButton.addEventListener('click', function(event) {
+
+		const selectedValue = dropdownSelected.textContent;
+		let inputValue = null;
+
+		switch (selectedValue) {
+		case "의류":
+			inputValue = 'clothes';
+			break;
+		case '가방':
+			inputValue = 'bags';
+			break;
+		case '패션잡화':
+			inputValue = 'accessories';
+			break;
+		case '토이/완구':
+			inputValue = 'toys';
+			break;
+		default:
+			inputValue = 'all';
+			break;
+		}
+
+		const hiddenInput = document.createElement('input');
+		hiddenInput.type = 'hidden';
+		hiddenInput.name = 'goods_sort';
+		hiddenInput.value = inputValue;
+		const form = document.querySelector('.header_search_form');
+		form.appendChild(hiddenInput);
+	});
+</script>

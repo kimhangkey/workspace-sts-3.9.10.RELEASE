@@ -13,7 +13,6 @@
 
 </head>
 <body>
-	<h1>로그인/회원가입 레이아웃</h1>
 	<tiles:insertAttribute name="body" />
 
 

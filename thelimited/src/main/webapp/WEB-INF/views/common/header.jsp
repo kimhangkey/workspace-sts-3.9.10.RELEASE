@@ -454,7 +454,6 @@ function checkLogin(event) {
 			inputValue = 'all';
 			break;
 		}
-		alert(inputValue);
 
 		const hiddenInput = document.createElement('input');
 		hiddenInput.type = 'hidden';

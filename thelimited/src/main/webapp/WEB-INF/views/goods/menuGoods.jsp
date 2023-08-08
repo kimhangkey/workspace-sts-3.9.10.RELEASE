@@ -20,7 +20,7 @@
 	</div>
 
 
-	<div class="row mt-4">
+	<div class="row mt-4 menu_main">
 		<div
 			class="d-flex categoryGoodList align-items-start flex-wrap p-0 justify-content-center" style="gap: 4.1rem!important; height: 600px">
 			<c:choose>
