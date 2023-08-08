@@ -1,5 +1,6 @@
 package com.kimhangkey.thelimited.goods.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ public interface GoodsService {
 	public List<String> keywordSearch(String keyword) throws Exception;
 
 	// 검색
-	public List<GoodsVO> searchGoods(String searchWord) throws Exception;
+	public List<GoodsVO> searchGoods(HashMap<String, String> searchMap) throws Exception;
 
 	// 상품상세
 	public Map goodsDetail(String _goods_id) throws Exception;

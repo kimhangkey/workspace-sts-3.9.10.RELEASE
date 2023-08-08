@@ -17,122 +17,152 @@
 
 </head>
 <body>
-	<div id="ad_main_banner">
-		<%-- <ul class="bjqs">	 	
-		  <li><img width="100%" height="446" src="${contextPath}/resources/image/main_banner01.jpg"></li>
-			<li><img width="100%" height="446" src="${contextPath}/resources/image/main_banner02.jpg"></li>
-			<li><img width="100%" height="446" src="${contextPath}/resources/image/main_banner03.jpg"></li> 
-		</ul> --%>
-		<img id="slideshow-img" width="100%" height="446" src="${contextPath}/resources/image/main_banner01.jpg">
+	<div id="ad_main_banner" class="container">
+		<img id="slideshow-img" width="100%" height="446"
+			src="${contextPath}/resources/image/main_banner01.jpg">
 	</div>
-	
-	<div style="height: 1600px"></div>
-	
-<%-- 	<div class="main_book">
-	   <c:set  var="goods_count" value="0" />
-		<h3>베스트셀러</h3>
-		<c:forEach var="item" items="${goodsMap.bestseller }">
-		   <c:set  var="goods_count" value="${goods_count+1 }" />
-			<div class="book">
-				<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
-				<img class="link"  src="${contextPath}/resources/image/1px.gif"> 
-				</a> 
-					<img width="121" height="154" 
-					     src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}">
-	
-				<div class="title">${item.goods_title }</div>
-				<div class="price">
-			  	   <fmt:formatNumber  value="${item.goods_price}" type="number" var="goods_price" />
-			          ${goods_price}원
-				</div>
+
+	<!-- NEW 상품 목록 -->
+	<div class="container main_goods">
+		<div class="row">
+			<div class="p-0 align-items-center gap-3 mt-5 mb-3">
+				<p class="fs-6 mb-1 menu_title">NEW ITEMS</p>
+				<p class="fs-3 fw-bold">새로 나온 상품들을 확인해 보세요!</p>
 			</div>
-		   <c:if test="${goods_count==15   }">
-	         <div class="book">
-	           <font size=20> <a href="#">more</a></font>
-	         </div>
-	     </c:if>
-	  </c:forEach>
-	</div>
-	<div class="clear"></div>
-	<div id="ad_sub_banner">
-		<img width="770" height="117" src="${contextPath}/resources/image/sub_banner01.jpg">
-	</div>
-	<div class="main_book" >
-	<c:set  var="goods_count" value="0" />
-		<h3>새로 출판된 책</h3>
-		<c:forEach var="item" items="${goodsMap.newbook }" >
-		   <c:set  var="goods_count" value="${goods_count+1 }" />
-			<div class="book">
-			  <a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
-		       <img class="link"  src="${contextPath}/resources/image/1px.gif"> 
-		      </a>
-			 <img width="121" height="154" 
-					src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}">
-			<div class="title">${item.goods_title }</div>
-			<div class="price">
-			    <fmt:formatNumber  value="${item.goods_price}" type="number" var="goods_price" />
-			       ${goods_price}원
-			  </div>
 		</div>
-		 <c:if test="${goods_count==15   }">
-	     <div class="book">
-	       <font size=20> <a href="#">more</a></font>
-	     </div>
-	   </c:if>
-		</c:forEach>
-	</div>
-	
-	<div class="clear"></div>
-	<div id="ad_sub_banner">
-		<img width="770" height="117" src="${contextPath}/resources/image/sub_banner02.jpg">
-	</div>
-	
-	
-	<div class="main_book" >
-	<c:set  var="goods_count" value="0" />
-		<h3>스테디셀러</h3>
-		<c:forEach var="item" items="${goodsMap.steadyseller }" >
-		   <c:set  var="goods_count" value="${goods_count+1 }" />
-			<div class="book">
-			  <a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
-		       <img class="link"  src="${contextPath}/resources/image/1px.gif"> 
-		      </a>
-			 <img width="121" height="154" 
-					src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}">
-			<div class="title">${item.goods_title }</div>
-			<div class="price">
-			    <fmt:formatNumber  value="${item.goods_price}" type="number" var="goods_price" />
-			       ${goods_price}원
-			  </div>
+
+
+		<div class="row mt-4 justify-content-center">
+			<div
+				class="d-flex categoryGoodList align-items-start flex-wrap p-0 justify-content-center mainlist1"
+				style="gap: 4.1rem !important; height: 300px;">
+				<c:choose>
+
+					<c:when test="${empty goodsMap.NEW}">
+					해당 카테고리에 상품이 없습니다.
+					</c:when>
+
+					<c:otherwise>
+						<c:forEach var="item" items="${goodsMap.NEW}">
+							<div class="p-0" style="width: 250px; height: 250px">
+								<a
+									href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id}"
+									class="text-decoration-none d-block"> <img
+									src="${contextPath}/download.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}"
+									style="width: 200px; height: 200px">
+									<p class="mt-4 mb-0 text-truncate fw-bold fs-6">${item.goods_title}</p>
+									<p>
+										<span class="text-danger fw-bold fs-4 me-1"> <fmt:formatNumber
+												value="${item.goods_sales_price}" pattern="#,###" />
+										</span>원
+									</p>
+								</a>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+
+				</c:choose>
+			</div>
+			<a href="#" class="more-link1">더보기</a>
 		</div>
-		 <c:if test="${goods_count==15   }">
-	     <div class="book">
-	       <font size=20> <a href="#">more</a></font>
-	     </div>
-	   </c:if>
-		</c:forEach>
-	</div> --%>
+	</div>
+	<!-- NEW 상품 목록 -->
+
+	
+	<!-- POP 상품 목록 -->
+	<div class="container main_goods">
+		<div class="row">
+			<div class="p-0 align-items-center gap-3 mt-5 mb-3">
+				<p class="fs-6 mb-1 menu_title">POPULAR ITEMS</p>
+				<p class="fs-3 fw-bold">인기 상품들을 지금 만나보세요!</p>
+			</div>
+		</div>
 
 
-<!-- jQuery 라이브러리 -->
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+		<div class="row mt-4 justify-content-center">
+			<div
+				class="d-flex categoryGoodList align-items-start flex-wrap p-0 justify-content-center mainlist2"
+				style="gap: 4.1rem !important; height: 300px;">
+				<c:choose>
 
-<!-- Bjqs 스크립트 파일 -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bjqs/bjqs-1.3.min.js"></script> -->
+					<c:when test="${empty goodsMap.POP}">
+					해당 카테고리에 상품이 없습니다.
+					</c:when>
 
-<!-- 슬라이드 쇼 스크립트 -->
-<!-- <script>
-  $(document).ready(function () {
-    // 슬라이드 쇼의 각 설정 값들을 지정합니다.
-    $('#ad_main_banner .bjqs').cycle({
-      fx: 'fade', // 페이드 효과 사용
-      timeout: 2000, // 슬라이드 간격 (2초)
-      speed: 800, // 슬라이드 애니메이션 속도
-      pause: true, // 마우스 호버 시 슬라이드 정지
-      pager: false // 페이지 표시기 사용 안함
-    });
-  });
-</script> -->
+					<c:otherwise>
+						<c:forEach var="item" items="${goodsMap.POP}">
+							<div class="p-0" style="width: 250px; height: 250px">
+								<a
+									href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id}"
+									class="text-decoration-none d-block"> <img
+									src="${contextPath}/download.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}"
+									style="width: 200px; height: 200px">
+									<p class="mt-4 mb-0 text-truncate fw-bold fs-6">${item.goods_title}</p>
+									<p>
+										<span class="text-danger fw-bold fs-4 me-1"> <fmt:formatNumber
+												value="${item.goods_sales_price}" pattern="#,###" />
+										</span>원
+									</p>
+								</a>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+
+				</c:choose>
+			</div>
+			<a href="#" class="more-link2">더보기</a>
+		</div>
+	</div>
+	<!-- POP 상품 목록 -->
+	
+	
+	
+	<!-- DISC 상품 목록 -->
+	<div class="container main_goods">
+		<div class="row">
+			<div class="p-0 align-items-center gap-3 mt-5 mb-3">
+				<p class="fs-6 mb-1 menu_title">DISCOUNTS</p>
+				<p class="fs-3 fw-bold">현재 할인 중인 상품들을 알아보세요!</p>
+			</div>
+		</div>
+
+
+		<div class="row mt-4 justify-content-center">
+			<div
+				class="d-flex categoryGoodList align-items-start flex-wrap p-0 justify-content-center mainlist3"
+				style="gap: 4.1rem !important; height: 300px;">
+				<c:choose>
+
+					<c:when test="${empty goodsMap.DISC}">
+					해당 카테고리에 상품이 없습니다.
+					</c:when>
+
+					<c:otherwise>
+						<c:forEach var="item" items="${goodsMap.DISC}">
+							<div class="p-0" style="width: 250px; height: 250px">
+								<a
+									href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id}"
+									class="text-decoration-none d-block"> <img
+									src="${contextPath}/download.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}"
+									style="width: 200px; height: 200px">
+									<p class="mt-4 mb-0 text-truncate fw-bold fs-6">${item.goods_title}</p>
+									<p>
+										<span class="text-danger fw-bold fs-4 me-1"> <fmt:formatNumber
+												value="${item.goods_sales_price}" pattern="#,###" />
+										</span>원
+									</p>
+								</a>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+
+				</c:choose>
+			</div>
+			<a href="#" class="more-link3">더보기</a>
+		</div>
+	</div>
+	<!-- DISC 상품 목록 -->
+	
 
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  
@@ -158,6 +188,27 @@
       setInterval(changeImage, 2000);
     });
   </script>
+  
+ <script>
+	$(document).ready(function() {
+	  // '더보기' 링크를 클릭했을 때
+	  $('a.more-link1').on('click', function(e) {
+	    e.preventDefault(); // 기본 링크 동작 방지
+	    // 클래스 categoryGoodList인 div 태그에 overflow를 보이게 처리
+	    $('div.mainlist1').css('height', '600px');
+	  });
+	  $('a.more-link2').on('click', function(e) {
+	    e.preventDefault(); // 기본 링크 동작 방지
+	    // 클래스 categoryGoodList인 div 태그에 overflow를 보이게 처리
+	    $('div.mainlist2').css('height', '600px');
+	  });
+	  $('a.more-link3').on('click', function(e) {
+	    e.preventDefault(); // 기본 링크 동작 방지
+	    // 클래스 categoryGoodList인 div 태그에 overflow를 보이게 처리
+	    $('div.mainlist3').css('height', '600px');
+	  });
+	});
+</script>
 
 
 </body>

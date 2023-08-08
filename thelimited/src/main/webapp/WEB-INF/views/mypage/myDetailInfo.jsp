@@ -80,19 +80,21 @@
 								</tr>
 							</table>
 						</div>
-
+					
+					<div class="d-flex align-items-center">
 						<!-- 수정 -->
 						<a href="javascript:fn_modify_member_info()"
-							class="btn btn-lg btn-main rounded-0 w-100 d-block fw-bold p-2 lh-lg mt-4 mb-2">수정하기</a>
+							class="btn btn-lg btn-main rounded-0 w-50 d-inline-block fw-bold lh-lg mt-4 mb-4 mod_btn">수정하기</a>
 
 						<!-- 취소, 클릭시  reload-->
 						<button type="button" onClick="location.reload()"
-							class="btn btn-lg border-main rounded-0 w-100 d-block fw-bold p-2 lh-lg mt-0 mb-2 fs-6">취소하기</button>
+							class="btn btn-lg border-main rounded-0 w-50 d-inline-block fw-bold p-2 lh-lg mb-0 fs-6 cancel_btn">취소하기</button>
+					</div>
 
 						<!-- 탈퇴 -->
 						<button type="button"
 							onClick="fn_delete_member('${member_info.member_id }','Y')"
-							class="btn btn-lg border-main rounded-0 w-100 d-block fw-bold p-2 lh-lg mt-0 mb-3 fs-6">탈퇴하기</button>
+							class="btn btn-lg border-main rounded-0 w-100 d-block fw-bold p-2 lh-lg mt-0 mb-3 fs-6 out_btn">탈퇴하기</button>
 
 					</form>
 				</div>
@@ -157,7 +159,7 @@
 		var frm_mod_member = document.frm_mod_member.value;
 		var member_id = document.frm_mod_member.member_id.value;
 
-		var answer = confirm("탈퇴하시겠습니까?");
+		var answer = confirm("정말 탈퇴하시겠습니까?");
 		//confirm answer = true일때 submit
 		if (answer == true) {
 			$.ajax({

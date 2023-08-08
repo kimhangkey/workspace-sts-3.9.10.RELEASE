@@ -64,7 +64,7 @@
 
 
 
-	<!-- header 카테고리별 -->
+	<!-- 카테고리별 상품목록 -->
 	<!-- t_shopping_goods에서 #{menuGoods}가 들어간 상품의 goods_title과 main_image를 goods_creDate 
 		desc내림차순으로 가져온다. -->
 	<select id="selectGoodsByMenuGoods" resultMap="goodsResult"
@@ -77,9 +77,7 @@
 		    order by g.goods_creDate desc
 		]]>
 	</select>
-
-
-
+	
 
 	<!-- 추천키워드 -->
 	<!-- t_shopping_goods에서 #{keyword}가 들어간 상품의 goods_title를 goods_creDate desc내림차순으로 
@@ -99,14 +97,19 @@
 	<!-- t_shopping_goods에서 #{searchWord}가 들어간 상품의 goods_title과 main_image를 
 		goods_creDate desc내림차순으로 가져온다. -->
 	<select id="selectGoodsBySearchWord" resultMap="goodsResult"
-		parameterType="String">
+		parameterType="java.util.Map">
      <![CDATA[
 				select g.*,d.fileName from t_shopping_goods g, t_goods_detail_image d
 		    where g.goods_id=d.goods_id
 		    and d.filetype='main_image'
-		    and g.goods_title like '%'|| #{searchWord} || '%'
-		    order by g.goods_creDate desc
 		]]>
+		    
+			<if test="goods_sort != 'all'">
+		     	and g.goods_sort = #{goods_sort}
+		    </if>
+	    	
+			and g.goods_title like '%'|| #{searchWord} || '%'
+			order by g.goods_creDate desc
 	</select>
 
 

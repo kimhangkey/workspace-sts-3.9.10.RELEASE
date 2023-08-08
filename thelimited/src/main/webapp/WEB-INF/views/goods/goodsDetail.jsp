@@ -38,23 +38,22 @@
 						style="width: 50px"></a> <a class="mb-3 back_eee"
 						id="detailThumb2" data-bs-toggle="list" href="#detailThumb02"
 						role="tab" aria-controls="detailThumb02"> <img
-						src="${contextPath}/resources/image/dog1.jpg"
+						src="${contextPath}/resources/image/tl_logo.png"
 						style="width: 50px"></a>
 				</div>
 				<!-- tab caller -->
 
 				<!-- tab 본문 -->
-				<!-- 배경설정 back_eee -->
 				<div class="tab-content back_eee" id="nav-tabContent">
 					<div class="tab-pane show active" id="detailThumb01"
 						role="tabpanel" aria-labelledby="detailThumb1">
 						<img
 							src="${contextPath}/download.do?goods_id=${goods.goods_id}&fileName=${goods.goods_fileName}"
-							style="width: 410px; height: 410px;">
+							style="width: 400px; height: 400px;">
 					</div>
 					<div class="tab-pane back_eee" id="detailThumb02" role="tabpanel"
 						aria-labelledby="detailThumb2">
-						<img src="${contextPath}/resources/image/dog1.jpg" style="width: 410px; height: 410px;">
+						<img src="${contextPath}/resources/image/tl_logo1.png" style="width: 400px; height: 400px;">
 					</div>
 				</div>
 				<!-- tab 본문 -->
@@ -65,7 +64,7 @@
 
 
 			<!-- 상품정보 -->
-			<div class="ps-4 w-100">
+			<div class="ps-4 goods_info">
 				<!-- 카테고리 -->
 				<p class="fs-3 mb-1 detail_sort">카테고리:
 				<c:if test="${goods.goods_sort == 'clothes'}">의류</c:if>
@@ -76,6 +75,7 @@
 				<!-- 상품명 -->
 				<p class="fs-1 fw-bold detail_title">${goods.goods_title }</p>
 				<hr>
+				<p>${goods.goods_intro}</p>
 				<!-- 가격 및 수량, 수량은 고정 -->
 				<p class="fs-6 mb-1 detail_price">
 					<span class="fs-4 text-danger fw-bold">
@@ -87,10 +87,9 @@
 				<div class="d-flex gap-0 mt-4">
 					<input type="hidden" id="goods_qty" name="order_goods_qty"
 						value="1">
-
 					<!-- 장바구니 담기, goods_id값과 함께 add_cart 실행 -->
 					<a href="javascript:add_cart('${goods.goods_id}')"
-						class="btn btn-lg fw-bold border-main rounded-0 d-block flex-fill addcart_btn">장바구니담기</a>
+						class="btn btn-lg fw-bold border-main rounded-0 d-block flex-fill addcart_btn">쇼핑카트 담기</a>
 					<!-- 주문하기, 상품정보와 함께 fn_order_each_goods실행  -->
 					<a
 						href="javascript:fn_order_each_goods('${goods.goods_id }','${goods.goods_title }','${goods.goods_sales_price}','${goods.goods_fileName}');"

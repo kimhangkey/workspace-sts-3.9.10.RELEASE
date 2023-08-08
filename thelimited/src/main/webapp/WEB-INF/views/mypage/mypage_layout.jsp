@@ -25,6 +25,15 @@
 <body>
 	<tiles:insertAttribute name="header" />
 	<tiles:insertAttribute name="body" />
-	<tiles:insertAttribute name="footer" />
+	<div style="height: 500px"></div>
+	<div
+		class="footer border-top mt-5 py-5 text-center small text-secondary">
+		<div class="logo_container" style="height: 50px;">
+			<div class="logo"><a href="${contextPath}/main/main.do">THE LIMITED</a></div>
+		</div>
+		<p class="mb-0">
+			<tiles:insertAttribute name="footer" />
+		</p>
+	</div>
 </body>
 </html>

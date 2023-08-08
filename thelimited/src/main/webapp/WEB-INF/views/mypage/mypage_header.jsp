@@ -137,7 +137,7 @@
 								<div class="wishlist_icon"><a href="#"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918681/heart.png" alt=""></a></div>
 								<div class="wishlist_content">
 									<div class="wishlist_text"><a href="#" class="wishlist_text">찜목록</a></div>
-									<div class="wishlist_count">10</div>
+									<!-- <div class="wishlist_count">10</div> -->
 								</div>
 							</div>
 
@@ -145,14 +145,14 @@
 							<div class="cart">
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_icon">
-										<a href="#">
+										<a href="${contextPath}/cart/shoppingCart.do">
 											<img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png" alt="">
-											<span class="cart_count"><span>3</span></span>
+											<span class="cart_count"><span>${cartCount}</span></span>
 										</a>
 									</div>
 									<div class="cart_content">
-										<div class="cart_text"><a href="#" class="cart_text">쇼핑카트</a></div>
-										<div class="cart_price">39,000원</div>
+										<div class="cart_text"><a href="${contextPath}/cart/shoppingCart.do" class="cart_text">쇼핑카트</a></div>
+										<!-- <div class="cart_price">39,000원</div> -->
 									</div>
 								</div>
 							</div>

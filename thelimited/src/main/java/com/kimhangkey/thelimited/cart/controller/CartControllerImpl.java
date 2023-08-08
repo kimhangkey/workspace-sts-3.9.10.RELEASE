@@ -34,7 +34,7 @@ public class CartControllerImpl extends BaseController implements CartController
 	
 
 	
-	// 장바구니 가져오기
+	// 쇼핑카트 가져오기
 	@Override
 	@RequestMapping(value = "/shoppingCart.do", method = RequestMethod.GET)
 	public ModelAndView myCartMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -45,7 +45,7 @@ public class CartControllerImpl extends BaseController implements CartController
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 		String member_id = memberVO.getMember_id();
 
-		// 회원정보에 맞는 장바구니 리스트를 불러온다.
+		// 회원정보에 맞는 쇼핑카트 리스트를 불러온다.
 		cartVO.setMember_id(member_id);
 		Map<String, List> cartMap = cartService.myCartList(cartVO);
 		
@@ -56,7 +56,7 @@ public class CartControllerImpl extends BaseController implements CartController
 		return mav;
 	}
 
-	// 장바구니 추가
+	// 쇼핑카트 추가
 	@Override
 	@RequestMapping(value = "/addGoodsInCart.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	public @ResponseBody String addGoodsInCart(@RequestParam("goods_id") int goods_id, HttpServletRequest request,
@@ -66,7 +66,7 @@ public class CartControllerImpl extends BaseController implements CartController
 		memberVO = (MemberVO) session.getAttribute("memberInfo");
 		String member_id = memberVO.getMember_id();
 
-		// 회원정보와 추가하고자하는 상품id로 장바구니 중복체크 후 boolean형 isAreadyExisted로 리턴값 저장
+		// 회원정보와 추가하고자하는 상품id로 쇼핑카트 중복체크 후 boolean형 isAreadyExisted로 리턴값 저장
 		cartVO.setMember_id(member_id);
 		cartVO.setGoods_id(goods_id);
 		boolean isAreadyExisted = cartService.findCartGoods(cartVO);
@@ -76,24 +76,34 @@ public class CartControllerImpl extends BaseController implements CartController
 			return "already_existed";
 		} else {
 			cartService.addGoodsInCart(cartVO);
+			String cartCount = cartService.countCart(member_id);
+			session.setAttribute("cartCount", cartCount);
 			return "add_success";
 		}
 	}
 
-	// 장바구니 삭제
+	// 쇼핑카트 삭제
 	@Override
 	@RequestMapping(value = "/removeCartGoods.do", method = RequestMethod.POST)
 	public ModelAndView removeCartGoods(@RequestParam("cart_id") int cart_id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(cart_id);
 		// @RequestParam받은 cart_id 상품을 삭제 후 shoppingCart로 redirect
 		cartService.removeCartGoods(cart_id);
+		
+		HttpSession session = request.getSession();
+		memberVO = (MemberVO) session.getAttribute("memberInfo");
+		
+		String member_id = memberVO.getMember_id();
+		String cartCount = cartService.countCart(member_id);
+		
+		session.setAttribute("cartCount", cartCount);
+		
 		mav.setViewName("redirect:/cart/shoppingCart.do");
 		return mav;
 	}
 
-	// 장바구니 수정
+	// 쇼핑카트 수정
 	@Override
 	@RequestMapping(value = "/modifyCartQty.do", method = RequestMethod.POST)
 	public @ResponseBody String modifyCartQty(@RequestParam("goods_id") int goods_id,

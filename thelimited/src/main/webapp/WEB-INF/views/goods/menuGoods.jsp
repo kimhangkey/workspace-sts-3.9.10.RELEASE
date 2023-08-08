@@ -7,7 +7,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <div class="container">
-	<div class="row justify-content-center">
+	<div class="row justify-content-center mt-5">
 		<div class="p-0 align-items-center gap-3 mt-5 mb-3">
 		
 			<!-- 카테고리 명 -->
@@ -22,11 +22,11 @@
 
 	<div class="row mt-4">
 		<div
-			class="d-flex categoryGoodList align-items-start flex-wrap p-0" style="gap: 4.1rem!important;">
+			class="d-flex categoryGoodList align-items-start flex-wrap p-0 justify-content-center" style="gap: 4.1rem!important; height: 600px">
 			<c:choose>
 			
 				<c:when test="${empty goodsList}">
-					해당 카테고리에 상품이 없습니다.
+					요청하신 내용 관련 상품이 없습니다.
 				</c:when>
 
 				<c:otherwise>

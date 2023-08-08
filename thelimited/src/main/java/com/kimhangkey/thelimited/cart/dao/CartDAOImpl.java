@@ -61,5 +61,11 @@ public class CartDAOImpl implements CartDAO {
 	public void updateCartGoodsQty(CartVO cartVO) throws DataAccessException{
 		sqlSession.insert("mapper.cart.updateCartGoodsQty",cartVO);
 	}
+	
+	
+	@Override
+	public String countCart(String member_id) throws DataAccessException {
+		return sqlSession.selectOne("mapper.cart.getCartCount", member_id);
+	}
 
 }

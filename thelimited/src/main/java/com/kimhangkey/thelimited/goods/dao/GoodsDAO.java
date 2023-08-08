@@ -1,5 +1,6 @@
 package com.kimhangkey.thelimited.goods.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
@@ -21,7 +22,7 @@ public interface GoodsDAO {
 	public List<String> selectKeywordSearch(String keyword) throws DataAccessException;
 
 	// 검색
-	public List<GoodsVO> selectGoodsBySearchWord(String searchWord) throws DataAccessException;
+	public List<GoodsVO> selectGoodsBySearchWord(HashMap<String, String> searchMap) throws DataAccessException;
 
 	// 상품상세
 	public GoodsVO selectGoodsDetail(String goods_id) throws DataAccessException;

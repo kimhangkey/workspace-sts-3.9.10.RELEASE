@@ -117,11 +117,11 @@
 						<div class="header_search">
 							<div class="header_search_content">
 								<div class="header_search_form_container">
-									<form action="#" class="header_search_form clearfix">
-										<input type="search" required="required" class="header_search_input" placeholder="원하는 상품을 검색해 보세요.">
+									<form action="${contextPath}/goods/searchGoods.do" class="header_search_form clearfix">
+										<input type="search" required="required" class="header_search_input" name="searchWord" placeholder="원하는 상품을 검색해 보세요.">
 										<div class="custom_dropdown" style="display: block;">
 											<div class="custom_dropdown_list">
-												<span class="custom_dropdown_placeholder clc">전체</span>
+												<span id="dropdownSelected" class="custom_dropdown_placeholder clc">전체</span>
 												<i class="fas fa-chevron-down"></i>
 												<ul class="custom_list clc">
 													<li><a class="clc" href="#">전체</a></li>
@@ -146,7 +146,7 @@
 								<div class="wishlist_icon"><a href="#"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918681/heart.png" alt=""></a></div>
 								<div class="wishlist_content">
 									<div class="wishlist_text"><a href="#" class="wishlist_text">찜목록</a></div>
-									<div class="wishlist_count">10</div>
+									<!-- <div class="wishlist_count">10</div> -->
 								</div>
 							</div>
 
@@ -154,14 +154,22 @@
 							<div class="cart">
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_icon">
-										<a href="#">
+										<a href="${contextPath}/cart/shoppingCart.do">
 											<img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png" alt="">
-											<span class="cart_count"><span>3</span></span>
+											<span class="cart_count">
+												<c:if test="${!empty cartCount}">
+													<span>${cartCount}</span>
+												</c:if>
+												<c:if test="${empty cartCount}">
+													<span>0</span>
+												</c:if>
+												
+											</span>
 										</a>
 									</div>
 									<div class="cart_content">
 										<div class="cart_text"><a href="${contextPath}/cart/shoppingCart.do" onclick="checkLogin(event)" class="cart_text">쇼핑카트</a></div>
-										<div class="cart_price">39,000원</div>
+										<!-- <div class="cart_price">39,000원</div> -->
 									</div>
 								</div>
 							</div>
@@ -268,8 +276,8 @@
 										</ul>
 									</li>
 									<li class="menu_line"><span>&nbsp;&#124;</span></li>
-									<li><a href="blog.html">추천 상품<i class="fas fa-chevron-down"></i></a></li>
-									<li><a href="blog.html">인기 상품<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="#">추천 상품<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="#">이벤트<i class="fas fa-chevron-down"></i></a></li>
 									<li class="hassubs">
 										<a href="#">게시판<i class="fas fa-chevron-down"></i></a>
 										<ul>
@@ -278,7 +286,7 @@
 											<li><a href="#">발매 정보<i class="fas fa-chevron-down"></i></a></li>
 										</ul>
 									</li>
-									<li><a href="contact.html">고객센터<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="#">고객센터<i class="fas fa-chevron-down"></i></a></li>
 								</ul>
 							</div>
 
@@ -417,6 +425,47 @@ function checkLogin(event) {
   }
 }
 </script>
+
+<!-- 검색 -->
+<script>
+    const dropdownSelected = document.getElementById('dropdownSelected');
+    const submitButton = document.querySelector('.header_search_button');
+
+
+	submitButton.addEventListener('click', function(event) {
+
+		const selectedValue = dropdownSelected.textContent;
+		let inputValue = null;
+
+		switch (selectedValue) {
+		case "의류":
+			inputValue = 'clothes';
+			break;
+		case '가방':
+			inputValue = 'bags';
+			break;
+		case '패션잡화':
+			inputValue = 'accessories';
+			break;
+		case '토이/완구':
+			inputValue = 'toys';
+			break;
+		default:
+			inputValue = 'all';
+			break;
+		}
+		alert(inputValue);
+
+		const hiddenInput = document.createElement('input');
+		hiddenInput.type = 'hidden';
+		hiddenInput.name = 'goods_sort';
+		hiddenInput.value = inputValue;
+		const form = document.querySelector('.header_search_form');
+		form.appendChild(hiddenInput);
+	});
+</script>
+
+
 
 </body>
 </html>

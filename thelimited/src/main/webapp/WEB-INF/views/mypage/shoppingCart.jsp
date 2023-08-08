@@ -63,7 +63,7 @@ function modify_cart_qty(index, goods_id, value){
 
 //장바구니 삭제하기
 function delete_cart_goods(cart_id){
-	var result = confirm('해당 상품을 쇼핑카트에서 삭제하시겠습니까?' + cart_id);
+	var result = confirm('해당 상품을 쇼핑카트에서 삭제하시겠습니까?');
 	
 	if(result) {
 		// 삭제할 cart_id값을 저장
@@ -97,7 +97,7 @@ function fn_order_all_cart_goods(){
 	var length=document.getElementsByClassName("cartGood").length;
 	let checkLen = 0;
 	if(length>1){
-		//전체 체크박스를 돌려 체크됬을때만 걸러낸다.
+		//전체 체크박스를 돌려 체크 되었을 때만 걸러낸다.
 		for(var i=0; i<length;i++){
 			if(checked_goods[i].checked==true){
 				checkLen++;
@@ -125,7 +125,9 @@ function fn_order_all_cart_goods(){
 	 	objForm.action="${contextPath}/order/orderAllCartGoods.do";
 		objForm.submit();
 		//사용자가 뒤로가기 한뒤 다시 주문할때를 대비해 input 값을 되돌려놓음.
-	 	cart_goods_qty[i].value=cart_goods_qty[i].previousElementSibling.value;
+		for(var i=0; i<length;i++){
+	 		cart_goods_qty[i].value=cart_goods_qty[i].previousElementSibling.value;
+		}
 		
 	}else {alert("원하시는 상품을 선택해주세요!");}//체크된 상품이 없을 경우 submit하지않고 alert만 표시.
 	
@@ -177,7 +179,7 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 
 
 <!-- 쇼핑카트 -->
-<section class="cart1">
+<section class="cart1 mt-5">
 	<div class="container">
 		<div class="justify-content-md-center mx-auto px-auto mypage_form">
 			<div class="cart__information">

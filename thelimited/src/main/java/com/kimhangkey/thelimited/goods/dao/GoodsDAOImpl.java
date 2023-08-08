@@ -1,6 +1,7 @@
 package com.kimhangkey.thelimited.goods.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -48,8 +49,8 @@ public class GoodsDAOImpl implements GoodsDAO {
 	
 	//검색
 	@Override
-	public ArrayList selectGoodsBySearchWord(String searchWord) throws DataAccessException{
-		ArrayList list=(ArrayList)sqlSession.selectList("mapper.goods.selectGoodsBySearchWord",searchWord);
+	public ArrayList selectGoodsBySearchWord(HashMap<String, String> searchMap) throws DataAccessException{
+		ArrayList list=(ArrayList)sqlSession.selectList("mapper.goods.selectGoodsBySearchWord", searchMap);
 		 return list;
 	}
 	

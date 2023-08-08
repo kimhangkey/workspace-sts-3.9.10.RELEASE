@@ -1,5 +1,6 @@
 package com.kimhangkey.thelimited.goods.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,12 +71,21 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 	
 	//검색
 	@RequestMapping(value="/searchGoods.do" ,method = RequestMethod.GET)
-	public ModelAndView searchGoods(@RequestParam("searchWord") String searchWord,
+	public ModelAndView searchGoods(@RequestParam String searchWord, String goods_sort,
 			                       HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String viewName=(String)request.getAttribute("viewName");
-		List<GoodsVO> goodsList=goodsService.searchGoods(searchWord);
-		ModelAndView mav = new ModelAndView(viewName);
+		System.out.println(searchWord);
+		System.out.println(goods_sort);
+		HashMap<String, String> searchMap = new HashMap<String, String>();
+		
+		searchMap.put("goods_sort", goods_sort);
+		searchMap.put("searchWord", searchWord);
+		
+		
+		List<GoodsVO> goodsList=goodsService.searchGoods(searchMap);
+		ModelAndView mav = new ModelAndView("/goods/menuGoods");
 		mav.addObject("goodsList", goodsList);
+		mav.addObject("menuGoods", "검색 단어  : " + searchWord);
+		
 		return mav;
 	}
 	

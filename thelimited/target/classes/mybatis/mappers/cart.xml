@@ -132,5 +132,12 @@
 	      where goods_id=#{goods_id}
     	]]>
 	</delete>
+	
+	<select id="getCartCount" resultType="String" parameterType="String">
+  		<![CDATA[
+    		SELECT COUNT(*) FROM t_shopping_cart c
+    		where c.member_id=#{member_id}
+  		]]>
+</select>
 
 </mapper>

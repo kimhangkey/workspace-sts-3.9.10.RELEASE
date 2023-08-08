@@ -18,7 +18,7 @@ public interface GoodsController {
 			HttpServletResponse response) throws Exception;
 
 	// 검색
-	public ModelAndView searchGoods(@RequestParam("searchWord") String searchWord, HttpServletRequest request,
+	public ModelAndView searchGoods(@RequestParam String searchWord, String goods_sort, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
 
 	// 상품상세

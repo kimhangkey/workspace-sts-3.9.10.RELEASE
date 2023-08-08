@@ -93,7 +93,7 @@
 
 								<!-- 상품 가격정보 -->
 								<c:set var="final_total_order_price"
-									value="${final_total_order_price+ item.goods_sales_price* item.order_goods_qty + total_delivery_price}" />
+									value="${final_total_order_price+ item.goods_sales_price* item.order_goods_qty}" />
 								<c:set var="total_order_price"
 									value="${total_order_price+ item.goods_sales_price* item.order_goods_qty}" />
 								<c:set var="total_order_goods_qty"
@@ -126,7 +126,7 @@
 								<!-- 총 주문금액 -->
 									<span>=</span> 총 주문금액</span> <span class="text-black fw-bold fs-5 ms-3">
 									<span id="p_final_totalPrice">
-									<fmt:formatNumber value="${final_total_order_price}" pattern="#,###" />
+									<fmt:formatNumber value="${final_total_order_price + total_delivery_price}" pattern="#,###" />
 									
 									</span>원</span> 
 									<input id="h_final_total_Price" type="hidden" value="${final_total_order_price}" />

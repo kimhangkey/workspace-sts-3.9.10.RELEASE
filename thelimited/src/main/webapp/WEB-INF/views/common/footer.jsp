@@ -7,12 +7,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-  	<title>Footer 04</title>
+  	<title>Footer</title>
     <meta charset="utf-8">
   </head>
   <body>
-  <div style="height: 800px">
-	  <h1>this is footer</h1>
-  </div>
+  ©THE LIMITED Corp. All rights reserved.
   </body>
 </html>

@@ -24,4 +24,7 @@ public interface CartDAO {
 
 	// 장바구니 수정
 	public void updateCartGoodsQty(CartVO cartVO) throws DataAccessException;
+	
+	// 쇼핑카트 수량 체크
+	public String countCart(String member_id) throws DataAccessException;
 }

@@ -45,7 +45,6 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 			//memberVO가 존재할 경우
 			if (memberVO != null && memberVO.getMember_id() != null) {
 				HttpSession session = request.getSession();
-				session = request.getSession();
 				
 				//로그인 여부 isLogOn와 회원정보 memberInfo를 세션에 저장한다.
 				session.setAttribute("isLogOn", true);
@@ -72,6 +71,7 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 			//세션 설정 초기화 및 메인페이지 이동.
 			session.setAttribute("isLogOn", false);
 			session.removeAttribute("memberInfo");
+			session.removeAttribute("cartCount");
 			mav.setViewName("redirect:/main/main.do");
 			return mav;
 		}

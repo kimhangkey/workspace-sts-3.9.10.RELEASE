@@ -240,6 +240,23 @@ section
 .top_bar
 {
 }
+/*********************************
+	Footer
+*********************************/
+.footer {
+	background-color: #e9ecef;
+}
+
+.footer_text {
+	color: #000;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.footer_text:hover {
+	color: #d6b534;
+}
+
 
 /*********************************
 3. Header
@@ -1082,6 +1099,41 @@ select option
     line-height: 60px;
     opacity: .3;
 }
+
+/*********************************
+	main goods
+*********************************/
+
+.main_goods {
+	margin-top: 80px;
+}
+
+.main_goods:nth-of-type(4),
+.main_goods:nth-of-type(5) {
+	border-top: 1px solid #cdd4da;
+}
+
+.more-link1,
+.more-link2,
+.more-link3 {
+	color: #000;
+	text-align: center;
+	font-size: 15px;
+	line-height:42px;
+	width:97px;
+	border: 1px solid #cdd4da;
+	border-radius: 10px;
+	margin-top: 30px;
+}
+
+.more-link1:hover,
+.more-link2:hover,
+.more-link3:hover {
+	color: #000;
+	background-color: #e9ecef;
+}
+
+
 /*********************************
 	MyPage
 *********************************/
@@ -1101,6 +1153,37 @@ select option
 .mypage_content
 {
 	font-size: 30px;
+}
+
+.mod_btn {
+	background-color: #000;
+	color: #fff;
+	line-height: 50px;
+	padding: 0;
+}
+
+.mod_btn:hover {
+	background-color: #d6b534;
+	color: #fff;
+}
+
+.cancel_btn {
+	background-color: #e9ecef;
+	height: 52px;
+}
+
+.cancel_btn:hover {
+	background-color: #adb5bd;
+}
+
+.out_btn {
+	background-color: #db4455;
+	opacity: .8;
+}
+
+.out_btn:hover {
+	opacity: 1;
+	color: #fff;
 }
 
 
@@ -1331,6 +1414,7 @@ select option
 
 .categoryGoodList {
 	width: 1300px;
+	overflow: hidden;
 }
 
 .menu_title {
@@ -1388,6 +1472,11 @@ select option
 .detail_info {
 	color: #000;
 	font-weight: bold;
+}
+
+.goods_info {
+	width:420px;
+	margin-left: 50px;
 }
 
 /*********************************

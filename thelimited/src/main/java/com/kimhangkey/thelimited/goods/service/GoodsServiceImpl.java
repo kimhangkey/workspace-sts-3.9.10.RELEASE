@@ -25,16 +25,16 @@ public class GoodsServiceImpl implements GoodsService {
 		Map<String, List<GoodsVO>> goodsMap = new HashMap<String, List<GoodsVO>>();
 
 		//신상 저장
-		List<GoodsVO> goodsList = goodsDAO.selectGoodsList("new");
-		goodsMap.put("new", goodsList);
+		List<GoodsVO> goodsList = goodsDAO.selectGoodsList("NEW");
+		goodsMap.put("NEW", goodsList);
 
 		//인기상품 저장
-		goodsList = goodsDAO.selectMenusList("pop");
-		goodsMap.put("pop", goodsList);
+		goodsList = goodsDAO.selectGoodsList("POP");
+		goodsMap.put("POP", goodsList);
 
 		//할인상품 저장
-		goodsList = goodsDAO.selectMenusList("disc");
-		goodsMap.put("disc", goodsList);
+		goodsList = goodsDAO.selectGoodsList("DISC");
+		goodsMap.put("DISC", goodsList);
 
 		
 		//위 정보를 담은 Map return
@@ -43,7 +43,7 @@ public class GoodsServiceImpl implements GoodsService {
 
 	
 	
-	//header 카테고리별
+	//카테고리별
 	@Override
 	public List<GoodsVO> menuGoods(String menuGoods) throws Exception {
 		List goodsList = goodsDAO.selectGoodsByMenuGoods(menuGoods);
@@ -62,8 +62,8 @@ public class GoodsServiceImpl implements GoodsService {
 	
 	//검색
 	@Override
-	public List<GoodsVO> searchGoods(String searchWord) throws Exception {
-		List goodsList = goodsDAO.selectGoodsBySearchWord(searchWord);
+	public List<GoodsVO> searchGoods(HashMap<String, String> searchMap) throws Exception {
+		List goodsList = goodsDAO.selectGoodsBySearchWord(searchMap);
 		return goodsList;
 	}
 	

@@ -92,7 +92,9 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 		ModelAndView mav = new ModelAndView(viewName);
 		HttpSession session = request.getSession();
 		List myOrderList = new ArrayList<OrderVO>();
-
+		
+		System.out.println(cart_goods_qty[0] + " : 테스트 @@@@@@@@@@@@");
+		
 		//장바구니 리스트를 받아 저장 
 		Map cartMap = (Map) session.getAttribute("cartMap");
 		List<GoodsVO> myGoodsList = (List<GoodsVO>) cartMap.get("myGoodsList");
@@ -100,7 +102,7 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 		//회원정보를 받아 저장
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 
-		//상품:수량으로 input에 저장해 넘겻던 정보를 이용할 것임.
+		//상품:수량으로 input에 저장해 넘겼던 정보를 이용할 것임.
 		//cart_goods_qty, 받은 input의 수만큼 for문.
 		for (int i = 0; i < cart_goods_qty.length; i++) {
 			//상품:수량을 나눠 확인.
