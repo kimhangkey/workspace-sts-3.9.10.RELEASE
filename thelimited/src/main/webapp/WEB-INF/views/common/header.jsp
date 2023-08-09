@@ -163,7 +163,6 @@
 												<c:if test="${empty cartCount}">
 													<span>0</span>
 												</c:if>
-												
 											</span>
 										</a>
 									</div>

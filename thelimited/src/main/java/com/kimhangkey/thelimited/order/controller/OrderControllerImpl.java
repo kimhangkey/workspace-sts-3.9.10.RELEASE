@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kimhangkey.thelimited.cart.service.CartService;
 import com.kimhangkey.thelimited.common.base.BaseController;
 import com.kimhangkey.thelimited.goods.vo.GoodsVO;
 import com.kimhangkey.thelimited.member.vo.MemberVO;
@@ -32,9 +33,12 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 	private OrderService orderService;
 	@Autowired
 	private OrderVO orderVO;
-
 	@Autowired
-	private ApiService01 apiService01;
+	private CartService cartService;
+
+	// 실제 결제 구현
+//	@Autowired
+//	private ApiService01 apiService01;
 	
 	
 	// 개별주문
@@ -93,9 +97,8 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 		HttpSession session = request.getSession();
 		List myOrderList = new ArrayList<OrderVO>();
 		
-		System.out.println(cart_goods_qty[0] + " : 테스트 @@@@@@@@@@@@");
 		
-		//장바구니 리스트를 받아 저장 
+		//쇼핑카트 리스트를 받아 저장 
 		Map cartMap = (Map) session.getAttribute("cartMap");
 		List<GoodsVO> myGoodsList = (List<GoodsVO>) cartMap.get("myGoodsList");
 		
@@ -197,10 +200,18 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 //			myOrderList.set(i, orderVO);
 			
 		}
-		// 테스트
+		// 테스트 : 입력 정보를 전달하며 주문데이터 추가
 		orderService.addNewOrder(myOrderList);
+		
+		// 주문 후 카트 개수 재설정
+		String cartCount = cartService.countCart(member_id);
+		session.setAttribute("cartCount", cartCount);
+		
+		
 		return mav;
 		
+		
+		//실제 결제 구현
 //		String merchantId = "himedia";
 //		String expireMonth = receiverMap.get("expireMonth");
 //		String expireYear = receiverMap.get("expireYear");

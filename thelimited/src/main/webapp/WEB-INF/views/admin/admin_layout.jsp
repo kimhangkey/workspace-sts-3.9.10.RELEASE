@@ -15,6 +15,16 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/header.css">
 
+<c:choose>
+  <c:when test="${empty memberInfo || memberInfo.member_id != 'admin'}">
+    <script type="text/javascript">
+      window.alert('접근 권한이 없습니다.');
+      // 로그인 페이지로 이동
+      window.location.href = '${contextPath}/member/loginForm.do'; // 로그인 페이지 경로로 변경
+    </script>
+  </c:when>
+</c:choose>
+
 </head>
 <body>
 

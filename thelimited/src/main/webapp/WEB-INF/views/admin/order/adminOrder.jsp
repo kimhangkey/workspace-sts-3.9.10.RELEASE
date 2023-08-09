@@ -113,7 +113,7 @@ function init(){
 									<c:forEach var="item" items="${newOrderList}" varStatus="i">
 										<c:choose>
 
-											<c:when test="${item.order_id != pre_order_id }">
+											<c:when test="${item.order_id != pre_order_id}">
 												<form name="frm_delivery_list">
 													<tr>
 													
@@ -156,7 +156,7 @@ function init(){
 														
 														<!-- 상품이름 -->
 															<div class="d-flex mb-1 align-items-center">
-																<span style="width: 100px;" class="">주문상품</span> <input
+																<span style="width: 100px;" class="">주문상품i${i.index}</span> <input
 																	class="form-control rounded-0" type="text"
 																	placeholder="주문상품" value="${item.goods_title}" readonly>
 															</div>
@@ -184,22 +184,22 @@ function init(){
 																	<!-- 구분선 -->
 																	
 																		<div class="d-flex mb-1 align-items-center">
-																			<span style="width: 103px;" class="">주문상품</span> 
+																			<span style="width: 103px;" class="">주문상품j.i${i.index}</span> 
 																			
 																			<!-- 상품이름 -->
 																			<input
 																				class="form-control rounded-0" type="text"
-																				placeholder="주문상품" value="${item2.goods_title}">
+																				placeholder="주문상품" value="${item2.goods_title}" readonly>
 																			<!-- 상품이름 -->
 																			
 																		</div>
 																		<div class="d-flex mb-1 align-items-center">
-																			<span style="width: 100px;" class="">주문수량</span> 
+																			<span style="width: 100px;" class="">주문수량j${j.index}</span> 
 																			
 																			<!-- 주문수량 -->
 																			<input
 																				class="form-control rounded-0" type="text"
-																				placeholder="주문상품" value="${item2.order_goods_qty}">
+																				placeholder="주문상품" value="${item2.order_goods_qty}" readonly>
 																			<!-- 주문수량 -->
 																			
 																		</div>
@@ -371,7 +371,11 @@ function fn_modify_order_state(index, order_id){
 	var deliveryInputs=document.getElementsByName("delivery_state");
 	//그 값 value을 저장해 수정 수행
 	var delivery_state = deliveryInputs[index].value;
-
+	var deliveryInput = document.getElementById("s_delivery_state"+index);
+	delivery_state = deliveryInput.value;
+	
+	alert(index);
+	
 	$.ajax({
 		type : "post",
 		async : false, 

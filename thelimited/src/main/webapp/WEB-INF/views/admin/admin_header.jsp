@@ -141,7 +141,14 @@
 									<div class="cart_icon">
 										<a href="${contextPath}/cart/shoppingCart.do">
 											<img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png" alt="">
-											<span class="cart_count"><span>${cartCount}</span></span>
+											<span class="cart_count">
+												<c:if test="${!empty cartCount}">
+													<span>${cartCount}</span>
+												</c:if>
+												<c:if test="${empty cartCount}">
+													<span>0</span>
+												</c:if>
+											</span>
 										</a>
 									</div>
 									<div class="cart_content">

@@ -21,7 +21,7 @@
 									<td class="table-light ps-4 align-middle" style="width: 200px;">이름</td>
 									<td class="px-4"><input style="width: 200px;"
 										class="form-control rounded-0" name="member_name" type="text"
-										size="20" value="${memberInfo.member_name }" disabled /></td>
+										size="20" value="${memberInfo.member_name}" disabled /></td>
 								</tr>
 								
 								<!-- 아이디 -->
@@ -29,7 +29,7 @@
 									<td class="table-light ps-4 align-middle" style="width: 200px;">아이디</td>
 									<td class="px-4"><input style="width: 200px;"
 										name="member_id" class="form-control rounded-0" type="text"
-										size="20" value="${memberInfo.member_id }" disabled /></td>
+										size="20" value="${memberInfo.member_id}" disabled /></td>
 								</tr>
 								
 								<!-- 비밀번호 -->
@@ -37,7 +37,7 @@
 									<td class="table-light ps-4 align-middle" style="width: 200px;">비밀번호</td>
 									<td class="px-4"><input style="width: 200px;"
 										name="member_pw" class="form-control rounded-0"
-										type="password" size="20" value="${memberInfo.member_pw }" />
+										type="password" size="20" value="${memberInfo.member_pw}" />
 									</td>
 								</tr>
 								
@@ -46,7 +46,7 @@
 									<td class="table-light ps-4 align-middle" style="width: 200px;">휴대폰번호</td>
 									<td class="px-4"><input style="width: 200px;" type="text"
 										class="form-control rounded-0" name="hp1" size=4
-										value="${memberInfo.hp1 }"></td>
+										value="${memberInfo.hp1}"></td>
 								</tr>
 								<tr>
 									<td class="table-light ps-4 align-middle" style="width: 200px;">배송지</td>
@@ -56,7 +56,7 @@
 											<!-- 우편번호 -->
 											<input type="text" class="form-control rounded-0"
 												placeholder="우편번호" id="zipcode" name="zipcode" size=5
-												value="${memberInfo.zipcode }"> 
+												value="${memberInfo.zipcode}"> 
 												
 											<!-- 다음 우편번호 검색 -->
 											<a class="btn border-main small rounded-0 samll"
@@ -69,13 +69,13 @@
 										<input type="text" id="member_address"
 										class="form-control rounded-0 mb-2" placeholder="주소"
 										name="member_address" size="50"
-										value="${memberInfo.member_address }"> 
+										value="${memberInfo.member_address}"> 
 										
 										<!-- 상세주소 -->
 										<input
 										type="text" id="subaddress"
 										class="form-control rounded-0 mb-2" name="subaddress"
-										size="50" value="${memberInfo.subaddress }">
+										size="50" value="${memberInfo.subaddress}">
 									</td>
 								</tr>
 							</table>
@@ -93,7 +93,7 @@
 
 						<!-- 탈퇴 -->
 						<button type="button"
-							onClick="fn_delete_member('${member_info.member_id }','Y')"
+							onClick="fn_delete_member('${member_info.member_id}','Y')"
 							class="btn btn-lg border-main rounded-0 w-100 d-block fw-bold p-2 lh-lg mt-0 mb-3 fs-6 out_btn">탈퇴하기</button>
 
 					</form>

@@ -19,7 +19,7 @@ public class AdminOrderDAOImpl implements AdminOrderDAO {
 	//주문목록
 	@Override
 	public ArrayList<OrderVO>selectNewOrderList(Map condMap) throws DataAccessException{
-		ArrayList<OrderVO>  orderList=(ArrayList)sqlSession.selectList("mapper.admin.order.selectNewOrderList",condMap);
+		ArrayList<OrderVO> orderList=(ArrayList)sqlSession.selectList("mapper.admin.order.selectNewOrderList",condMap);
 		return orderList;
 	}
 	

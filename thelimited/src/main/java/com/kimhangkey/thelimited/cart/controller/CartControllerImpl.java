@@ -42,7 +42,7 @@ public class CartControllerImpl extends BaseController implements CartController
 		ModelAndView mav = new ModelAndView(viewName);
 
 		HttpSession session = request.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+		memberVO = (MemberVO) session.getAttribute("memberInfo");
 		String member_id = memberVO.getMember_id();
 
 		// 회원정보에 맞는 쇼핑카트 리스트를 불러온다.
@@ -50,7 +50,9 @@ public class CartControllerImpl extends BaseController implements CartController
 		Map<String, List> cartMap = cartService.myCartList(cartVO);
 		
 		
-		
+		// 카트 개수를 갱신한다.(카트목록에서 직접 삭제, 관리자에 의한 상품 삭제 경우 대비)
+		String cartCount = cartService.countCart(member_id);
+		session.setAttribute("cartCount", cartCount);
 		
 		session.setAttribute("cartMap", cartMap);
 		return mav;
@@ -90,14 +92,6 @@ public class CartControllerImpl extends BaseController implements CartController
 		ModelAndView mav = new ModelAndView();
 		// @RequestParam받은 cart_id 상품을 삭제 후 shoppingCart로 redirect
 		cartService.removeCartGoods(cart_id);
-		
-		HttpSession session = request.getSession();
-		memberVO = (MemberVO) session.getAttribute("memberInfo");
-		
-		String member_id = memberVO.getMember_id();
-		String cartCount = cartService.countCart(member_id);
-		
-		session.setAttribute("cartCount", cartCount);
 		
 		mav.setViewName("redirect:/cart/shoppingCart.do");
 		return mav;

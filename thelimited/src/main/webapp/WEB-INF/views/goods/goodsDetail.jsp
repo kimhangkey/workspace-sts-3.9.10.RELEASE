@@ -87,7 +87,7 @@
 				<div class="d-flex gap-0 mt-4">
 					<input type="hidden" id="goods_qty" name="order_goods_qty"
 						value="1">
-					<!-- 장바구니 담기, goods_id값과 함께 add_cart 실행 -->
+					<!-- 쇼핑카트 담기, goods_id값과 함께 add_cart 실행 -->
 					<a href="javascript:add_cart('${goods.goods_id}')"
 						class="btn btn-lg fw-bold border-main rounded-0 d-block flex-fill addcart_btn">쇼핑카트 담기</a>
 					<!-- 주문하기, 상품정보와 함께 fn_order_each_goods실행  -->
@@ -157,7 +157,7 @@
 
 <script type="text/javascript">
 
-	//장바구니 추가, goods_id정보를 넘겨줌.
+	//쇼핑카트 추가, goods_id정보를 넘겨줌.
 	function add_cart(goods_id) {
 		$.ajax({
 			type : "post",
@@ -165,7 +165,7 @@
 			url : "${contextPath}/cart/addGoodsInCart.do",
 			data : {goods_id:goods_id},
 			success : function(data, textStatus) {
-				if(data.trim()=='add_success'){alert("장바구니에 추가되었습니다.");
+				if(data.trim()=='add_success'){alert("쇼핑카트에 추가되었습니다.");
 				}else if(data.trim()=='already_existed'){alert("이미 카트에 등록된 상품입니다.");	}
 			},
 			error : function(data, textStatus) {alert("로그인 후 추가하실 수 있습니다!");},
