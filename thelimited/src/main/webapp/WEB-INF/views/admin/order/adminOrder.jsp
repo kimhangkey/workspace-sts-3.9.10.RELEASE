@@ -211,7 +211,7 @@ function init(){
 															<div class="d-flex mb-0 align-items-center">
 
 															<!-- 주문상태 표시 -->
-																<span style="width: 100px;" class="">주문상태</span>
+																<span style="width: 100px;" class="">주문상태${i.index}</span>
 
 															<!-- select부분과 option부분으로 나누어 표현해보자. -->
 																<c:choose>
@@ -304,8 +304,8 @@ function init(){
 																
 																
 																<!-- 배송상태 hidden input -->
-																 <input type="hidden" id="delivery_state"
-																	name="delivery_state" value="${item.delivery_state}">
+																<%--  <input type="hidden" id="delivery_state"
+																	name="delivery_state" value="${item.delivery_state}"> --%>
 																<!-- 배송상태 hidden input -->
 
 															<!-- 주문상태 표시 -->
@@ -367,14 +367,10 @@ function selectValue(selectBox, value){
 //주문수정 - 배송수정
 //수정할 상품 index와 order_id를 가져온다.
 function fn_modify_order_state(index, order_id){
-	//해당 getElementsByName이 delivery_state인 input을 가져와
-	var deliveryInputs=document.getElementsByName("delivery_state");
-	//그 값 value을 저장해 수정 수행
-	var delivery_state = deliveryInputs[index].value;
+	//input의 id가 delivery_state + index인 input을 가져와
+	//그 value를 이용해 수정
 	var deliveryInput = document.getElementById("s_delivery_state"+index);
-	delivery_state = deliveryInput.value;
-	
-	alert(index);
+	var delivery_state = deliveryInput.value;
 	
 	$.ajax({
 		type : "post",

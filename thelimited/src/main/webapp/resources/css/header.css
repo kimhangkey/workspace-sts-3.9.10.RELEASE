@@ -1100,6 +1100,21 @@ select option
     opacity: .3;
 }
 
+.to_top {
+	transform: rotate(-90deg);
+}
+
+
+.main_add_img {
+	opacity: .6;
+}
+
+.main_add_img:hover {
+	opacity: 1;
+	cursor: pointer;
+	
+}
+
 /*********************************
 	main goods
 *********************************/

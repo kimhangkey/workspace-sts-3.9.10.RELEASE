@@ -154,7 +154,7 @@
 							<div class="cart">
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_icon">
-										<a href="${contextPath}/cart/shoppingCart.do">
+										<a href="${contextPath}/cart/shoppingCart.do" onclick="checkLogin(event)">
 											<img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png" alt="">
 											<span class="cart_count">
 												<c:if test="${!empty cartCount}">
@@ -196,7 +196,7 @@
 
 							<div class="main_nav_menu">
 								<ul class="standard_dropdown main_nav_dropdown">
-									<li><a href="#" class="home">Home<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="${contextPath}/main/main.do">Home<i class="fas fa-chevron-down"></i></a></li>
 									<li class="hassubs">
 										<a href="${contextPath}/goods/menuGoods.do?menuGoods=clothes">의류<i class="fas fa-chevron-down"></i></a>
 										<ul>
@@ -286,6 +286,26 @@
 										</ul>
 									</li>
 									<li><a href="#">고객센터<i class="fas fa-chevron-down"></i></a></li>
+									<li class="menu_line main_add d-none"><span>&nbsp;&#124;</span></li>
+									<li class="main_add d-none">
+										<a class="main_add_img">
+											<img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918681/heart.png" alt="">
+										</a>
+									</li>
+									<li class="main_add d-none">
+										<a href="${contextPath}/cart/shoppingCart.do" onclick="checkLogin(event)" class="main_add_img">
+											<img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918704/cart.png" alt="">
+											<span class="cart_count" style="margin-bottom: 13px">
+												<c:if test="${!empty cartCount}">
+													<span>${cartCount}</span>
+												</c:if>
+												<c:if test="${empty cartCount}">
+													<span>0</span>
+												</c:if>
+											</span>
+										</a>
+									</li>
+									<li class="main_add d-none"><a href="#" class="home main_add_img"><img src="${contextPath}/resources/image/up_icon3.png" style="width: 30px; margin-left: 15px;"></a></li>
 								</ul>
 							</div>
 

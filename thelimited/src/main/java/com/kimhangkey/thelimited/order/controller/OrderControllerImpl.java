@@ -55,13 +55,13 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
 		String action = (String) session.getAttribute("action");
 
-		// 이전에 로그인 상태인 경우는 주문과정 진행
+		// 로그아웃 상태인 경우 로그인 화면으로 이동
 		if (isLogOn == null || isLogOn == false) {
 			session.setAttribute("orderInfo", _orderVO);
 			session.setAttribute("action", "/order/orderEachGoods.do");
-			return new ModelAndView("redirect:/member/login.do");
+			return new ModelAndView("redirect:/member/loginForm.do");
 		}
-		// 로그아웃 상태인 경우 로그인 화면으로 이동
+		// 이전에 로그인 상태인 경우는 주문과정 진행
 		else {
 			if (action != null && action.equals("/order/orderEachGoods.do")) {
 				orderVO = (OrderVO) session.getAttribute("orderInfo");

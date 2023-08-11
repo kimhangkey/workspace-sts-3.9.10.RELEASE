@@ -68,7 +68,8 @@
 		where
 		to_char(pay_order_time,'yyyy-mm-dd') between #{beginDate} and
 		#{endDate}
-		order by pay_order_time desc) a
+		order by order_id desc) a
+<!-- 		order by pay_order_time desc) a -->
 	</select>
 	
 

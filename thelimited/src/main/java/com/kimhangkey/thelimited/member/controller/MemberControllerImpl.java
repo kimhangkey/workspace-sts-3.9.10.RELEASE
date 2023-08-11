@@ -42,10 +42,13 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 			HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		memberVO = memberService.login(loginMap);
+		HttpSession session = request.getSession();
+		
+		String action = (String) session.getAttribute("action");
+		
 
 		// memberVO가 존재할 경우
 		if (memberVO != null && memberVO.getMember_id() != null) {
-			HttpSession session = request.getSession();
 			
 			// 로그인 여부 isLogOn와 회원정보 memberInfo를 세션에 저장한다.
 			session.setAttribute("isLogOn", true);
@@ -55,9 +58,13 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 			String id = memberVO.getMember_id();
 			String cartCount = cartService.countCart(id);
 			session.setAttribute("cartCount", cartCount);
-
-			// 메인페이지로 이동.
-			mav.setViewName("redirect:/main/main.do");
+			
+			if(action != null && action.equals("/order/orderEachGoods.do")) {
+				mav.setViewName("forward:"+action);
+			} else {
+				// 메인페이지로 이동.
+				mav.setViewName("redirect:/main/main.do");
+			}
 
 		} else { // memberVO가 존재하지않을 경우 message를 담아 return + login페이지로 이동
 			String message = "아이디나 비밀번호가 틀립니다. 다시 로그인해주세요.";

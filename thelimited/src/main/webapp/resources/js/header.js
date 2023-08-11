@@ -85,8 +85,10 @@ $(document).ready(function()
         // 헤더 요소에 scrolled 클래스를 추가하거나 제거
         if (scrollPosition > 250) {
           $('.header').addClass('scrolled');
+          $('.main_add').removeClass('d-none');
         } else {
           $('.header').removeClass('scrolled');
+          $('.main_add').addClass('d-none');
         }
       });
     
