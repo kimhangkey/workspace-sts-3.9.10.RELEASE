@@ -156,7 +156,7 @@ function init(){
 														
 														<!-- 상품이름 -->
 															<div class="d-flex mb-1 align-items-center">
-																<span style="width: 100px;" class="">주문상품i${i.index}</span> <input
+																<span style="width: 100px;" class="">주문상품</span> <input
 																	class="form-control rounded-0" type="text"
 																	placeholder="주문상품" value="${item.goods_title}" readonly>
 															</div>
@@ -184,7 +184,7 @@ function init(){
 																	<!-- 구분선 -->
 																	
 																		<div class="d-flex mb-1 align-items-center">
-																			<span style="width: 103px;" class="">주문상품j.i${i.index}</span> 
+																			<span style="width: 103px;" class="">주문상품</span> 
 																			
 																			<!-- 상품이름 -->
 																			<input
@@ -194,7 +194,7 @@ function init(){
 																			
 																		</div>
 																		<div class="d-flex mb-1 align-items-center">
-																			<span style="width: 100px;" class="">주문수량j${j.index}</span> 
+																			<span style="width: 100px;" class="">주문수량</span> 
 																			
 																			<!-- 주문수량 -->
 																			<input
@@ -211,7 +211,7 @@ function init(){
 															<div class="d-flex mb-0 align-items-center">
 
 															<!-- 주문상태 표시 -->
-																<span style="width: 100px;" class="">주문상태${i.index}</span>
+																<span style="width: 100px;" class="">주문상태</span>
 
 															<!-- select부분과 option부분으로 나누어 표현해보자. -->
 																<c:choose>

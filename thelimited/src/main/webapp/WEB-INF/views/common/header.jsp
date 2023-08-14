@@ -196,7 +196,7 @@
 
 							<div class="main_nav_menu">
 								<ul class="standard_dropdown main_nav_dropdown">
-									<li><a href="${contextPath}/main/main.do">Home<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="${contextPath}/main/main.do">Home</a></li>
 									<li class="hassubs">
 										<a href="${contextPath}/goods/menuGoods.do?menuGoods=clothes">의류<i class="fas fa-chevron-down"></i></a>
 										<ul>
@@ -305,7 +305,7 @@
 											</span>
 										</a>
 									</li>
-									<li class="main_add d-none"><a href="#" class="home main_add_img"><img src="${contextPath}/resources/image/up_icon3.png" style="width: 30px; margin-left: 15px;"></a></li>
+									<li class="main_add d-none"><a href="#" class="home main_add_img"><img src="${contextPath}/resources/image/up_icon2.png" style="width: 30px; margin-left: 15px;"></a></li>
 								</ul>
 							</div>
 
@@ -436,7 +436,8 @@ function checkLogin(event) {
   // 세션 값 조건 확인
   if (isLogOn === 'true' && memberInfo !== '') {
     // 로그인 상태이면 해당 링크로 이동
-    var targetHref = event.target.getAttribute('href');
+    /* var targetHref = event.target.getAttribute('href'); */
+    var targetHref = '${contextPath}/cart/shoppingCart.do';
     window.location.href = targetHref;
   } else {
     // 로그인 상태가 아니면 경고창 표시

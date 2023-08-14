@@ -105,14 +105,18 @@ window.onload = function() {init();}
 	//결제하기
 	function fn_process_pay_order() {
 		var payType = $('input[name="pay_method"]:checked').val();
-	
+
 		//required값인 input이 입력되지않았을 경우 submit을 하지 않도록 한다.
+		/*var inputs = document.querySelectorAll("input[required]");
+
+		alert(inputs);
 		let isValid = true;
-//		inputs.forEach(input => {
-//			  if (!input.value || input.classList.contains("is-invalid")) {
-//		    isValid = false;
-//		  }
-//			});
+		inputs.forEach(input => {
+			  if (!input.value || input.classList.contains("is-invalid")) {
+				  alert(input.value);
+				  isValid = false;
+			  }
+		});*/
 		
 		 if (isValid) {
 			 

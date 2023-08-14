@@ -94,7 +94,7 @@
 
 
 	<!-- 검색 -->
-	<!-- t_shopping_goods에서 #{searchWord}가 들어간 상품의 goods_title과 main_image를 
+	<!-- t_shopping_goods에서 #{searchWord}가 들어간 g의 모든 정보와 d의 main_image를 
 		goods_creDate desc내림차순으로 가져온다. -->
 	<select id="selectGoodsBySearchWord" resultMap="goodsResult"
 		parameterType="java.util.Map">

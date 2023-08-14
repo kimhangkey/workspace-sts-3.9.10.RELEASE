@@ -40,7 +40,7 @@ public class CartControllerImpl extends BaseController implements CartController
 	public ModelAndView myCartMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-
+		
 		HttpSession session = request.getSession();
 		memberVO = (MemberVO) session.getAttribute("memberInfo");
 		String member_id = memberVO.getMember_id();

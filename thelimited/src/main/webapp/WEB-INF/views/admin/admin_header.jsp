@@ -21,8 +21,18 @@
 			<div class="container">
 				<div class="row">
 					<div class="col d-flex flex-row">
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918577/phone.png" alt=""></div>02-1234-1234</div>
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918597/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">thelimited@thelimited.com</a></div>
+						<div class="top_bar_contact_item">
+							<div class="top_bar_icon">
+								<img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918577/phone.png" alt="">
+							</div>
+							<span class="top_bar_text">02-1234-1234</span>
+						</div>
+						<div class="top_bar_contact_item">
+							<div class="top_bar_icon">
+								<img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918597/mail.png" alt="">
+							</div>
+							<span class="top_bar_text">thelimited@thelimited.com</span>
+						</div>
 						<div class="top_bar_content ml-auto">
 							<div class="top_bar_menu">
 								<ul class="standard_dropdown top_bar_dropdown">

@@ -1193,6 +1193,7 @@ select option
 
 .out_btn {
 	background-color: #db4455;
+	color: #fff;
 	opacity: .8;
 }
 
@@ -1251,7 +1252,7 @@ select option
 }
 
 .cart1 .btn:hover {
-	opacity: .7;
+	background-color: #d6b534;
 }
 
 .cart1 table {
@@ -1493,6 +1494,42 @@ select option
 	width:420px;
 	margin-left: 50px;
 }
+
+
+
+
+
+
+/*********************************
+	orderForm
+*********************************/
+
+.order_title {
+	font-size: 20px;
+}
+
+.pay_btn {
+	background-color: #000;
+	color: #fff;
+}
+
+.pay_btn:hover {
+	background-color:#d6b534;
+	color: #fff;
+}
+
+.can_btn {
+	background-color: #db4455;
+	opacity: .8;
+	color: #fff;
+}
+
+.can_btn:hover {
+	opacity: 1;
+	color: #fff;
+}
+
+
 
 /*********************************
 	admin 상품관리
