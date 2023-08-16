@@ -9,18 +9,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface CartController {
 
-	// 장바구니
+	// 쇼핑카트
 	public ModelAndView myCartMain(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	// 장바구니 추가
+	// 쇼핑카트 추가
 	public @ResponseBody String addGoodsInCart(@RequestParam("goods_id") int goods_id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
 
-	// 장바구니 삭제
+	// 쇼핑카트 삭제
 	public ModelAndView removeCartGoods(@RequestParam("cart_id") int cart_id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
 
-	// 장바구니 수정
+	// 쇼핑카트 수정
 	public @ResponseBody String modifyCartQty(@RequestParam("goods_id") int goods_id,
 			@RequestParam("cart_goods_qty") int cart_goods_qty, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;

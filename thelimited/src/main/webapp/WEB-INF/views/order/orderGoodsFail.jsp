@@ -30,7 +30,7 @@
 					</p>
 					<p class="small mb-3 text-danger">
 					<strong>${responseMsg}</strong><br>
-					장바구니에서 주문된 상품들은 장바구니에서 다시 확인 가능합니다.
+					쇼핑카트에서 주문된 상품들은 쇼핑카트에서 다시 확인 가능합니다.
 					</p>
 					<div class="border-top border-danger border-2 mt-2">
 						<div class="shadow-sm p-4 pt-2 mt-3 rounded border border-light">

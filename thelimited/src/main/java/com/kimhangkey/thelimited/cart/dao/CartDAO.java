@@ -8,21 +8,21 @@ import com.kimhangkey.thelimited.cart.vo.CartVO;
 import com.kimhangkey.thelimited.goods.vo.GoodsVO;
 
 public interface CartDAO {
-	// 장바구니
+	// 쇼핑카트
 	public List<CartVO> selectCartList(CartVO cartVO) throws DataAccessException;
 
 	public List<GoodsVO> selectGoodsList(List<CartVO> cartList) throws DataAccessException;
 
-	// 장바구니 추가
+	// 쇼핑카트 추가
 	public boolean selectCountInCart(CartVO cartVO) throws DataAccessException;
 
 	public void insertGoodsInCart(CartVO cartVO) throws DataAccessException;
 	
 
-	// 장바구니 삭제
+	// 쇼핑카트 삭제
 	public void deleteCartGoods(int cart_id) throws DataAccessException;
 
-	// 장바구니 수정
+	// 쇼핑카트 수정
 	public void updateCartGoodsQty(CartVO cartVO) throws DataAccessException;
 	
 	// 쇼핑카트 수량 체크

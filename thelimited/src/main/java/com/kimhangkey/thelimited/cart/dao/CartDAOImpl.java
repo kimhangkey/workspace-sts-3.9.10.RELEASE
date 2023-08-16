@@ -17,7 +17,7 @@ public class CartDAOImpl implements CartDAO {
 	private SqlSession sqlSession;
 	
 	
-	//장바구니
+	//쇼핑카트
 	@Override
 	public List<CartVO> selectCartList(CartVO cartVO) throws DataAccessException {
 		List<CartVO> cartList =sqlSession.selectList("mapper.cart.selectCartList",cartVO);
@@ -32,7 +32,7 @@ public class CartDAOImpl implements CartDAO {
 	}
 	
 	
-	//장바구니 추가
+	//쇼핑카트 추가
 	@Override
 	public boolean selectCountInCart(CartVO cartVO) throws DataAccessException {
 		String  result =sqlSession.selectOne("mapper.cart.selectCountInCart",cartVO);
@@ -50,13 +50,13 @@ public class CartDAOImpl implements CartDAO {
 		return cart_id;
 	}
 	
-	//장바구니 삭제
+	//쇼핑카트 삭제
 	@Override
 	public void deleteCartGoods(int cart_id) throws DataAccessException{
 		sqlSession.delete("mapper.cart.deleteCartGoods",cart_id);
 	}
 	
-	//장바구니 수정
+	//쇼핑카트 수정
 	@Override
 	public void updateCartGoodsQty(CartVO cartVO) throws DataAccessException{
 		sqlSession.insert("mapper.cart.updateCartGoodsQty",cartVO);

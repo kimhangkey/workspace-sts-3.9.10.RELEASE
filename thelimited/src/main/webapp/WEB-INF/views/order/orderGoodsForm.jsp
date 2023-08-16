@@ -150,7 +150,7 @@
 							<!-- 이름 -->
 								<tr>
 									<td class="table-light ps-4 align-middle" style="width: 200px;">이름</td>
-									<td class="px-4"><input class="form-control rounded-0" required
+									<td class="px-4"><input class="form-control rounded-0 reqInput" required
 										id="receiver_name" name="receiver_name" type="text" size="40"
 										value="${orderer.member_name }" style="width: 300px;">
 										<input type="hidden" id="h_orderer_name" name="h_orderer_name"
@@ -165,7 +165,7 @@
 								<tr>
 									<td class="table-light ps-4 align-middle" style="width: 200px;">휴대폰
 										번호</td>
-									<td class="px-4"><input class="form-control rounded-0" required
+									<td class="px-4"><input class="form-control rounded-0 reqInput" required
 										type="text" id="hp1" name="hp1" value="${orderer.hp1 }"
 										style="width: 300px;"> <input type="hidden" id="h_hp1"
 										name="h_hp1" value="${orderer.hp1 }" /> <c:set
@@ -184,17 +184,18 @@
 											<a class="btn border-main  rounded-0"
 												type="button" id="button-addon2"
 												href="javascript:execDaumPostcode()">우편번호 검색</a>
-										</div> <input class="form-control rounded-0 mb-2" type="text"
+										</div> 
+										<input class="form-control rounded-0 mb-2 reqInput" type="text"
 										id="member_address" name="member_address" size="50"
-										value="${orderer.member_address }" required> <input
-										class="form-control rounded-0" type="text" id="subaddress"
+										value="${orderer.member_address }" required> 
+										<input class="form-control rounded-0 reqInput" type="text" id="subaddress"
 										name="subaddress" size="50" value="${orderer.subaddress }" required>
 
 										<input type="hidden" id="h_zipcode" name="h_zipcode"
-										value="${orderer.zipcode }"  /> <input type="hidden"
-										id="h_member_address" name="h_zipcode"
-										value="${orderer.member_address }" /> <input type="hidden"
-										id="h_subaddress" name="h_zipcode"
+										value="${orderer.zipcode }"  /> 
+										<input type="hidden" id="h_member_address" name="h_zipcode"
+										value="${orderer.member_address }" /> 
+										<input type="hidden" id="h_subaddress" name="h_zipcode"
 										value="${orderer.subaddress }" />
 									</td>
 								</tr>
@@ -202,7 +203,7 @@
 								
 							</tbody>
 						</table>
-						<!-- 기본 회원정보를 valuㄷ로 지정한다. -->
+						<!-- 기본 회원정보를 value로 지정한다. -->
 
 					</div>
 
@@ -337,8 +338,8 @@
 										</div>
 										<div>
 											<input type="text" id="cardNum" name="cardNum"
-												class="form-control rounded-0" style="width: 300px;"
-												value="" placeholder="-를 제외하고 적어주세요" required/>
+												class="form-control rounded-0 cardReq" style="width: 300px;"
+												placeholder="-를 제외하고 적어주세요" required/>
 										</div>
 									</div>
 									
@@ -351,12 +352,12 @@
 										
 										</div>
 											<input type="text" id="cardDate_month" name="cardDate_month"
-												class="form-control rounded-0" style="width: 50px;"
-												value="" placeholder="00(월)" onBlur="checkLength(this, 2);" maxlength="2"/>
+												class="form-control rounded-0 cardReq" style="width: 50px;"
+												placeholder="00(월)" onBlur="checkLength(this, 2);" maxlength="2"/>
 												<span class="py-1 px-3"> / </span>
 												<input type="text" id="cardDate_year" name="cardDate_year"
-												class="form-control rounded-0" style="width: 50px;"
-												value="" placeholder="00(년)" onBlur="checkLength(this, 2);" maxlength="2"/>
+												class="form-control rounded-0 cardReq" style="width: 50px;"
+												placeholder="00(년)" onBlur="checkLength(this, 2);" maxlength="2"/>
 										</div>
 									</div>
 									
@@ -366,8 +367,8 @@
 										</div>
 										<div>
 											<input type="text" id="birth" name="birth"
-												class="form-control rounded-0" style="width: 300px;"
-												value=""  placeholder="6자리로 작성해주세요 예) 980314"
+												class="form-control rounded-0 cardReq" style="width: 300px;"
+												placeholder="6자리로 작성해주세요 예) 980314"
 												 onBlur="checkLength(this, 6)" maxlength="6"/>
 										</div>
 									</div>
@@ -378,7 +379,7 @@
 										</div>
 										<div>
 											<input type="text" id="cardPassword" name="cardPassword"
-												class="form-control rounded-0" style="width: 300px;"
+												class="form-control rounded-0 cardReq" style="width: 300px;"
 												placeholder="비밀번호 앞 2자리"
 												 onBlur="checkLength(this, 2)" maxlength="2" required/>
 										</div>
@@ -393,7 +394,8 @@
 							<tr class="whenSelected_Phone border-bottom d-none">
 								<td class="table-light ps-4 align-middle" style="width: 200px;">휴대폰 번호</td>
 								<td class="px-4">
-								<input class="form-control rounded-0" type="text" id="pay_orderer_hp_num" name="pay_order_tel" value="" placeholder="-없이 작성해주세요: 01000000000" style="width: 300px;">
+								<input class="form-control rounded-0 hpReq" type="text" id="pay_orderer_hp_num" name="pay_order_tel" 
+									placeholder="-없이 작성해주세요: 01000000000" style="width: 300px;" required>
 								</td>
 							</tr>
 							<!-- 휴대폰결제 form -->

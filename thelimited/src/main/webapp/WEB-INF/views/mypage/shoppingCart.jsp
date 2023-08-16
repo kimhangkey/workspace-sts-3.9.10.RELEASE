@@ -37,7 +37,7 @@ function selectValue(selectBox, value, goods_id, index){
 }
 
 
-//장바구니 수정하기
+//쇼핑카트 수정하기
 function modify_cart_qty(index, goods_id, value){
 	//수정할 cart_goods_qty의 값을 저장.
 	var cart_goods_qty = Number(value);
@@ -61,7 +61,7 @@ function modify_cart_qty(index, goods_id, value){
 }
 
 
-//장바구니 삭제하기
+//쇼핑카트 삭제하기
 function delete_cart_goods(cart_id){
 	var result = confirm('해당 상품을 쇼핑카트에서 삭제하시겠습니까?');
 	
@@ -190,7 +190,7 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 					<li>해당 상품이 삭제되는 경우, 쇼핑카트 목록에서 자동으로 제거될 수 있습니다.</li>
 				</ul>
 			</div>
-			<!-- 장바구니  리스트 myGoodsList를 foreach 문으로 돌려 출력한다.-->
+			<!-- 쇼핑카트  리스트 myGoodsList를 foreach 문으로 돌려 출력한다.-->
 			<table class="cart__list">
 				<thead>
 					<tr>
@@ -209,7 +209,7 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 					<c:choose>
 	
 						<c:when test="${ empty myCartList || isLogOn == 'false' }">
-							<!-- 장바구니가 비어있을 경우 -->
+							<!-- 쇼핑카트가 비어있을 경우 -->
 							<tr> 	
 								<td colspan="8" height="100px">쇼핑카트에 상품이 없습니다 !</td>
 							</tr>

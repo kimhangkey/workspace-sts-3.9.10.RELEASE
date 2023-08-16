@@ -52,8 +52,12 @@ public class AdminGoodsDAOImpl implements AdminGoodsDAO {
 	@Override
 	public void deleteGoods(String goods_id) throws Exception {
 		
-		//해당 상품 쇼핑카트 삭제
-		sqlSession.delete("mapper.cart.deleteCartByGoods",goods_id);
+		
+		// 해당 상품 쇼핑카트 삭제
+		sqlSession.delete("mapper.admin.goods.deleteCartByGoodsId",goods_id);
+		
+		// 해당 상품 주문목록 삭제
+		sqlSession.delete("mapper.admin.goods.deleteMyOrderByGoodsId",goods_id);
 		
 		//상품이미지 삭제
 		sqlSession.delete("mapper.admin.goods.deleteimages",goods_id);

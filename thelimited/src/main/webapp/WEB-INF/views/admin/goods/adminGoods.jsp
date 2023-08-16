@@ -93,7 +93,7 @@
 											
 											<!-- select 선택시 input에 selected value가 공유됨 selectValue() -->
 											<select
-												name="" id="" onchange="selectValue(this, this.value)"
+												onchange="selectValue(this, this.value)"
 												class="form-select rounded-0 flex-inherit text-start  border border-end">
 												<option value="clothes" selected>의류</option>
 												<option value="bags">가방</option>
@@ -102,7 +102,7 @@
 											</select> 
 											<!-- 초기선택값 의류 -->
 											<input type="hidden" name="goods_sort" id="goods_sort"
-												value="의류">
+												value="clothes">
 											<!-- select 선택시 input에 selected value가 공유됨 selectValue() -->
 											
 										</div>
@@ -111,7 +111,7 @@
 										<div class="d-flex mb-1 align-items-center">
 											<span style="width: 100px;" class="">상품이름</span> 
 											<input
-												class="form-control rounded-0" type="text"
+												class="form-control rounded-0 add_name" type="text"
 												placeholder="상품이름" value="" name="goods_title">
 										</div>
 										<!-- 상품이름 -->
@@ -119,7 +119,7 @@
 										<!-- 상품가격 -->
 										<div class="d-flex mb-0 align-items-center">
 											<span style="width: 100px;" class="">상품가격</span> <input
-												class="form-control rounded-0" name="goods_sales_price"
+												class="form-control rounded-0 add_price" name="goods_sales_price"
 												type="text" placeholder="상품가격" value="">
 										</div>
 										<!-- 상품가격 -->
@@ -244,7 +244,7 @@
 
 														<!-- select 선택시 input에 selected value가 공유됨 selectValue() -->
 														<!-- //input값에 따른 selectBox option select 스크립트에 의해 자동선택되어 사용자에게 보여줌. -->
-														<select name="" id=""
+														<select
 															onchange="selectValue(this, this.value)"
 															class="form-select rounded-0 flex-inherit text-start  border border-end">
 															<option value="clothes">의류</option>
@@ -451,10 +451,13 @@ cart_goods_qty_inputs.forEach((cart_goods_qty_inputs) => {
 //상품추가
 function fn_add_new_goods(obj){
 	const fileName = document.querySelector("#f_main_image").value;
+	const add_name = document.querySelector(".add_name").value;
+	const add_price = document.querySelector(".add_price").value;
 	//f_main_image의 value가 없으면 submit되지않으며, 경고한다.
-	 if(fileName != null && fileName != undefined){
+
+	 if(add_name != '' && add_price != '' && fileName != ''){
 		 obj.submit();
-	 }else{alert("메인 이미지는 반드시 첨부해야 합니다.");return;}
+	 }else{alert("상품 추가시 이름, 가격, 메인 이미지는 필수 입력사항입니다.");return;}
 }
 
 

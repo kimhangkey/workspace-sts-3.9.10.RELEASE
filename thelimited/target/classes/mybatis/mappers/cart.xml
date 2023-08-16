@@ -125,19 +125,12 @@
 	</update>
 	
 	
-	<!-- 해당 상품이 삭제되면 쇼핑카트에서 삭제 -->
-	<delete id="deleteCartByGoods" parameterType="String">
-	    <![CDATA[
-	      delete from t_shopping_cart
-	      where goods_id=#{goods_id}
-    	]]>
-	</delete>
 	
 	<select id="getCartCount" resultType="String" parameterType="String">
   		<![CDATA[
     		SELECT COUNT(*) FROM t_shopping_cart c
     		where c.member_id=#{member_id}
   		]]>
-</select>
+	</select>
 
 </mapper>

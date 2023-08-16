@@ -89,7 +89,7 @@
 	
 
 
-	<!-- 주문완료시 장바구니에서 상품 제거 -->
+	<!-- 주문완료시 쇼핑카트에서 상품 제거 -->
 	<delete id="deleteGoodsFromCart" parameterType="orderVO">
 		  <![CDATA[
 			  delete from t_shopping_cart where goods_id= #{goods_id}

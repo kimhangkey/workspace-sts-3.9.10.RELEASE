@@ -175,6 +175,22 @@
 	</update>
 	
 	
+	<!-- 관리자가 상품 삭제시 해당 상품 주문목록에서 삭제 -->
+	<update id="deleteMyOrderByGoodsId" parameterType="String">
+		delete
+		t_shopping_order
+		where
+		goods_id=#{goods_id}
+	</update>
+	
+	<!-- 관리자가 상품 삭제시 해당 상품 쇼핑카트에서 삭제 -->
+	<delete id="deleteCartByGoodsId" parameterType="String">
+	    <![CDATA[
+	      delete from t_shopping_cart
+	      where goods_id=#{goods_id}
+    	]]>
+	</delete>
+	
 	
 </mapper>
 

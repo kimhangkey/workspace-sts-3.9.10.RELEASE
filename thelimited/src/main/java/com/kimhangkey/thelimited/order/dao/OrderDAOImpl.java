@@ -34,7 +34,7 @@ public class OrderDAOImpl implements OrderDAO {
 		return result;
 	}
 
-	// 주문완료시 장바구니에서 상품 제거
+	// 주문완료시 쇼핑카트에서 상품 제거
 	@Override
 	public void removeGoodsFromCart(List<OrderVO> myOrderList) throws DataAccessException {
 		for (int i = 0; i < myOrderList.size(); i++) {

@@ -106,17 +106,30 @@ window.onload = function() {init();}
 	function fn_process_pay_order() {
 		var payType = $('input[name="pay_method"]:checked').val();
 
-		//required값인 input이 입력되지않았을 경우 submit을 하지 않도록 한다.
-		/*var inputs = document.querySelectorAll("input[required]");
+		//required값 input이 입력되지 않았을 경우 submit을 하지 않도록 한다.
+		var inputs = document.querySelectorAll(".reqInput");
+		var cardReqs = document.querySelectorAll(".cardReq");
+		var hpReq = document.querySelector(".hpReq")
+	    let isValid = true;
 
-		alert(inputs);
-		let isValid = true;
-		inputs.forEach(input => {
-			  if (!input.value || input.classList.contains("is-invalid")) {
-				  alert(input.value);
-				  isValid = false;
-			  }
-		});*/
+	    
+	    inputs.forEach(input => {
+    		if (!input.value || input.classList.contains("is-invalid")) {
+    			isValid = false;
+    		}
+    	});
+	    
+	    if(payType == '신용카드') {
+	    	cardReqs.forEach(cardReq => {
+	    		if (!cardReq.value || cardReq.classList.contains("is-invalid")) {
+	    			isValid = false;
+	    		}
+	    	});
+	    } else if(payType == '휴대폰결제') {
+	    	if (!hpReq.value || hpReq.classList.contains("is-invalid")) {
+    			isValid = false;
+    		}
+	    }
 		
 		 if (isValid) {
 			 
@@ -195,7 +208,7 @@ window.onload = function() {init();}
 				 	i_birth.value=document.getElementById("birth").value;
 				    formObj.appendChild(i_birth); 
 				    
-				    //비밀번호  
+				    //카드비밀번호  
 				 	var i_cardPassword  = document.createElement("input");
 				 	i_cardPassword.name="cardPw"; 
 				 	i_cardPassword.value=document.getElementById("cardPassword").value;
@@ -203,7 +216,7 @@ window.onload = function() {init();}
 				    
 					
 					//카카오 페이로 왔을 때
-					if(payType == '카카오페이(간편결제)'){
+					if(payType == '카카오페이(앱결제)'){
 				
 						//화면에서 가져갈 데이터
 						var amount = $("#h_final_total_Price").val(); //결제금액
@@ -363,7 +376,7 @@ window.onload = function() {init();}
 					formObj.submit(); 
 					}
 				} 
-		 else {alert("입력하신 정보가 없거나 올바르지않습니다!");}
+		 else {alert("입력하신 정보가 없거나 올바르지 않습니다!");}
 	}
 	
 	

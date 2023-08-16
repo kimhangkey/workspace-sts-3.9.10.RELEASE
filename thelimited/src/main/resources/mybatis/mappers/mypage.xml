@@ -76,7 +76,7 @@
 		order_id=#{order_id}
 	</update>
 	
-	<!-- 주문목록에서 삭제 -->
+	<!-- order_id로 주문목록 삭제 -->
 	<update id="deleteMyOrder" parameterType="String">
 		delete
 		t_shopping_order
@@ -115,4 +115,24 @@
 			where member_id = #{member_id}
     	]]>
 	</delete>
+	
+	
+	<!-- 회원탈퇴시 해당 아이디 쇼핑카트 삭제 -->
+	<delete id="deleteCartByMemberId" parameterType="String">
+	    <![CDATA[
+	      delete from t_shopping_cart
+	      where member_id=#{member_id}
+    	]]>
+	</delete>
+	
+	<!-- 회원탈퇴시 해당 아이디 주문목록 삭제 -->
+	<delete id="deleteOrderByMemberId" parameterType="String">
+	    <![CDATA[
+	      delete from t_shopping_order
+	      where member_id=#{member_id}
+    	]]>
+	</delete>
+	
+	
+	
 </mapper>

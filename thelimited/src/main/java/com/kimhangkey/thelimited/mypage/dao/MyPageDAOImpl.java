@@ -64,6 +64,14 @@ public class MyPageDAOImpl implements MyPageDAO {
 	// 회원탈퇴
 	@Override
 	public void deleteMember(String member_id) throws DataAccessException {
-		sqlSession.update("mapper.mypage.deleteMember", member_id);
+		
+		// 해당 아이디의 쇼핑카트 삭제
+		sqlSession.delete("mapper.mypage.deleteCartByMemberId", member_id);
+		
+		// 해당 아이디의 주문목록 삭제
+		sqlSession.delete("mapper.mypage.deleteOrderByMemberId", member_id);
+		
+		// 회원 목록에서 삭제
+		sqlSession.delete("mapper.mypage.deleteMember", member_id);
 	}
 }

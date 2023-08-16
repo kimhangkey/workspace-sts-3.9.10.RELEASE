@@ -45,7 +45,7 @@
 		<result property="zipcode" column="zipcode" />
 		<result property="member_address" column="member_address" />
 		<result property="subaddress" column="subaddress" />
-		<result property="sopang_money" column="sopang_money" />
+		<result property="tl_point" column="tl_point" />
 		<result property="joinDate" column="joinDate" />
 		<result property="del_yn" column="del_yn" />
 	</resultMap>

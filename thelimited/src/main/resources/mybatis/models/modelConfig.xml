@@ -13,9 +13,7 @@
     <typeAlias type="com.kimhangkey.thelimited.goods.vo.ImageFileVO" alias="imageFileVO" />
  
     <typeAlias type="com.kimhangkey.thelimited.order.vo.OrderVO" alias="orderVO" />
-    <!-- 
-    <typeAlias type="com.kimhangkey.thelimited.vo.MemberVO" alias="mypageVO" />
-     -->
+    
   </typeAliases>
 </configuration>
 

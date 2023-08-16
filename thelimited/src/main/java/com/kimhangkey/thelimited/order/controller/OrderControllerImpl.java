@@ -155,18 +155,12 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("orderer");
 		String member_id = memberVO.getMember_id();
-		String orderer_name = memberVO.getMember_name();
 		String orderer_hp = memberVO.getHp1();
 
 		//주문정보를 가져온다.
 		List<OrderVO> myOrderList = (List<OrderVO>) session.getAttribute("myOrderList");
 		
-		//결제성공여부
-		String responseCode = "";
-		String responseMsg = "";
-		String itemName = "";
-		String orderNumber = "";
-		int amount = 0;
+		
 		//주문정보를 for로 돌리며 myOrderList에 수령자정보를 담는다.
 		for (int i = 0; i < myOrderList.size(); i++) {
 			OrderVO orderVO = (OrderVO) myOrderList.get(i);
@@ -175,35 +169,36 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 			orderVO.setReceiver_hp1(receiverMap.get("receiver_hp1"));
 			orderVO.setDelivery_address(receiverMap.get("delivery_address"));
 
-			//추후 결제시 필요할 수 있으니 주석으로 남겨둔다.
-			orderVO.setPay_method(receiverMap.get("pay_method"));
-			orderVO.setCard_com_name(receiverMap.get("card_com_name"));
-			orderVO.setCard_pay_month(receiverMap.get("card_pay_month"));
-			orderVO.setPay_orderer_hp_num(receiverMap.get("pay_orderer_hp_num"));	
 			orderVO.setOrderer_hp(orderer_hp);
 			
-			// 테스트
+			orderVO.setPay_method(receiverMap.get("pay_method"));
+			
+			String pay_method = receiverMap.get("pay_method");
+			
+			System.out.println(pay_method);
+			
+			if(pay_method.equals("신용카드")) {
+				orderVO.setCard_com_name(receiverMap.get("card_com_name"));
+				orderVO.setCard_pay_month(receiverMap.get("card_pay_month"));
+				orderVO.setPay_orderer_hp_num("신용카드결제");
+				
+			} else if (pay_method.equals("휴대폰결제")) {
+				orderVO.setPay_orderer_hp_num(receiverMap.get("pay_orderer_hp_num"));
+				orderVO.setCard_com_name("휴대폰결제");
+				orderVO.setCard_pay_month("0");
+			}
+			
+			// 기본값 배송준비중
 			orderVO.setDelivery_state("delivery_prepared");
 			
 			myOrderList.set(i, orderVO);
 			
-//			//payup form 추가
-//			if(myOrderList.size() == 1) {
-//				itemName = orderVO.getGoods_title();
-//			}else if(myOrderList.size() > 1){
-//				itemName = orderVO.getGoods_title() +" 외 " + i + "건";
-//			}
-//			orderNumber += String.valueOf(orderVO.getOrder_seq_num());
-//			amount += orderVO.getGoods_sales_price();
-//
-////			amount = String.valueOf(orderVO.getGoods_sales_price());
-//			myOrderList.set(i, orderVO);
 			
 		}
-		// 테스트 : 입력 정보를 전달하며 주문데이터 추가
+		// 입력 정보를 전달하며 주문데이터 추가
 		orderService.addNewOrder(myOrderList);
 		
-		// 주문 후 카트 개수 재설정
+		// 주문 후 쇼핑카트 개수 재설정
 		String cartCount = cartService.countCart(member_id);
 		session.setAttribute("cartCount", cartCount);
 		
@@ -212,6 +207,24 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 		
 		
 		//실제 결제 구현
+//		String responseCode = "";
+//		String responseMsg = "";
+//		String itemName = "";
+//		String orderNumber = "";
+//		int amount = 0;
+		
+//		//payup form 추가
+//		if(myOrderList.size() == 1) {
+//			itemName = orderVO.getGoods_title();
+//		}else if(myOrderList.size() > 1){
+//			itemName = orderVO.getGoods_title() +" 외 " + i + "건";
+//		}
+//		orderNumber += String.valueOf(orderVO.getOrder_seq_num());
+//		amount += orderVO.getGoods_sales_price();
+//
+////		amount = String.valueOf(orderVO.getGoods_sales_price());
+//		myOrderList.set(i, orderVO);
+		
 //		String merchantId = "himedia";
 //		String expireMonth = receiverMap.get("expireMonth");
 //		String expireYear = receiverMap.get("expireYear");
