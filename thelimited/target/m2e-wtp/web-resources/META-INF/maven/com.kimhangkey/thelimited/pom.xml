@@ -164,6 +164,8 @@
 			<artifactId>cglib-nodep</artifactId>
 			<version>2.2</version>
 		</dependency>
+		
+		<!-- tiles -->
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-core</artifactId>
@@ -179,6 +181,8 @@
 			<artifactId>tiles-servlet</artifactId>
 			<version>2.2.2</version>
 		</dependency>
+		
+		<!-- 파일업로드 -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>

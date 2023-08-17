@@ -213,7 +213,6 @@ function init(){
 															<!-- 주문상태 표시 -->
 																<span style="width: 100px;" class="">주문상태</span>
 
-															<!-- select부분과 option부분으로 나누어 표현해보자. -->
 																<c:choose>
 																	<c:when test="${item.order_id != pre_order_id }">
 																		<c:choose>

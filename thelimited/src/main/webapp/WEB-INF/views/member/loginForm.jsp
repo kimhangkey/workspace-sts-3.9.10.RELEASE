@@ -17,7 +17,7 @@
 <!-- 리턴받은 message가 있을 경우 -->
 <c:if test='${not empty message }'>
 	<script>
-	 window.onload=function(){alert("아이디나  비밀번호가 틀립니다. 다시 입력해주세요.");}
+	 window.onload=function(){alert("아이디나 비밀번호가 틀립니다. 다시 입력해주세요.");}
 	</script>
 </c:if>
 

@@ -13,9 +13,9 @@ public interface GoodsController {
 	public ModelAndView menuGoods(@RequestParam("menuGoods") String menuGoods, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
 
-	// 추천키워드
-	public @ResponseBody String keywordSearch(@RequestParam("keyword") String keyword, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
+//	// 추천키워드
+//	public @ResponseBody String keywordSearch(@RequestParam("keyword") String keyword, HttpServletRequest request,
+//			HttpServletResponse response) throws Exception;
 
 	// 검색
 	public ModelAndView searchGoods(@RequestParam String searchWord, String goods_sort, HttpServletRequest request,

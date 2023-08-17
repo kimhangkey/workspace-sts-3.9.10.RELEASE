@@ -91,7 +91,7 @@
 										<div><a href="${contextPath}/member/loginForm.do">로그인</a></div>
 									</div>
 							</c:otherwise>
-							</c:choose>		
+							</c:choose>
 									
 						</div>
 					</div>
