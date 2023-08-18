@@ -30,15 +30,15 @@
 <script>
 
 //select박스가 체크되었을때 input에 반영함.
-function selectValue(selectBox, value, goods_id, index){
+function selectValue(selectBox, value, goods_id){
 	var input = selectBox.nextElementSibling;
 	input.setAttribute("value", value);
-	modify_cart_qty(index, goods_id, value);
+	modify_cart_qty(goods_id, value);
 }
 
 
 //쇼핑카트 수정하기
-function modify_cart_qty(index, goods_id, value){
+function modify_cart_qty(goods_id, value){
 	//수정할 cart_goods_qty의 값을 저장.
 	var cart_goods_qty = Number(value);
 	$.ajax({
@@ -89,7 +89,7 @@ function fn_order_all_cart_goods(){
 	var order_goods_qty;
 	var order_goods_id;
 	var objForm=document.frm_order_all_cart;
-	var cart_goods_qty=objForm.cart_goods_qty; 
+	var cart_goods_qty=objForm.cart_goods_qty;
 	var h_order_each_goods_qty=objForm.h_order_each_goods_qty;
 	var checked_goods=objForm.checked_goods;
 	
@@ -245,7 +245,7 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 										<td class="cart_select">
 											<span> 수량 : </span> 
 											<select id="" class="form-select rounded-0 text-center" 
-												onchange="selectValue(this, this.value,${item.goods_id },${cnt.count-1 })">
+												onchange="selectValue(this,this.value,${item.goods_id})">
 												<option value="1">1</option>
 												<option value="2">2</option>
 												<option value="3">3</option>
@@ -309,14 +309,21 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 						value="${totalGoodsPrice+totalDeliveryPrice}" />
 					<!-- 가격정보 hidden input -->
 		
-					<span> <!-- 총 상품가격 --> <span>상품총액 <span id="goodsPrice">${total_goods_price}</span>
-							원
-					</span> <span>+</span> <!-- 총 배송비 --> <span>기본 배송비 <span><fmt:formatNumber
-									value="${totalDeliveryPrice}" pattern="#,###" /></span> 원
-					</span> <span>=</span> <!-- 총 주문금액 --> 총 주문금액 <span
-						class="text-black fw-bold fs-5 ms-3"> <span id="totalPrice">${total_price}</span>
-							원
-					</span>
+					<span style="font-size: 16px"> 
+						<!-- 총 상품가격 --> 
+						<span>상품총액 <span id="goodsPrice">${total_goods_price}</span> 원</span> 
+						<span>+</span> 
+						<!-- 총 배송비 --> 
+						<span>기본 배송비 
+							<span>
+								<fmt:formatNumber value="${totalDeliveryPrice}" pattern="#,###" />
+							</span> 원
+						</span> 
+						<span>=</span> 
+						<!-- 총 주문금액 --> 
+						<span class="text-black fw-bold fs-5 ms-3">총 주문금액 
+							<span id="totalPrice">${total_price}</span>	원
+						</span>
 					</span>
 				</p>
 				<!-- 선택상품 가격표시 영역 -->
@@ -371,7 +378,7 @@ function selectAll(selectAll){
 		total_goods=0;
 		total=0;
 		for (const i of goods_sales_price) {total_goods += i.innerHTML*1;total=total_goods+4000;};
-		goodsPrice.innerHTML=total_all.toLocaleString();
+		goodsPrice.innerHTML=total_goods.toLocaleString();
 		totalPrice.innerHTML=total.toLocaleString();
 	}
 	//체크되지않았을 경우 금액빼기

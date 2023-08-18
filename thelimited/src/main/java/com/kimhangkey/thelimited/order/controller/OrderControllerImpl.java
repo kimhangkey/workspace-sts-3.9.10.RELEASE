@@ -74,12 +74,12 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 
-		// myOrderList에 선택한 상품정보 orderVO를 리다이렉트.
+		// myOrderList에 선택한 상품정보 orderVO를 바인딩.
 		List myOrderList = new ArrayList<OrderVO>();
 		myOrderList.add(orderVO);
 		session.setAttribute("myOrderList", myOrderList);
 
-		// + 회원정보와 함께 리다이렉트.
+		// + 회원정보와 함께 바인딩.
 		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
 		session.setAttribute("orderer", memberInfo);
 
