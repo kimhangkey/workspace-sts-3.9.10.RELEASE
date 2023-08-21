@@ -239,7 +239,7 @@ public class adminGoodsControllerImpl extends BaseController implements AdminGoo
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 
 		
-		//수령받은 imageFileList의 정보에서 getFileName이 비어잇진 않는지 확인하고, 카운트한다.
+		//수령받은 imageFileList의 정보에서 getFileName이 비어있진 않는지 확인하고, 카운트한다.
 		int check = 0;
 		List<ImageFileVO> imageFileList = upload(multipartRequest);
 		if (imageFileList != null && imageFileList.size() != 0) {
@@ -256,7 +256,7 @@ public class adminGoodsControllerImpl extends BaseController implements AdminGoo
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
-			//modifyGoods 상품정보 ㅅ정
+			//modifyGoods 상품정보 수정
 			adminGoodsService.modifyGoods(goods_id, newGoodsMap);
 			for (ImageFileVO imageFileVO : imageFileList) {
 				

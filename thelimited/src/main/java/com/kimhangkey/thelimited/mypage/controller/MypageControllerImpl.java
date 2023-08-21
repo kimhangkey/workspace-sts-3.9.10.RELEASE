@@ -41,7 +41,7 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		HttpSession session = request.getSession();
-
+		
 		// memberInfo의 member_id get
 		memberVO = (MemberVO) session.getAttribute("memberInfo");
 		String member_id = memberVO.getMember_id();
@@ -75,60 +75,70 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 
 	
 	
-	// 주문취소
-	@Override
-	@RequestMapping(value = "/cancelMyOrder.do", method = RequestMethod.POST)
-	public ModelAndView cancelMyOrder(@RequestParam("order_id") String order_id, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		// 주문 id order_id로 주문 취소로 delivery_status 변경 후 cancel_order message 리턴
-		myPageService.cancelOrder(order_id);
-		mav.addObject("message", "cancel_order");
-		mav.setViewName("redirect:/mypage/listMyOrderHistory.do");
-		return mav;
-	}
-	
 	// 주문목록에서 삭제
 	@Override
 	@RequestMapping(value = "/deleteMyOrder.do", method = RequestMethod.POST)
 	public ModelAndView deleteMyOrder(@RequestParam("order_id") String order_id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		// 주문 id order_id로 db삭제 후 cancel_order message 리턴
+		
 		myPageService.deleteOrder(order_id);
-		mav.addObject("message", "cancel_order");
 		mav.setViewName("redirect:/mypage/listMyOrderHistory.do");
 		return mav;
 	}
 	
 	
-
+//	// 주문취소
+//	@Override
+//	@RequestMapping(value = "/cancelMyOrder.do", method = RequestMethod.POST)
+//	public ModelAndView cancelMyOrder(@RequestParam("order_id") String order_id, HttpServletRequest request,
+//			HttpServletResponse response) throws Exception {
+//		ModelAndView mav = new ModelAndView();
+//		// 주문 id order_id로 주문 취소로 delivery_status 변경 후 cancel_order message 리턴
+//		myPageService.cancelOrder(order_id);
+//		mav.addObject("message", "cancel_order");
+//		mav.setViewName("redirect:/mypage/listMyOrderHistory.do");
+//		return mav;
+//	}
+//	
+//	
+//	// 반품
+//	@Override
+//	@RequestMapping(value = "/returnMyOrder.do", method = RequestMethod.POST)
+//	public ModelAndView returnMyOrder(@RequestParam("order_id") String order_id, HttpServletRequest request,
+//			HttpServletResponse response) throws Exception {
+//		ModelAndView mav = new ModelAndView();
+//		// 주문 id order_id로 db삭제 후 returning_goods message 리턴
+//		myPageService.returnOrder(order_id);
+//		mav.addObject("message", "returning_goods");
+//		mav.setViewName("redirect:/mypage/listMyOrderHistory.do");
+//		return mav;
+//	}
+//
+//	
+//	
+//	// 교환
+//	@Override
+//	@RequestMapping(value = "/exchangeMyOrder.do", method = RequestMethod.POST)
+//	public ModelAndView exchangeMyOrder(@RequestParam("order_id") String order_id, HttpServletRequest request,
+//			HttpServletResponse response) throws Exception {
+//		ModelAndView mav = new ModelAndView();
+//		// 주문 id order_id로 db삭제 후 exchange_goods message 리턴
+//		myPageService.exchangeOrder(order_id);
+//		mav.addObject("message", "exchange_goods");
+//		mav.setViewName("redirect:/mypage/listMyOrderHistory.do");
+//		return mav;
+//	}
 	
-	
-	// 반품
+	// 주문상태 수정 통합
 	@Override
-	@RequestMapping(value = "/returnMyOrder.do", method = RequestMethod.POST)
-	public ModelAndView returnMyOrder(@RequestParam("order_id") String order_id, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/modifyMyOrder.do", method = RequestMethod.POST)
+	public ModelAndView modifyMyOrder(@RequestParam Map<String, String> orderMap,
+			HttpServletRequest request,	HttpServletResponse response) throws Exception {
+		
 		ModelAndView mav = new ModelAndView();
-		// 주문 id order_id로 db삭제 후 returning_goods message 리턴
-		myPageService.returnOrder(order_id);
-		mav.addObject("message", "returning_goods");
-		mav.setViewName("redirect:/mypage/listMyOrderHistory.do");
-		return mav;
-	}
-
-	
-	
-	// 교환
-	@Override
-	@RequestMapping(value = "/exchangeMyOrder.do", method = RequestMethod.POST)
-	public ModelAndView exchangeMyOrder(@RequestParam("order_id") String order_id, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		// 주문 id order_id로 db삭제 후 exchange_goods message 리턴
-		myPageService.exchangeOrder(order_id);
-		mav.addObject("message", "exchange_goods");
+		
+		myPageService.modifyOrder(orderMap);
 		mav.setViewName("redirect:/mypage/listMyOrderHistory.do");
 		return mav;
 	}
@@ -138,22 +148,14 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 	// 내 정보 수정
 	@Override
 	@RequestMapping(value = "/modifyMyInfo.do", method = RequestMethod.POST)
-	public ResponseEntity modifyMyInfo(@RequestParam("member_pw") String member_pw, @RequestParam("hp1") String hp1,
-			@RequestParam("zipcode") String zipcode, @RequestParam("member_address") String member_address,
-			@RequestParam("subaddress") String subaddress, HttpServletRequest request, HttpServletResponse response)
+	public ResponseEntity modifyMyInfo(@RequestParam Map<String, String> memberMap, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		Map<String, String> memberMap = new HashMap<String, String>();
 
 		HttpSession session = request.getSession();
 		memberVO = (MemberVO) session.getAttribute("memberInfo");
 		String member_id = memberVO.getMember_id();
 
-		// 받아온 정보 memberMap에 put
-		memberMap.put("member_pw", member_pw);
-		memberMap.put("hp1", hp1);
-		memberMap.put("zipcode", zipcode);
-		memberMap.put("member_address", member_address);
-		memberMap.put("subaddress", subaddress);
+		// 세션의 회원id memberMap에 put
 		memberMap.put("member_id", member_id);
 
 		// memberMap을 가지고 db수정

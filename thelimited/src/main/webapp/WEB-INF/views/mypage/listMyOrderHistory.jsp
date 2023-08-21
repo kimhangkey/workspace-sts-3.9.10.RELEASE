@@ -159,7 +159,7 @@
 																		<!-- 배송준비중일때 -->
 																		<button
 																			class="btn btn-sm border-main rounded-0 d-block my-2"
-																			onClick="fn_edit_order('${item.order_id}','cancel')"
+																			onClick="fn_edit_order('${item.order_id}','cancel_order')"
 																			style="width: 150px;">주문취소</button>
 																		<!-- 배송준비중일때 -->
 																	</c:when>
@@ -169,11 +169,11 @@
 																		<!-- 배송완료 일때 -->
 																		<button
 																			class="btn btn-sm border-main rounded-0 d-block my-2"
-																			onClick="fn_edit_order('${item.order_id}', 'exchange')"
+																			onClick="fn_edit_order('${item.order_id}', 'exchange_goods')"
 																			style="width: 150px;">교환신청</button>
 																		<button
 																			class="btn btn-sm border-main rounded-0 d-block my-2"
-																			onClick="fn_edit_order('${item.order_id}','return')"
+																			onClick="fn_edit_order('${item.order_id}','returning_goods')"
 																			style="width: 150px;">반품신청</button>
 																			<!-- 배송완료 일때 -->
 																	</c:when>
@@ -225,26 +225,73 @@
 				var i_order_id = document.createElement("input"); 
 				 	i_order_id.name="order_id";
 				    i_order_id.value=order_id;
+				
+				var i_delivery_state = document.createElement("input"); 
+					i_delivery_state.name = "delivery_state";
+					i_delivery_state.value = option;
+					
+				    formObj.appendChild(i_order_id);
+				    formObj.appendChild(i_delivery_state);
+				    document.body.appendChild(formObj);
+				    formObj.method="post";
+				   
+				    //취소
+				    if(option == "cancel_order"){
+				    	var answer=confirm("주문을 취소하시겠습니까?");
+						if(answer==true){
+							formObj.action="${contextPath}/mypage/modifyMyOrder.do";
+							formObj.submit();
+						}
+				    }else if(option == "returning_goods"){
+				    //반품
+				    	var answer=confirm("반품신청 하시겠습니까?");
+						if(answer==true){
+				    	formObj.action="${contextPath}/mypage/modifyMyOrder.do";
+				    	formObj.submit();
+						}
+				    }else if(option == "exchange_goods"){
+				    //교환
+				    	var answer=confirm("교환신청 하시겠습니까?");
+						if(answer==true){
+				    	formObj.action="${contextPath}/mypage/modifyMyOrder.do";
+				    	formObj.submit();
+						}
+				    } else if (option == "delete") {
+						var answer=confirm("목록에서 삭제하시겠습니까?");
+						if(answer==true){
+							formObj.action="${contextPath}/mypage/deleteMyOrder.do";
+					    	formObj.submit();
+						}
+					}
+				    	
+				
+			}
+/* 			//주문수정, option값에 따라 if문을 통해 submit한다.
+			function fn_edit_order(order_id, option){
+				var formObj=document.createElement("form");
+				var i_order_id = document.createElement("input"); 
+				 	i_order_id.name="order_id";
+				    i_order_id.value=order_id;
 					
 				    formObj.appendChild(i_order_id);
 				    document.body.appendChild(formObj); 
 				    formObj.method="post";
 				   
 				    //취소
-				    if(option == "cancel"){
+				    if(option == "cancel_order"){
 				    	var answer=confirm("주문을 취소하시겠습니까?");
 						if(answer==true){
 							formObj.action="${contextPath}/mypage/cancelMyOrder.do";
 							formObj.submit();
 						}
-				    }else if(option == "return"){
+				    }else if(option == "returning_goods"){
 				    //반품
 				    	var answer=confirm("반품신청 하시겠습니까?");
 						if(answer==true){
 				    	formObj.action="${contextPath}/mypage/returnMyOrder.do";
 				    	formObj.submit();
 						}
-				    }else if(option == "exchange"){
+				    }else if(option == "exchange_goods"){
 				    //교환
 				    	var answer=confirm("교환신청 하시겠습니까?");
 						if(answer==true){
@@ -260,7 +307,7 @@
 					}
 				    	
 				
-			}
+			} */
 			
 			//url에 따라서 버튼의 style을 변경
 			if (window.location.href.includes("fixedSearchPeriod")) {

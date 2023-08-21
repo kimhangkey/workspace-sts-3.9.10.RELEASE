@@ -24,6 +24,5 @@ public class OrderServiceImpl implements OrderService {
 		
 		//카트에서 주문 상품 제거한다.
 		orderDAO.removeGoodsFromCart(myOrderList);
-		System.out.println("쇼핑카트에서 해당 상품을 삭제했습니다.");
 	}	
 }

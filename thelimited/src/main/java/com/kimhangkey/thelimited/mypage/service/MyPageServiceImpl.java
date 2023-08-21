@@ -42,6 +42,12 @@ public class MyPageServiceImpl implements MyPageService {
 		myPageDAO.updateMyOrderExchange(order_id);
 	}
 	
+	// 주문상태 수정 테스트
+	@Override
+	public void modifyOrder(Map<String, String> orderMap) throws Exception {
+		myPageDAO.updateMyOrder(orderMap);
+	}
+	
 	// 주문목록에서 삭제
 	@Override
 	public void deleteOrder(String order_id) throws Exception {

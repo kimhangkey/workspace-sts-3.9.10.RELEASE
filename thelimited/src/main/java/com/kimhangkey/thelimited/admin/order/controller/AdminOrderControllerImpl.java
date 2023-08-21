@@ -53,13 +53,10 @@ public class AdminOrderControllerImpl extends BaseController  implements AdminOr
 		condMap.put("beginDate",beginDate);
 		condMap.put("endDate", endDate);
 		List<OrderVO> newOrderList=adminOrderService.listNewOrder(condMap);
-		List<OrderVO> newOrderList2=adminOrderService.listNewOrder(condMap);
 		
-		System.out.println(newOrderList);
 		
 		//리턴된 배송리스트 member_list를  mav의 member_list에 부여		
 		mav.addObject("newOrderList",newOrderList);
-		mav.addObject("newOrderList2",newOrderList);
 		
 		//날짜형식지정
 		String beginDate1[]=beginDate.split("-");

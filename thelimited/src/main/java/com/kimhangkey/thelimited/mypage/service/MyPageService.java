@@ -19,7 +19,10 @@ public interface MyPageService {
 
 	// 교환
 	public void exchangeOrder(String order_id) throws Exception;
-	
+
+	// 주문상태 수정 테스트
+	public void modifyOrder(Map<String, String> orderMap) throws Exception;
+
 	// 주문목록에서 삭제
 	public void deleteOrder(String order_id) throws Exception;
 
@@ -28,6 +31,5 @@ public interface MyPageService {
 
 	// 회원탈퇴
 	public void deleteMember(String member_id) throws Exception;
-
 
 }

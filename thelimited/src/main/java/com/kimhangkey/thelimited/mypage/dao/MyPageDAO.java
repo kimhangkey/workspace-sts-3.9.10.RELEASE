@@ -21,7 +21,10 @@ public interface MyPageDAO {
 
 	// 교환
 	public void updateMyOrderExchange(String order_id) throws DataAccessException;
-	
+
+	// 주문 상태 수정 테스트
+	public void updateMyOrder(Map<String, String> orderMap) throws DataAccessException;
+
 	// 주문목록에서 삭제
 	public void deleteMyOrder(String order_id) throws DataAccessException;
 

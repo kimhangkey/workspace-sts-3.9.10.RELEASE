@@ -1,7 +1,7 @@
 package com.kimhangkey.thelimited.admin.member.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +32,6 @@ public class AdminMemberControllerImpl extends BaseController implements AdminMe
 			                           HttpServletRequest request, HttpServletResponse response)  throws Exception{
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-		System.out.println(dateMap);
 		
 		String fixedSearchPeriod = dateMap.get("fixedSearchPeriod");
 		System.out.println(fixedSearchPeriod);
@@ -49,7 +48,7 @@ public class AdminMemberControllerImpl extends BaseController implements AdminMe
 		HashMap<String,Object> condMap=new HashMap<String,Object>();
 		condMap.put("beginDate",beginDate);
 		condMap.put("endDate", endDate);
-		ArrayList<MemberVO> member_list=adminMemberService.listMember(condMap);
+		List<MemberVO> member_list=adminMemberService.listMember(condMap);
 		
 		mav.addObject("member_list", member_list);
 		

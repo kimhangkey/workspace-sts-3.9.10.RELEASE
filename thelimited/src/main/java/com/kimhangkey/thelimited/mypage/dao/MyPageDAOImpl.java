@@ -41,6 +41,12 @@ public class MyPageDAOImpl implements MyPageDAO {
 		sqlSession.update("mapper.mypage.updateMyOrderExchange", order_id);
 	}
 	
+	// 주문 상태 수정 테스트
+	@Override
+	public void updateMyOrder(Map<String, String> orderMap) throws DataAccessException {
+		sqlSession.update("mapper.mypage.updateMyOrder", orderMap);
+	}
+	
 	// 주문목록에서 삭제
 	@Override
 	public void deleteMyOrder(String order_id) throws DataAccessException {
